@@ -22,33 +22,11 @@
 
 **Documentation**: <a href="https://openqaoa.entropicalabs.com" target="_blank">https://openqaoa.entropicalabs.com</a>
 
-**Source Code**: <a href="https://github.com/tiangolo/openqaoa" target="_blank">https://github.com/tiangolo/openqaoa</a>
+**Source Code**: <a href="https://github.com/entropicalabs/openqaoa" target="_blank">https://github.com/entropicalabs/openqaoa</a>
 
 **API Reference** <a href="https://el-openqaoa.readthedocs.io/" target="_blank">https://el-openqaoa.readthedocs.io/</a>
 
 ---
 
-# Welcome to OpenQAOA's documentation!
-
-
-
-## Features
-Key features of OpenQAOA:
-
-* Simple yet customizable workflows for QAOA and RQAOA deployable on
-    * IBMQ devices
-    * Rigettis' Quantum Cloud Services
-    * Amazon Braket
-    * Local simulators (including Rigettis' QVM, IBM's Qiskit, and Entropica Labs' vectorized simulator)
-* Multiple parametrization strategies:
-    * Standard, Fourier, and Annealing
-    * Each class can be further controlled by selecting standard or extended parameter configurations
-* Multiple Initliaisation strategies:
-    * Linear ramp, random, and custom
-* Multiple Mixer Hamiltonians:
-     * `x` and `xy`
-* The optimization loop includes:
-    * SciPy Optimisers
-    * Custom gradient SciPy optimizers
-
+OpenQAOA is open-source and Developed by [Entropica Labs](https://www.entropicalabs.com/) in Singapore.
 
