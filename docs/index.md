@@ -24,9 +24,9 @@
 
 **Source Code**: <a href="https://github.com/entropicalabs/openqaoa" target="_blank">https://github.com/entropicalabs/openqaoa</a>
 
-**API Reference** <a href="https://el-openqaoa.readthedocs.io/" target="_blank">https://el-openqaoa.readthedocs.io/</a>
+**API Reference** <a href="https://el-openqaoa.readthedocs.io/" target="_blank">https://el-openqaoa.readthedocs.io</a>
 
 ---
 
-OpenQAOA is open-source and Developed by [Entropica Labs](https://www.entropicalabs.com/) in Singapore.
+OpenQAOA is open-source and developed by [Entropica Labs](https://www.entropicalabs.com/) in Singapore.
 

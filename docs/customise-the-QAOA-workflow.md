@@ -1,6 +1,25 @@
 # Customise the QAOA workflow
 
-It is now time to customise the QAOA workflow. In the previous example, we used implemented the QAOA workflow using its default value. Now, we will go through how these values can be modified
+The simples QAOA workflow makes use of the OpenQAOA default values
+
+
+```Python title="simples_qaoa_workflow.py"
+from openqaoa.workflows.optimizer import QAOA  
+q = QAOA()
+q.compile(qubo_problem)
+q.optimize()
+```
+
+A QAOA workflow is composed by 4 parts. this example, we have used the default values:
+
+* **the circuit ansats** a 1-layer qaoa, with the `standard` parametrisation and the `x` mixer
+* **the classical optimizer** `cobyla`, as implemented by the folks at SciPy
+* **the device employed** `vectorized`, a very fast numpy-based QAOA simulator developed by Entropica Labs
+* **the result of the algorithm**
+
+## Customizing a workflow
+
+It is now time to customise the QAOA workflow.
 
 Again, first things first: we need to create a problem instance. For example, an instance of vertex cover:
 
@@ -38,9 +57,33 @@ q.compile(qubo_problem)
 q.optimize()
 ```
 
-Let's break down the process. First, we create the `QAOA()` object
+## The device
+
+Let's break down the process. First, we create the `QAOA()` object and set a device
 
 ```Python hl_lines="8 9"
+from openqaoa.workflows.optimizer import QAOA  
+from openqaoa.devices import create_device
+
+#Create the QAOA
+q = QAOA()
+
+# Create a device
+aspen_m3_device = create_device(location='qcs', name='aspen-m3')
+q.set_device(aspen_m3_device)
+```
+
+With these two lines of code we first create a device, and then set the it within the QAOA workflow.
+
+!!! Tip 
+    To check all available backends go to the [devices page](devices/device.md)
+
+
+## The circuit Ansatz
+
+Next, we can modify the circuit's ansatz. This can be done through the method `set_circuit_properties()`
+
+```Python hl_lines="12 13"
 from openqaoa.workflows.optimizer import QAOA  
 from openqaoa.devices import create_device
 
@@ -53,36 +96,14 @@ q.set_device(qiskit_sv)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
-
-# backend properties
-q.set_backend_properties(init_hadamard=True, n_shots=8000, cvar_alpha=0.85)
-
-# classical optimizer properties
-q.set_classical_optimizer(method='nelder-mead', maxiter=200)
-
-q.compile(qubo_problem)
-q.optimize()
-```
 ```
 
-The `QAOA()` object is a workflow and contains all the details required to successfully build the circuit and execute it. However, even while using the default values the `QAOA()` object needs to take as input the problem statement
+This method allows to shape the properties of the ansats circuit. It is the place where you can select the number of layers `p`, the type desired parametrization (and its initialization), and the type of mixer that you want to use. 
 
-!!! note "Compilation and QUBOs"
-    To build the QAOA ansatz we need the cost function, and the cost function is encoded in the qubo problem! :-)
 
-```Python hl_lines="3"
-from openqaoa.workflows.optimizer import QAOA  
-q = QAOA()
-q.compile(qubo_problem)
-q.optimize()
-```
+## The backend properties
 
-Compiling the problem is a crucial step: now the representation of the QAOA workflow includes all the key information to build the circuit. So, all we are left with is the last step: the optimization1
 
-```Python hl_lines="4"
-from openqaoa.workflows.optimizer import QAOA  
-q = QAOA()
-q.compile(qubo_problem)
-q.optimize()
-```
 
+
+## The classical optimizer

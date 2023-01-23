@@ -2,7 +2,9 @@
 
 ## Install latest stable through pip
 
-You can install the latest version of OpenQAOA directly from PyPI. First, create a virtual environment with python3.8, 3.9, 3.10 and then pip install openqaoa with the following command
+You can install the latest version of OpenQAOA [directly from PyPI](https://pypi.org/project/openqaoa/). Creating a python `virtual environment` for this project is recommended. (for instance, instructions on how to create a virtual environment using conda can be found [here](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands). Make sure to use a python version between **python 3.8** and **python 3.10**. 
+
+Once the virtual environment is activated, then simply pip install openqaoa with the following command
 
 ```bash
 pip install openqaoa
