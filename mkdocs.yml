@@ -21,8 +21,8 @@ theme:
       bug: octicons/bug-16
       example: octicons/beaker-16
       quote: octicons/quote-16
-  logo: img/entropica_logo.png
-  favicon: img/entropica_logo.png
+  logo: img/entropicalabs_logo.svg
+  favicon: img/entropicalabs_logo.svg
   language: en 
   palette: 
     # Palette toggle for light mode
