@@ -103,7 +103,7 @@ This method allows to shape the properties of the ansats circuit. It is the plac
 
 ## The backend properties
 
-
+The backend properties 
 
 
 ## The classical optimizer

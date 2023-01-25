@@ -82,16 +82,15 @@ nav:
       - parametrization/extended-parametrization.md
       - parametrization/fourier-parametrization.md
   - The devices:
-      - devices:
-        - devices/device.md
-        - local simulators:
-          - devices/entropica-labs-vectorized.md
-          - devices/qiskit.md
-        - Quantum Processing Units:
-          - devices/amazon-braket.md
-          - devices/azure-quantum.md
-          - devices/ibmq.md
-          - devices/rigetti-qcs.md
+      - devices/device.md
+      - Local simulators:
+        - devices/entropica-labs-vectorized.md
+        - devices/qiskit.md
+      - Quantum Processing Units:
+        - devices/amazon-braket.md
+        - devices/azure-quantum.md
+        - devices/ibmq.md
+        - devices/rigetti-qcs.md
   - QUBO problems:
       - generic-qubo.md
       - built-in-qubos.md

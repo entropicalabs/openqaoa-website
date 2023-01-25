@@ -1,14 +1,17 @@
 # Devices
 
-Sorted alphabetically
+Here are all the devices supported by OpenQAOA. Please note that the list is _alphabetically_ sorted.
+
+In OpenQAOA devices are divided between local and cloud base.
+
 
 # Clouds:
-* [amazon braket](amazon-braket.md)
-* [azure quantum](azure-quatum.md)
-* [ibmq](ibmq.md)
-* [rigetti-qcs](rigett-qcs.md)
+* [Amazon braket](amazon-braket.md)
+* [Azure quantum](azure-quatum.md)
+* [IBM Quantum](ibmq.md)
+* [Rigetti Quantum Cloud Services](rigett-qcs.md)
 
 
 # Local:
-* [vectorized](entropica-labs-vectorized.md)
-* [qiskit](qiskit.md)
+* [Qiskit](qiskit.md)
+* [Vectorized](entropica-labs-vectorized.md)
