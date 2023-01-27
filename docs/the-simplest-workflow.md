@@ -1,4 +1,4 @@
-# The simples OpenQAOA workflow
+# The simplest OpenQAOA workflow
 
 The key concept behind OpenQAOA is workflows. Workflows are intuitive and programmatic ways to build complex QAOAs while focusing more on the actual problem you want to solve. Another way to say the same thing is that you don't have to write the circuit explicitly but rather focus on the keywords and concepts that lie behind the algorithm.
 

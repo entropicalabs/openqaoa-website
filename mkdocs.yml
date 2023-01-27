@@ -74,8 +74,8 @@ nav:
       - the-simplest-workflow.md
       - making-sense-of-the-result.md
   - Workflows:
-      - customise-the-QAOA-workflow.md
-      - recursive-qaoa.md
+      - workflows/customise-the-QAOA-workflow.md
+      - workflows/recursive-qaoa.md
   - Parametrizations:
       - parametrization/parametrization.md
       - parametrization/standard-parametrization.md
@@ -84,8 +84,9 @@ nav:
   - The devices:
       - devices/device.md
       - Local simulators:
-        - devices/entropica-labs-vectorized.md
         - devices/qiskit.md
+        - devices/rigetti-qvm.md
+        - devices/entropica-labs-vectorized.md
       - Quantum Processing Units:
         - devices/amazon-braket.md
         - devices/azure-quantum.md

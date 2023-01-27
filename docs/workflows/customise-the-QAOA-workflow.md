@@ -76,7 +76,7 @@ q.set_device(aspen_m3_device)
 With these two lines of code we first create a device, and then set the it within the QAOA workflow.
 
 !!! Tip 
-    To check all available backends go to the [devices page](devices/device.md)
+    To check all available backends go to the [devices page](/devices/device.md)
 
 
 ## The circuit Ansatz
