@@ -18,28 +18,21 @@ $$
 Z_{i} \rightarrow \textrm{sign}(\mathcal{M}_{(i)}) \qquad \qquad \qquad \qquad \qquad \langle Z_{i} Z_{j} \rangle \rightarrow \textrm{sign}(\mathcal{M}_{(ij)}),
 $$
 
-and last, inserting the constraint into the Hamiltonian, effectively reducing the size of the problem by one qubit. Using the reduced Hamiltonian, QAOA is run again and the same procedure is followed. Once the reduced problem reaches a predefined cutoff size, it is solved exactly solved via classical methods. The final answer is then reconstructed by re-inserting the eliminated qubits into the classical solution following the appropriate order.
+and last, inserting the constraint into the Hamiltonian, effectively reducing the size of the problem by one qubit. Using the reduced Hamiltonian, QAOA is run again and the same procedure is followed. Once the reduced problem reaches a predefined cutoff size, it is solved exactly via classical methods. The final answer is then reconstructed by re-inserting the eliminated qubits into the classical solution following the appropriate order.
 
-This version of RQAOA is included in OpenQAOA. Additionally, OpenQAOA incorporates RQAOA from two different generalized version of these procedure, which enable multiple qubit eliminations during the recursive process. These strategies are denoted as `custom` and `adaptive` [4], in accordance with the precise concept under which the elimination method takes place. In a nutshell, they are described as follows:
+This version of RQAOA is included in OpenQAOA. Additionally, OpenQAOA incorporates RQAOA from two different generalized version of these procedure, which enable *multiple* qubit eliminations during the recursive process. These strategies are denoted as `custom` and `adaptive` [4], in accordance with the precise concept under which the elimination method takes place. In a nutshell, they are described as follows:
 
 
-* The ``custom`` strategy allows the user to define the number of eliminations to be performed at each step. This defined by the parameter ``steps``. If the parameter is set as an integer, the algorithm will use this value as the number of qubits to be eliminated at each step. Alternatively, it is possible to pass a list, which specifies the number of qubits to be eliminated at each step. For ``steps = 1``, the algorithm reduces to the original form of RQAOA presented in [1].
+* The ``custom`` strategy allows the user to define the number of eliminations to be performed at each step. This defined by the parameter ``steps``. If the parameter is set as an integer, the algorithm will use this value as the number of qubits to be eliminated at each step. Alternatively, it is possible to pass a list, which specifies the number of qubits to be eliminated at each step. For ``steps=1``, the algorithm reduces to the original form of RQAOA presented in [1].
 
-* The ``adaptive`` strategy adaptively selects how many qubits to eliminate at each step. The maximum number of allowed eliminations is given by the parameter ``n_max``. At each step, the algorithm selects the top ``n_max+1`` expectation values (ranked in magnitude), computes the mean among them, and uses the ones lying above it for qubit elimination. This corresponds to a maximum of ``n_max`` possible elimination per step. For ``n_max= 1``, the algorithm reduces to the original form of RQAOA presented in [1].
+* The ``adaptive`` strategy selects how many qubits to eliminate at each step adaptively. The maximum number of allowed eliminations is given by the parameter ``n_max``. At each step, the algorithm selects the top ``n_max+1`` expectation values (ranked in magnitude), computes the mean among them, and uses the ones lying above it for qubit elimination. This corresponds to a maximum of ``n_max`` possible elimination per step. For ``n_max=1``, the algorithm reduces to the original form of RQAOA presented in [1].
 
 **NOTE**: The specific performance of these generalizations is currently under investigation. In particular, the development of Adaptive RQAOA is associated with an internal research project at Entropica Labs to be released publicly in the near future [4]. We make these strategies already available to the community in order to strengthen the exploration of more complex elimination schemes for RQAOA, beyond its original formulation [1].
 
 
-References
-----------
-1.  S. Bravyi, A. Kliesch, R. Koenig, and E. Tang, Physical Review Letters 125, 260505 (2020)
-2. S. Bravyi, A. Kliesch, R. Koenig, and E. Tang, (2020), 10.22331/q-2022-03-30-678
-3. D. J. Egger, J. Marecek, and S. Woerner, Quantum 5, 479 (2021)
-4. E. I. Rodríguez Chiacchio, V. Sharma, E. Munro (Work in progress)
-
 ## The full RQAOA workflow. 
 
-First, let us create a problem instance. Let us now do a walk through the whole process for the Sherrington-Kirkpatrick model. This corresponds to a fully-connected system, where we choose the couplings $J_{ij}$ to be of magnitude 1, but with a randomly assigned signs. The workflow requires us to define the problem as an instance of the ``QUBO`` (Quadratic Unconstrained Binary Optimization) class, which is easily done by defining the connectivity of the problem, and the and the couplings.
+Let us now do a walk through the whole process using the Sherrington-Kirkpatrick model as an example. This model corresponds to a fully-connected system, where we choose the couplings $J_{ij}$ to be of magnitude 1, but with randomly assigned signs. Then we have to translate the problem to a Quadratic Unconstrained Binary Optimization problem. This can be done in a single line by creating an object of the class ```QUBO``` which takes the number of qubits, connectivity of the problem (terms) and the couplings  (weights).
 
 
 ```
@@ -189,3 +182,11 @@ From the intermediate steps, we can extract useful properties such as the cost o
 
 
 ![kamada_kawai_layout](/img/rqaoa_elimination_steps.png)
+
+References
+----------
+1.  S. Bravyi, A. Kliesch, R. Koenig, and E. Tang, Physical Review Letters 125, 260505 (2020)
+2. S. Bravyi, A. Kliesch, R. Koenig, and E. Tang, (2020), 10.22331/q-2022-03-30-678
+3. D. J. Egger, J. Marecek, and S. Woerner, Quantum 5, 479 (2021)
+4. E. I. Rodríguez Chiacchio, V. Sharma, E. Munro (Work in progress)
+
