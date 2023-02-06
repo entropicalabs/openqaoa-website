@@ -1,7 +1,7 @@
 # Parametrization and Initialization
 
 We currently offer 7 different parametrizations for QAOA, which can be found in
-the `openqaoa.qaoa_parameters` module. They fall broadly into three categories:
+the `src.openqaoa-core.qaoa_components.variational_parameters` module. They fall broadly into three categories:
 
 * The `Standard` classes are parametrizations that have the $\gamma$ 's and $\beta$ 's as free parameters, as defined in the seminal paper by Farhi et al. [1].
 * The `Fourier` classes have the discrete cosine and sine transforms of the $\gamma$'s respective $\beta$'s as free parameters, as proposed by Zhou et al. [2].
@@ -10,7 +10,7 @@ the `openqaoa.qaoa_parameters` module. They fall broadly into three categories:
 Except for the `Annealing` parameters, each class also comes in three levels of detail: 
 
 * `StandardParams` and `FourierParams` offer the $\gamma$ 's and $\beta$ 's as proposed in above papers. 
-* `StandardWithBiasParams` and `FourierWithBiasParams` allow for extra $\gamma$'s for possible single-qubit bias terms, resp. their discrete sine transform. 
+* `StandardWithBiasParams` and `FourierWithBiasParams` allow for extra $\gamma$'s for possible single-qubit bias terms and their discrete sine transform, respectively.
 * `ExtendedParams` and `FourierExtendedParams` offer full control by having a separate set of rotation angles for each term in the cost and mixer Hamiltonians, respective having a seperate set of Fourier coefficients for each term.
 
 
@@ -45,6 +45,10 @@ create_qaoa_variational_params(qaoa_circuit_params = qaoa_circuit_params, params
 or with the Extended Parameterisation and Random Initialisation
 ```Python
 create_qaoa_variational_params(qaoa_circuit_params = qaoa_circuit_params, params_type = 'extended', init_type = 'rand')
+```
+or with 
+```Python
+create_qaoa_variational_params(qaoa_circuit_params = qaoa_circuit_params, params_type = 'fourier', init_type='custom', variational_params_dict={"betas":[0.26], "gammas":[0.42]})
 ```
 
 **NOTE**: When using the custom initialization strategy, we have to provide the appropriate number of betas and gammas depending on the number of variational parameters, which depends on the p-value and parameterisation type.
