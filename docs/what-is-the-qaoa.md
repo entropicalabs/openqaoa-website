@@ -84,17 +84,11 @@ This means that we now know how to construct the QAOA circuit for any QUBO probl
 
 ## Classical loop
 
-The algorithm proceeds the following way:
+The classical loop procedure in quantum computing involves the following steps:
 
-Once we have encoded the problem to solve in a parametric quantum circuit, we have to choose some initial parameters $\gamma^\text{ini}, \beta^\text{ini}$. Then evaluate $\langle \psi|\mathcal{H}_C|\psi\rangle $ and choose a new set of parameters using a classical optimizer. 
+1. Encoding the optimization problem into a parametric quantum circuit
+2. InitializingInitializing the circuit parameters
+3. Evaluating the cost function, which represents the energy of the system described by the quantum circuit, by measuring the expectation value of the cost Hamiltonian $\langle \psi|\mathcal{H}_C|\psi\rangle $.
+4. Updating the circuit parameters using a classical optimization algorithm, such as gradient descent or COBYLA, to minimize the cost function and find the optimal solution to the optimization problem.
 
-The classical optimizer algorithm can be gradient-free such us cobyla or it can use a gradient algorithm such as gradient descent
-
-
-
-
-
-
-
-
-
+The goal of the QAOA is to find the set of circuit parameters that result in the minimum value of the cost function, thereby finding the approximate solution to the optimization problem encoded in the quantum circuit. The classical loop procedure is repeated multiple times until convergence to the optimal solution is achieved.
