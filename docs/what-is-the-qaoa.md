@@ -84,6 +84,9 @@ This means that we now know how to construct the QAOA circuit for any QUBO probl
 
 ## Classical loop
 
+The algorithm proceeds the following way:
+
+Once you have encoded the problem to solve in a parametric quantum circuit
 
 
 
