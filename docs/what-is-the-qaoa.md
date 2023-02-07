@@ -122,3 +122,7 @@ $$\mathcal{U} (\gamma_1=1,\beta_1=1) = e^{-i\sigma_{1}^x}\,e^{-i\sigma_{2}^x}\,e
 which is equivalent to:
 
 ![qaoa_circuit](/img/qaoa_circuit.png)
+
+After the optimization of $\gamma_1$ and $\beta_1$, we should find an histogram like:
+
+![qaoa_np_output](/img/histogram_np.png)
