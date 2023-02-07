@@ -70,7 +70,7 @@ $$ \mathcal{H}_C = \sum_{i=1}^n \sum_{j=1}^i Q_{i j} \sigma_i^z \sigma_j^z + \su
 
 where $\sigma_i^z$ are Pauli Z matrices.
 
-## The decomposition of the circuit 
+## Decomposition of the circuit 
 
 As the terms of these Hamiltonians commute, we can write:
 
