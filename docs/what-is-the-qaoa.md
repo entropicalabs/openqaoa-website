@@ -86,7 +86,9 @@ This means that we now know how to construct the QAOA circuit for any QUBO probl
 
 The algorithm proceeds the following way:
 
-Once you have encoded the problem to solve in a parametric quantum circuit
+Once we have encoded the problem to solve in a parametric quantum circuit, we have to choose some initial parameters $\gamma^\text{ini}, \beta^\text{ini}$. Then evaluate $\langle \psi|\mathcal{H}_C|\psi\rangle $ and choose a new set of parameters using a classical optimizer. 
+
+The classical optimizer algorithm can be gradient-free such us cobyla or it can use a gradient algorithm such as gradient descent
 
 
 
