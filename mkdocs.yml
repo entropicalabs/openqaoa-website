@@ -81,6 +81,7 @@ nav:
       - parametrization/standard-parametrization.md
       - parametrization/extended-parametrization.md
       - parametrization/fourier-parametrization.md
+      - parametrization/annealing-parametrization.md
   - The devices:
       - devices/device.md
       - Local simulators:
