@@ -41,9 +41,9 @@ where $H$  is a Hadamard gate, $U(\mathcal{H}_X,\beta_j) = e^{-i\beta_j \mathcal
 
 $\mathcal{H}_C$ is the cost Hamiltonian, which encodes the problem to be solved, and $\mathcal{H}_X$ is the mixing Hamiltonian:
 
-$$\mathcal{H}_X = \sum_{i=1}^n X_i, $$
+$$\mathcal{H}_X = \sum_{i=1}^n \sigma_{i}^x, $$
 
-where $X_i = I_1\otimes...\otimes I_{i-1} \otimes \sigma_{i}^x \otimes I_{i+1} \otimes...\otimes I_{n}$. Here, $\sigma_i^x$ are the Pauli X matrices.
+where $\sigma_{i}^x$ is the Pauli X matrix applied to the $i$ qubit.
 
 The goal of the QAOA algorithm is to find the optimal sets of angles ${\gamma^{\text{opt}}}$ and ${\beta^{\text{opt}}}$ that minimize $\langle\psi|\mathcal{H}_C|\psi\rangle$. With the optimal parameters, $|\psi(\gamma,\beta)\rangle$ is a superposition of base states, and the state with the highest probability will be the solution to the problem.
 
@@ -68,7 +68,7 @@ The function can be enconded in a cost Hamiltonian the following way:
 
 $$ \mathcal{H}_C = \sum_{i=1}^n \sum_{j=1}^i Q_{i j} \sigma_i^z \sigma_j^z + \sum_{i=1}^n C \sigma_i^z $$
 
-where $\sigma_i^z$ are Pauli Z matrices.
+where $\sigma_i^z$ is the Pauli Z matrix applied to the $i$ qubit.
 
 ## Decomposition of the circuit 
 
@@ -113,4 +113,12 @@ But let us imagine that we want to solve number partition for $S=\{3,4,5\}$ usin
 
 The cost Hamiltonian of this problem is:
 
-$$ $$
+$$\mathcal{H}_C = 3\cdot 4\, \sigma_{1}^z\sigma_{2}^z + 3\cdot 5\, \sigma_{1}^z\sigma_{3}^z + 4\cdot 5\, \sigma_{2}^z\sigma_{3}^z ,$$
+
+If we take $p=1$ and $\gamma_1=1, \beta_1=1$, then the resulting QAOA circuit is:
+
+$$\mathcal{U} (\gamma_1=1,\beta_1=1) = e^{-i\sigma_{1}^x}\,e^{-i\sigma_{2}^x}\,e^{-i\sigma_{3}^x}\,e^{-20i\sigma_{2}^z\sigma_{3}^z}\,e^{-15i\sigma_{1}^z\sigma_{3}^z}\,e^{-12i\sigma_{1}^z\sigma_{2}^z}H^{\otimes 3},$$
+
+which is equivalent to:
+
+![qaoa_circuit](/img/qaoa_circuit.png)
