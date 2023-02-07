@@ -29,7 +29,7 @@ graph TB
 
 The starting state of the quantum circuit is $|0\rangle^{\otimes n}$, where $n$ is the number of qubits being used. The state after the circuit is applied is given by:
 
-$$|\psi(\gamma,\beta)\rangle = \mathcal{U}(\gamma,\beta)\,|0\rangle^{\otimes n},$$
+$$|\psi\rangle \equiv |\psi(\gamma,\beta)\rangle \equiv \mathcal{U}(\gamma,\beta)\,|0\rangle^{\otimes n},$$
 
 where ${\gamma}={\gamma_1, \gamma_2, ..., \gamma_p}$ and ${\beta}={\beta_1, \beta_2, ..., \beta_p}$ are two sets of $p$ parameters.
 
@@ -91,4 +91,26 @@ The classical loop procedure in quantum computing involves the following steps:
 3. Evaluating the cost function, which represents the energy of the system described by the quantum circuit, by measuring the expectation value of the cost Hamiltonian $\langle \psi|\mathcal{H}_C|\psi\rangle $.
 4. Updating the circuit parameters using a classical optimization algorithm, such as gradient descent or COBYLA, to minimize the cost function and find the optimal solution to the optimization problem.
 
-The goal of the QAOA is to find the set of circuit parameters that result in the minimum value of the cost function, thereby finding the approximate solution to the optimization problem encoded in the quantum circuit. The classical loop procedure is repeated multiple times until convergence to the optimal solution is achieved.
+The goal of the QAOA is to find the set of parameters ($\gamma^\text{opt}, \beta^\text{opt}$) that result in the minimum value of the cost function ($\langle \psi^\text{opt} |\mathcal{H}_C|\psi^\text{opt}\rangle$), thereby finding the approximate solution to the optimization problem encoded in the quantum circuit. The classical loop procedure is repeated multiple times until convergence to the optimal solution is achieved.
+
+## Output
+
+The output of the QAOA algorithm can be obtained by measuring the probabilities of the base states of the final quantum state after evaluating the circuit using the optimized parameters, $|\psi^\text{opt}\rangle=|\psi(\gamma^\text{opt}, \beta^\text{opt})\rangle = \mathcal{U}(\gamma^\text{opt},\beta^\text{opt})\,|0\rangle^{\otimes n}$ . This will result in a histogram, such as the one shown in the image below.
+
+In the histogram, we can observe that the states $x_1 = 00011$ and $x_2 = 11100$ have higher probabilities compared to the other states, indicating that these two are likely solutions to the problem being addressed.
+
+![qaoa_output](/img/histogram.png)
+
+## Example 
+
+We want to solve a very easy example of number partition problem.
+
+Number partition is defined as: having a set $S$ of $n$ numbers, we want to find two disjoint subsets $S_1$ and $S_2$ so that the difference between the sum of all numbers of each set is minimized. 
+
+For example, the solution for $S=\{3,4,5\}$ is $S_1=\{3,4\}$ and $S_2=\{5\}$, since the difference between the sums is 2.
+
+But let us imagine that we want to solve number partition for $S=\{3,4,5\}$ using the QAOA algorithm:
+
+The cost Hamiltonian of this problem is:
+
+$$ $$
