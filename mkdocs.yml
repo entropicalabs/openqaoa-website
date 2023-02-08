@@ -99,9 +99,14 @@ nav:
         - devices/ibmq.md
         - devices/rigetti-qcs.md
   - QUBO problems:
-      - generic-qubo.md
-      - built-in-qubos.md
-
+      - problems/generic-qubo.md
+      - Built-in QUBO:
+        - problems/maximum-cut.md
+        - problems/minimum-vertex-cover.md
+        - problems/shortest-path-problem.md
+        - problems/number-partition.md
+        - problems/knapsack.md
+        - traveling-sales-person.md
 
 extra:
   social:
