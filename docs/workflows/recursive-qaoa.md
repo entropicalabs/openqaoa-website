@@ -185,7 +185,7 @@ From the intermediate steps, we can extract useful properties such as the cost o
 
 References
 ----------
-1.  S. Bravyi, A. Kliesch, R. Koenig, and E. Tang, Physical Review Letters 125, 260505 (2020)
+1. S. Bravyi, A. Kliesch, R. Koenig, and E. Tang, Physical Review Letters 125, 260505 (2020)
 2. S. Bravyi, A. Kliesch, R. Koenig, and E. Tang, (2020), 10.22331/q-2022-03-30-678
 3. D. J. Egger, J. Marecek, and S. Woerner, Quantum 5, 479 (2021)
 4. E. I. Rodríguez Chiacchio, V. Sharma, E. Munro (Work in progress)
