@@ -2,6 +2,9 @@
 
 Quantum Cloud Services (QCS) is Rigetti’s quantum cloud computing platform. If you don't have a QCS account, you can request one [directly from Rigetti](https://www.rigetti.com/get-quantum).
 
+!!! note "QPU accessibility"
+    As of writing, Rigetti devices are available **only** through QCS. That is, you have to run OpenQAOA within a notebook hosted on QCS. You can sign in from the [official QCS website](https://qcs.rigetti.com/sign-in)
+
 
 ## Installation and Getting Started
 

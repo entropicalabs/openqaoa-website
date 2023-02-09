@@ -38,9 +38,15 @@ theme:
   features:
     - content.code.copy
     - content.code.annotate
+    # - navigation.instant
+    - navigation.indexes
     - navigation.sections
     - navigation.footer
-    - toc.integrate
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+    # - navigation.tabs
+    # - toc.integrate
 
 plugins:
   - search
@@ -54,6 +60,8 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:
+  - toc:
+      permalink: true
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
@@ -101,12 +109,12 @@ nav:
   - QUBO problems:
       - problems/generic-qubo.md
       - Built-in QUBO:
+        - problems/knapsack.md
         - problems/maximum-cut.md
         - problems/minimum-vertex-cover.md
-        - problems/shortest-path-problem.md
         - problems/number-partition.md
-        - problems/knapsack.md
-        - traveling-sales-person.md
+        - problems/shortest-path-problem.md
+        - problems/traveling-sales-person.md
 
 extra:
   social:
@@ -116,4 +124,3 @@ extra:
     link: https://discord.gg/ana76wkKBd
   - icon: fontawesome/brands/medium
     link: https://medium.com/@entropicalabs
-    
