@@ -16,8 +16,16 @@ Let us once again take the cost Hamiltonian to be $H_C = 2.5 (Z_0Z_1 + Z_1Z_2 + 
 We can further specify the initial values of those using the custom initialization, for example with the following:
 
 ```Python
-q.set_circuit_properties(p=4, q=2, param_type='fourier', init_type='custom', variational_params_dict={"u":[0.1, 0.2], "v":[0.9, 0.8]})
+q.set_circuit_properties(p=4, 
+                         q=2, 
+                         param_type='fourier',
+                         init_type='custom',
+                         variational_params_dict={
+                             "u":[0.1, 0.2], 
+                             "v":[0.9, 0.8]}
+                         )
 ```
+
 As a circuit, this looks like:
 
 ![kamada_kawai_layout](/img/circuit_fourier.png)
@@ -56,7 +64,25 @@ Indeed, this is what we see in the brackets next to this gate.
 **NOTE**: The depth of the circuit is still linear in the number of layers, $p$. The advantage is in the smaller number of variational parameters to be optimized, as long as $q \leq p$.
 
 The class `QAOAVariationalFourierWithBiasParams` extends upon the above by allowing for an additional parameter controlling the single qubit rotations around the Z axis, analogous to what `StandardWithBiasParams` implements. 
+One way to use this class is by setting the circuit properties as:
+```Python
+q.set_circuit_properties(p=4, 
+                         q=2, 
+                         param_type='fourier_w_bias',
+                         init_type='custom',
+                         variational_params_dict={
+                             "u_pairs":[0.1, 0.2], 
+                             "u_singles":[0.5, 0.6], 
+                             "v":[0.9, 0.8]}
+                         )
+```
+which leads to the following quantum circuit:
 
+![kamada_kawai_layout](/img/circuit_fourier_w_bias.png)
+
+Since we kept the parameters controlling $\beta$ and $\gamma$ same as before and only gave new parameters for the single qubit rotations around the Z axis, the circuits look identical apart from the RZ gates. 
+
+**NOTE**: The number of parameters to be optimized is $3q$.
 
 References
 ----------

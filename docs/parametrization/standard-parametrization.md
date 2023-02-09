@@ -44,8 +44,8 @@ q.set_circuit_properties(p=1,
                         variational_params_dict={
                             'gammas_pairs':[0.42], 
                             'gammas_singles':[0.97], 
-                            'betas':[0.13]},
-                        mixer_hamiltonian='x')
+                            'betas':[0.13]}
+                         )
 ```
 
 In the circuit model, this looks like:
