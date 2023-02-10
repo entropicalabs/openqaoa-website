@@ -11,7 +11,8 @@ $$
 
 Let us take a very simple example where the cost hamiltonian has quadratic terms of the same weight, $w=2.5$, and biases of $b=3.5$, namely:
 
-$$ H_C = 2.5 (Z_0Z_1 + Z_1Z_2 + Z_0Z_2) + 3.5 (Z_0 + Z_1 + Z_2). $$ 
+$$ 
+H_C = 2.5 (Z_0Z_1 + Z_1Z_2 + Z_0Z_2) + 3.5 (Z_0 + Z_1 + Z_2). $$ 
 
 !!! info "For the curious"
     This Hamiltonian arises when solving the Minimum Vertex Cover on a 3-nodes ring graph with $\text{field}=3$ and $\text{penalty}=10$.
@@ -27,7 +28,7 @@ Then the angles of the $ZZ$ gate are $2*\gamma*w = 2*0.42*2.5 = 2.1$, the angles
 
 We can visualize this using the 'qiskit.statevector_simulator' backend:
 
-![kamada_kawai_layout](/img/circuit_standard.png)
+![circuit_standard](/img/circuit_standard.png)
 
 ## Control the bias term
 
@@ -51,7 +52,7 @@ q.set_circuit_properties(p=1,
 ```
 
 In the circuit model, this looks like:
-![kamada_kawai_layout](/img/circuit_standard_w_bias.png)
+![circuit_standard_w_bias](/img/circuit_standard_w_bias.png)
 
 
 !!! warning "Hamiltonian without bias terms"

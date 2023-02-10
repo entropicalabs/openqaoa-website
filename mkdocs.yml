@@ -62,6 +62,7 @@ extra_javascript:
 markdown_extensions:
   - toc:
       permalink: true
+      title: Table of contents
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
@@ -95,9 +96,9 @@ nav:
       - parametrization/extended-parametrization.md
       - parametrization/fourier-parametrization.md
       - parametrization/annealing-parametrization.md
-  - The devices:
+  - The Devices:
       - devices/device.md
-      - Local simulators:
+      - Local Simulators:
         - devices/qiskit.md
         - devices/rigetti-qvm.md
         - devices/entropica-labs-vectorized.md
@@ -106,8 +107,8 @@ nav:
         - devices/azure-quantum.md
         - devices/ibmq.md
         - devices/rigetti-qcs.md
-  - QUBO problems:
-      - problems/generic-qubo.md
+  - QUBO Problems:
+      - problems/what-is-a-qubo.md
       - Built-in QUBO:
         - problems/knapsack.md
         - problems/maximum-cut.md

@@ -39,16 +39,31 @@ We also support 3 different initializations at the moment:
 * `custom` allows the user to initialise the angles with custom values.
 
 The above can be combined to create a `Variational Parameter Class` with the Standard Parameterisation and Ramp Initialisation
+
 ```Python
-create_qaoa_variational_params(qaoa_circuit_params = qaoa_circuit_params, params_type = 'standard', init_type = 'ramp')
+create_qaoa_variational_params(qaoa_circuit_params=qaoa_circuit_params,
+                                params_type='standard',
+                                init_type='ramp')
+
 ```
 or with the Extended Parameterisation and Random Initialisation
 ```Python
-create_qaoa_variational_params(qaoa_circuit_params = qaoa_circuit_params, params_type = 'extended', init_type = 'rand')
+create_qaoa_variational_params(qaoa_circuit_params=qaoa_circuit_params,
+                                params_type='extended',
+                                init_type='rand')
 ```
+
 or with 
+
 ```Python
-create_qaoa_variational_params(qaoa_circuit_params = qaoa_circuit_params, params_type = 'fourier', init_type='custom', variational_params_dict={"betas":[0.26], "gammas":[0.42]})
+create_qaoa_variational_params(qaoa_circuit_params=qaoa_circuit_params,
+                                params_type='fourier',
+                                init_type='custom',
+                                variational_params_dict={
+                                    "betas":[0.26],
+                                    "gammas":[0.42]
+                                    }
+                                )
 ```
 
 !!! warning "Using `custom`"
@@ -56,5 +71,5 @@ create_qaoa_variational_params(qaoa_circuit_params = qaoa_circuit_params, params
 
 References
 ----------
-1. E. Farhi, J. Goldstone, S. Gutmann (2014). A Quantum Approximate Optimization Algorithm.
-2. L. Zhou, S. Wang, S. Choi, H. Pichler, M. D. Lukin, Phys.Rev.X 10, 021067 (2020) Quantum Approximate Optimization Algorithm: Performance, Mechanism, and Implementation on Near-Term Devices
+1. E. Farhi, J. Goldstone, S. Gutmann (2014). A Quantum Approximate Optimization Algorithm, [https://arxiv.org/abs/1411.4028](https://arxiv.org/abs/1411.4028).
+2. L. Zhou, S. Wang, S. Choi, H. Pichler, M. D. Lukin, Phys.Rev.X 10, 021067 (2020) Quantum Approximate Optimization Algorithm: Performance, Mechanism, and Implementation on Near-Term Devices, [https://arxiv.org/abs/1812.01041](https://arxiv.org/abs/1812.01041).
