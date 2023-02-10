@@ -12,7 +12,7 @@ This set of simulators encompasses simulators available through the well known p
 
 ## Explicitly create the qiskit device
 
-If you want to explicitly set the vectorized device use the following snipped
+If you want to target any of those simulator you need to specify the `local` location and use the correct name for the simulator. For example,
 
 ```Python
 q = QAOA()
