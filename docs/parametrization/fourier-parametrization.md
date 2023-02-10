@@ -19,6 +19,7 @@ In [1], the authors show that certain variants of this basic Fourier parametrisa
 !!! note "Number of parameters"
     The depth of the circuit is still linear in the number of layers, $p$. The advantage is in the smaller number of variational parameters to be optimized, as long as $q \leq p$.
 
+## Initialize with fourier parameters
 Let us once again take the cost Hamiltonian to be $H_C = 2.5 (Z_0Z_1 + Z_1Z_2 + Z_0Z_2) + 3.5 (Z_0 + Z_1 + Z_2)$ and construct a circuit of 4 layers (p=4). In the standard parametrization this would give $2*4 = 8$ variational parameters. The fourier parametrization, however, allows to work with less. Let's set $q=2$, giving only $4$ parameters to be optimized.
 We can further specify the initial values of those using the custom initialization, for example with the following:
 
@@ -65,7 +66,7 @@ Indeed, this is what we see in the brackets next to this gate.
 !!! note "Fourier with `ramp`"
     When the fourier parametrization is initialized with `ramp`, the optimization starts from $\vec{v} = \vec{u} = [0.35, 0, 0, ..., 0]$ where the length of the vectors is $q$. This is because at a single layer, $p=1$, and no user-specified time, the standard parameters $\beta$ and $\gamma$ are 0.35.
 
-
+## Control the bias terms
 The class `QAOAVariationalFourierWithBiasParams` extends upon the above by allowing for an additional parameter controlling the single qubit rotations around the Z axis, analogous to what `StandardWithBiasParams` implements. 
 One way to use this class is by setting the circuit properties as:
 ```Python
@@ -87,6 +88,26 @@ Since we kept the parameters controlling $\beta$ and $\gamma$ same as before and
 
 !!! note "Number of parameters"
     When using the `QAOAVariationalFourierWithBiasParams` class the number of parameters to be optimized is $3q$. 
+
+## Control all terms
+The class `QAOAVariationalFourierExtendedParams`, similarly to the `ExtendedParams` class, unlocks the full flexibility of the ansatz for this particular parametrization. 
+
+It can be used with the following piece of code:
+```Python
+q.set_circuit_properties(p=4, 
+                         q=2, 
+                         param_type='fourier_extended', 
+                         init_type='custom', 
+                         variational_params_dict={
+                             "u_pairs":[[0.11, 0.12, 0.13], [0.21, 0.22, 0.23]], 
+                             "u_singles":[[0.51, 0.52, 0.53],[0.61, 0.62, 0.63]], 
+                             "v_pairs":[], 
+                             "v_singles":[[0.91, 0.92, 0.93], [0.81, 0.82, 0.83]]}
+                         )
+```
+
+!!! note "Number of parameters"
+    Care must be taken when using the `QAOAVariationalFourierExtendedParams` as the number of variational parameters scales linearly with n. As shown above, for 3 qubits circuit, n=3 with q=2 and the standard X mixer, the number of parameters is $n*q*3=18$. Although this is still less than for the `ExtendedParams` class, as long as q<p, it can result in long optimization times.
 
 References
 ----------

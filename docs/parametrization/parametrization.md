@@ -51,7 +51,8 @@ or with
 create_qaoa_variational_params(qaoa_circuit_params = qaoa_circuit_params, params_type = 'fourier', init_type='custom', variational_params_dict={"betas":[0.26], "gammas":[0.42]})
 ```
 
-**NOTE**: When using the custom initialization strategy, we have to provide the appropriate number of betas and gammas depending on the number of variational parameters, which depends on the p-value and parameterisation type.
+!!! warning "Using `custom`"
+    When using the `custom` initialization strategy, we have to provide the appropriate number variational parameters in the form of a dictionary, `variational_params_dict`. The keys of the this dictionary are specific for the chose parametrization and the values depend on the number of values, p. Examples for how to use `custom` can be found in the separate pages.
 
 References
 ----------
