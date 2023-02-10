@@ -1,59 +1,39 @@
 # Shortest Path Problem
 
+Given an undirected graph $G(V,E)$, the shortest path problem for a given source $s \in V$ and destination node $d \in V$ seeks a path between them that has minimal distance. We consider the weighted variant of the problem, where nodes and edges of $G$ are assigned node and edge weights. The distance of a path is then equal to the sum of node and edge weights along the path.
+
 ## Mathematical Formulation
-An encoding of the problem can be achieved with $|V| + |E| - 2$ binary variables representing each state $x$ in the state space \cite{krauss2020solving} (We will use $x_i$'s and $x_{ij}$'s interchangeably with $x$ to denote states when the context is clear). 
 
-The first $|V|-2$ variables $x_1, x_2, ..., x_{|V|-2}$ correspond to the nodes in the graph excluding the source and destination nodes, while the remaining $|E|$ variables $x_{ij}$, where $(i,j) \in E$, corresponds to the edges.
+A QUBO encoding of the (weighted) shortest path problem can be constructed with $|V| + |E| - 2$ binary variables \cite{krauss2020solving, DSTAmanuscript23}. This is achieved by using linear terms to represent the node and edge weights, and quadratic penalty terms to penalize states that not valid paths, where a valid path is one that:
 
-With this encoding, we consider objectives that take the following forms:
+1.  starts from a specified source node $s$,
+2.  ends at a specified destination node $d$, and
+3.  has no broken links or branches along the path from $s$ to $d$.
 
-- **1 - Node cost**: Associates each node in the graph with a cost, depending on the node's weight $V_i$.
+In terms of binary variables $\{-1,1\}$, the first $|V|-2$ variables (denoted as $x_i$, where $i \in V$ corresponds to a node) correspond to nodes in the graph excluding the source and destination nodes, while the remaining $|E|$ variables (denoted as $x_{ij}$, where $(i,j) \in E$ represents an edge that is present in $G$ between nodes $i$ and $j$) represent the edges $E$. A state $\textbf{x}$ is then denoted as $\textbf{x} = (x_1,..., x_{|V|-2},...,x_{ij},...)$. Note that this encoding implicitly specifies the starting and ending nodes, since they are always in the path.
 
-$$
-E_{node}(x) = \sum_{i \in V} V_{i} x_{i}
-$$    
+With this encoding, the QUBO cost function $C(\textbf{x})$ can be written in the form: $$C(\textbf{x}) = C_w(\textbf{x}) + C_P(\textbf{x}).$$
 
-- **2 - Edge cost**: Associates each edge in the graph with a cost, depending on the edge's weight $E_{ij}$. 
+$C_w(\textbf{x})$ contains linear terms that encode the node and edge weights $w_i$ and $w_{ij}$ respectively:
 
-$$
-E_{edge}(x) = \sum_{(i,j) \in E} E_{ij} x_{ij}
-$$
+$$C_w(\textbf{x})= \sum_{i \in V} w_i x_i+ \sum_{(i,j) \in E} w_{ij} x_{ij},$$
 
+while $C_P(\textbf{x}) = C_s(\textbf{x}) + C_d(\textbf{x}) + C_{path}(\textbf{x})$ contains linear and quadratic terms that enforce the conditions (1), (2), and (3) above. Explicitly, they are:
 
-With only one objective (for instance, the minimisation of the distance between two points of a graph, which is an edge cost), the problem reduces to a single-objective shortest path problem which can be solved efficiently in polynomial time by Djikstra's well-known algorithm, which takes $O(|E|+|V|\log|V|)$ steps. The presence of multiple objectives constitute a Multi Objective Optimisation Problem (MOOP).
+-   **1 : Source constraint**: Penalises paths that do not have exactly one edge connected to the source node with
+$$C_s(\textbf{x}) = -x^2_s + (x_s - \sum_j x_{sj})^2,$$
+where $x_s = 1$, and the sum is over all edges that are connected to node $s$. This term has a minimum value of $-1$, which occurs for states where there is only one edge connected to the source node.
 
-The cost and the edge equations above allow us to compute the cost vector associated with a state $x$. However, of the $2^{|V| + |E|-2}$ possible states, not all of them represent actual paths.
+-   **2 : Destination constraint**: Penalises paths that do not have exactly one edge connected to the destination node with
+$$C_d(\textbf{x}) = -x^2_d + (x_d - \sum_j x_{dj})^2,$$
+where $x_d = 1$, and the sum is over all edges that are connected to node $d$. This term has a minimum value of $-1$, which occurs for states where there is only one edge connected to the destination node.
 
-A valid path is one that
+-   **3 : Path constraint**: Penalises paths that do not have exactly 2 edges connected to intermediate nodes with
+$$C_{path}(\textbf{x}) = \sum_{i \in V} C_i(\textbf{x})$$
+such that for every node $i \in V$:
+$$C_i(\textbf{x}) = (2x_i - \sum_j x_{ij})^2,$$
+where the sum is over all edges that are connected to node $i$. This has a minimum value of 0, which occurs for states where all nodes selected have exactly 2 edges connected to it.
 
-1. starts from a specified source node $s$, 
-2. ends at a specified destination node $d$, and 
-3. has no broken links or branches along the path from $s$ to $d$. 
+States that minimize $C_P(\textbf{x})$ then constitute valid paths that start at $s$ and end at $d$.
 
-States that satisfy these criteria are called _feasible_, and _infeasible_ otherwise. These 3 constraints can be enforced as quadratic penalty terms added to our cost function, so that infeasible solutions have higher total energies than feasible ones:
-
-- **3 : Source constraint**: Penalises paths that do not have exactly one edge connected to the source node:
-    
-$$
-E_s(x) = -x^2_s + (x_s - \sum_j x_{sj})^2,
-$$
-
-&ensp;where $s$ is the index of the source node, and the sum is over all edges that are connected to node $d$.  This term has a minimum value of $-1$, which occurs for states where the source node is used ($x_s = 1$), and there is only one way of leaving the source node (the bracketed term is equal to zero).
-
-- **4 : Destination constraint**: Penalises paths that do not have exactly one edge connected to the destination node:
-    
-$$
-E_d(x) = -x^2_d + (x_d - \sum_j x_{dj})^2,
-$$
-
-&ensp;where $d$ is the index of the destination node, and the sum is over all edges that are connected to node $s$. This term has a minimum value of $-1$, similar to the source constraint.
-
-- **5 : Path constraint**: Penalises paths that do not have exactly 2 edges connected to intermediate nodes: $E_{path} = \sum_{i \in V} E_i$, such that for each intermediate node $i$:
-    
-$$
-E_i(x) = (2x_i - \sum_j x_{ij})^2,
-$$
-
-&ensp;where the sum is over all edges that are connected to node $i$. This has a minimum value of 0, which occurs for states where for all intermediate nodes used (for which $x_i = 1$), the node degree is equal to 2.
-
-A solution of the multi-objective shortest path problem is then a path $x$ that achieves the minimum of all the penalties  and is Pareto-optimal with respect to the node and edge costs.
+Finally, in OpenQAOA, where we work with Ising variables $\{-1,1\}$, a transformation of variables $x_i \rightarrow (1-Z_i)/2$ transforms the cost function $C(\textbf{x})$ to  the QAOA cost Hamiltonian $H$.
