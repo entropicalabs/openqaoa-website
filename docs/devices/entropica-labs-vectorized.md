@@ -8,17 +8,17 @@ Due to its marked exploratory behavior, the vectorized simulator is the _default
 
 ## Key features of the vectorized device
 
-- Very fast up to 15/-18 qubits
+- Very fast up to ~18 qubits
 - Preferred choice for quick prototyping
 - Noiseless simulations
 
 
 ## Explicitly create the vectorized device
 
-If you want to explicitly set the vectorized device use the following snipped
+If you want to explicitly set the vectorized device use the following snippet
 
 ```Python
-qiskit_sv = create_device(location='local', name='vectorized')
-q.set_device(qiskit_sv)
+vect_device = create_device(location='local', name='vectorized')
+q.set_device(vect_device)
 ```
 
