@@ -53,7 +53,7 @@ For $p\to \infty$, it has been proven that a set of optimal parameters exist suc
 
 ## Encoding of the problem
 
-The encoding of the problem is a crucial step in the QAOA algorithm, as it determines the form of the parametric quantum circuit. This encoding is done by representing the problem as a cost Hamiltonian, $\mathcal{H}_C$, which maps the problem's variables to qubits and defines the cost function as an operator that acts on these qubits. The cost Hamiltonian has a fixed structure and, given an underlying binary optimizations problem (see read more about QUBOs [here](problems/generic-qubo.md)).
+The encoding of the problem is a crucial step in the QAOA algorithm, as it determines the form of the parametric quantum circuit. This encoding is done by representing the problem as a cost Hamiltonian, $\mathcal{H}_C$, which maps the problem's variables to qubits and defines the cost function as an operator that acts on these qubits. The cost Hamiltonian has a fixed structure and, given an underlying binary optimizations problem (see read more about QUBOs on the [what is a QUBO](problems/what-is-a-qubo.md) page).
 
 Problems that can be tackled by QAOA include [Minimum Vertex Cover](problems/minimum-vertex-cover.md), [Maximum Cut](problems/maximum-cut.md), [Number Partition](problems/number-partition.md), etc. These problems can all be mapped into a QUBO (Quadratic Unconstrained Binary Optimization) problem.
 

@@ -2,9 +2,17 @@
 
 The class `QAOAVariationalFourierParams` implements a heuristic proposed by Zhou et al. [1] which instead of optimizing for $\beta$ and $\gamma$ at each layer aims at finding the amplitudes of their discrete Fourier transforms given by:
 
-$\gamma_i^{(p)} = 2 \sum_{k=0}^{q-1} u_k \sin\left[(k+1/2)(i+1)\frac{\pi}{2p}\right]$ (1)
+$$
+\begin{equation}
+\gamma_i^{(p)} = 2 \sum_{k=0}^{q-1} u_k \sin\left[(k+1/2)(i+1)\frac{\pi}{2p}\right] \tag{1}
+\end{equation}
+$$ 
 
-$\beta_i^{(p)} = 2 \sum_{k=0}^{q-1} v_k \cos\left[(2k+1)i\frac{\pi}{2p}\right]$ (2)
+$$
+\begin{equation}
+\beta_i^{(p)} = 2 \sum_{k=0}^{q-1} v_k \cos\left[(2k+1)i\frac{\pi}{2p}\right] \tag{2}
+\end{equation}
+$$ 
 
 where $i = 0,...,p$.
 
@@ -36,29 +44,39 @@ q.set_circuit_properties(p=4,
 
 As a circuit, this looks like:
 
-![kamada_kawai_layout](/img/circuit_fourier.png)
+![circuit_fourier](/img/circuit_fourier.png)
 
 Let us now understand how the custom values we set for u and v translate to the rotational angles we see in the circuit above.
 
 For example, the RX rotation between qubit 1 and 2 in the first layer is obtained by evaluating eq.(2) for i=0, p=4, q=2 and then simply multiplying by 2, as conventional. 
 
-$-2 * 2 * \sum_{k=0}^{1} v_k \cos\left[(2k+1)*0*\frac{\pi}{2*4}\right]$
+$$
+-2 * 2 * \sum_{k=0}^{1} v_k \cos\left[(2k+1)*0*\frac{\pi}{2*4}\right]
+$$
 
 This simplifies nicely since $\cos(0)=1$ and we are left only with a sum over the chosen values of v which gives
 
-$ - 2 * 2 * (0.9 + 0.8) = -6.8$
+$$
+ - 2 * 2 * (0.9 + 0.8) = -6.8
+$$
 
 For another, a bit more involved, example let us focus on the ZZ rotation between qubits 0 and 1 in the 3rd layer. This comes from evaluating eq.(1) for i=3, p=4, q=2 and then multiplying by the weight of the quadratic term of the cost hamiltonian and by 2, as conventional. 
 
-$2 * w_{01} * 2 * \sum_{k=0}^{1} u_k \sin\left[(k+\frac{1}{2})(3+1)\frac{\pi}{2*4}\right]$
+$$
+2 * w_{01} * 2 * \sum_{k=0}^{1} u_k \sin\left[(k+\frac{1}{2})(3+1)\frac{\pi}{2*4}\right]
+$$
 
 After substituting for the weight and the parameters we chose for u and after expanding the sum, we arrive at
 
-$2 * 2.5 * 2 * (0.1 * \sin\left[\frac{\pi}{2}(2*0 + 1)\right] + 0.2 * \sin\left[\frac{\pi}{2}(2*1 + 1)\right])$
+$$
+2 * 2.5 * 2 * (0.1 * \sin\left[\frac{\pi}{2}(2*0 + 1)\right] + 0.2 * \sin\left[\frac{\pi}{2}(2*1 + 1)\right])
+$$
 
 which after simplifying gives
 
-$10 * (0.1*\sin(\frac{\pi}{2}) + 0.2*\sin(\frac{3\pi}{2})) = 10*(0.1 - 0.2) = 10*(-0.1) = -1.0$ 
+$$
+10 * (0.1*\sin(\frac{\pi}{2}) + 0.2*\sin(\frac{3\pi}{2})) = 10*(0.1 - 0.2) = 10*(-0.1) = -1.0
+$$ 
 
 Indeed, this is what we see in the brackets next to this gate.
 
@@ -69,6 +87,7 @@ Indeed, this is what we see in the brackets next to this gate.
 ## Control the bias terms
 The class `QAOAVariationalFourierWithBiasParams` extends upon the above by allowing for an additional parameter controlling the single qubit rotations around the Z axis, analogous to what `StandardWithBiasParams` implements. 
 One way to use this class is by setting the circuit properties as:
+
 ```Python
 q.set_circuit_properties(p=4, 
                          q=2, 
@@ -82,7 +101,7 @@ q.set_circuit_properties(p=4,
 ```
 which leads to the following quantum circuit:
 
-![kamada_kawai_layout](/img/circuit_fourier_w_bias.png)
+![circuit_fourier_w_bias](/img/circuit_fourier_w_bias.png)
 
 Since we kept the parameters controlling $\beta$ and $\gamma$ same as before and only gave new parameters for the single qubit rotations around the Z axis, the circuits look identical apart from the RZ gates. 
 
@@ -93,6 +112,7 @@ Since we kept the parameters controlling $\beta$ and $\gamma$ same as before and
 The class `QAOAVariationalFourierExtendedParams`, similarly to the `ExtendedParams` class, unlocks the full flexibility of the ansatz for this particular parametrization. 
 
 It can be used with the following piece of code:
+
 ```Python
 q.set_circuit_properties(p=4, 
                          q=2, 
@@ -107,8 +127,8 @@ q.set_circuit_properties(p=4,
 ```
 
 !!! note "Number of parameters"
-    Care must be taken when using the `QAOAVariationalFourierExtendedParams` as the number of variational parameters scales linearly with n. As shown above, for 3 qubits circuit, n=3 with q=2 and the standard X mixer, the number of parameters is $n*q*3=18$. Although this is still less than for the `ExtendedParams` class, as long as q<p, it can result in long optimization times.
+    Care must be taken when using the `QAOAVariationalFourierExtendedParams` as the number of variational parameters scales linearly with n. As shown above, for 3 qubits circuit, $n=3$ with $q=2$ and the standard X mixer, the number of parameters is $n*q*3=18$. Although this is still less than for the `ExtendedParams` class, as long as $q<p$, it can result in long optimization times.
 
 References
 ----------
-1. L. Zhou, S. Wang, S. Choi, H. Pichler, and M. D. Lukin, Phys. Rev. X 10, 021067 (2020)
+1. L. Zhou, S. Wang, S. Choi, H. Pichler, M. D. Lukin, Phys.Rev.X 10, 021067 (2020) Quantum Approximate Optimization Algorithm: Performance, Mechanism, and Implementation on Near-Term Devices, [https://arxiv.org/abs/1812.01041](https://arxiv.org/abs/1812.01041).
