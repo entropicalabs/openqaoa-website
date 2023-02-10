@@ -1,4 +1,4 @@
-# QUBO
+# What is a QUBO
 
 QAOA can solve binary optimization problems known as QUBOs. QUBO stands for _Quadratic unconstrained binary optimization_, and a QUBO problem represent, loosely speaking, a binary problem with at most quadratic terms. In general any optimization problem can be cast as a binary problem, but not all of them will be quadratic in the resulting binary variables. For a very nice paper showcasing most common QUBOs please check out Andrew Lucas's paper [Ising formulations of many NP problems](https://arxiv.org/abs/1302.5843)
 
@@ -56,7 +56,7 @@ $$ 3x_1 + 2x_2 + 6x_1x_2 + 4x_1x_2 + 5x_1x_3 $$ we have
 ```Python
 terms = [[0], [1], [0,1], [1,2], [0,2]]
 weights = [3, 2, 6, 4, 5]
-qubo = QUBO(n = 3, terms=terms, weights=weights)
+qubo = QUBO(n=3, terms=terms, weights=weights)
 ```
 
 !!! note "Python index"

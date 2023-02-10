@@ -38,4 +38,4 @@ If you are interested in running the tests or the docs you can do so by using th
 pip install .[tests]
 ```
 
-Should you face any issues during the installation, please drop us an email at [openqaoa@entropicalabs.com](openqaoa@entropicalabs.com) or [open an issue](https://github.com/entropicalabs/openqaoa/issues)!
+Should you face any issues during the installation, please drop us an email at [openqaoa@entropicalabs.com](mailto:openqaoa@entropicalabs.com) or [open an issue](https://github.com/entropicalabs/openqaoa/issues)!

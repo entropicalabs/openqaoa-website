@@ -8,7 +8,7 @@ Due to its marked exploratory behavior, the vectorized simulator is the _default
 
 ## Key features of the vectorized device
 
-- Very fast up to 15 qubits
+- Very fast up to 15/-18 qubits
 - Preferred choice for quick prototyping
 - Noiseless simulations
 
