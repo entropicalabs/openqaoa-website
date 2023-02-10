@@ -14,7 +14,15 @@ $H_C = 2.5 (Z_0Z_1 + Z_1Z_2 + Z_0Z_2) + 3.5 (Z_0 + Z_1 + Z_2)$.
 This time, however, the extended parametrization allows us to specify a different angle for every gate with the following:
 
 ```Python
-q.set_circuit_properties(p=1, param_type='extended', init_type='custom', variational_params_dict={'gammas_pairs':[1.1, 1.2, 1.3], 'gammas_singles': [2.1, 2.2, 2.3], 'betas_pairs': [], 'betas_singles': [3.1, 3.2, 3.3]})
+q.set_circuit_properties(p=1, 
+                         param_type='extended', 
+                         init_type='custom', 
+                         variational_params_dict={
+                             'gammas_pairs':[1.1, 1.2, 1.3], 
+                             'gammas_singles':[2.1, 2.2, 2.3], 
+                             'betas_pairs': [], 
+                             'betas_singles': [3.1, 3.2, 3.3]}
+                         )
 ```
 
 As a circuit, this `custom` initialization looks like:
