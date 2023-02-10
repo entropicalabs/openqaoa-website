@@ -18,7 +18,7 @@ Currently, the available devices are
 
 ## How to connect to AWS braket
 
-There are two ways to access the devices on Braket
+There are two ways to access the devices on Braket:
 
 ### Access through your own laptop
 
@@ -33,9 +33,9 @@ If you are on a unix machine, then you will be able to set your credentials thro
 
 ```Bash
 $ aws configure
-AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
-AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-Default region name [None]: us-west-2
+AWS Access Key ID [None]: AKIAI******EXAMPLE
+AWS Secret Access Key [None]: wJalrXU******EXAMPLEKEY
+Default region name [None]: us-west-1
 Default output format [None]: json
 ```
 

@@ -24,7 +24,7 @@ Currently, the available devices are
 
 ## How to connect to Azure Quantum
 
-There are two ways to access the devices on Azure Quantum you will need to create an Azure Quantum account. You can do so from the [official Azure website](https://azure.microsoft.com/en-us/products/quantum/)
+There are two ways to access the devices on Azure Quantum, and both require you to create an Azure Quantum account. You can do so from the [official Azure website](https://azure.microsoft.com/en-us/products/quantum/)
 
 ### Access through your own laptop
 
