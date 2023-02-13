@@ -59,14 +59,14 @@ Problems that can be tackled by QAOA include [Minimum Vertex Cover](problems/min
 
 A QUBO problem consist on finding a vector $x$ such that the function
 
-$$ f(x) = \sum_{i=1}^n \sum_{j=1}^i Q_{i j} x_i x_j + C $$
+$$ f(x) =  \sum_{i=1}^n h_{i} x_i + \sum_{i, j} J_{i j} x_i x_j $$
 
 is minimized. 
-Where $x$ is a vector of $n$ components, and $Q_{ij}$ and $C$ are constants. Each different problem will have different $Q_{ij}$ and $C$ values.
+Where $x$ is a vector of $n$ components ($x_i \in \pm 1$), and $J_{ij}$ and $h_i$ are constants. Each different problem will have different $J_{ij}$ and $h_i$ values.
 
 The function can be enconded in a cost Hamiltonian the following way:
 
-$$ \mathcal{H}_C = \sum_{i=1}^n \sum_{j=1}^i Q_{i j} \sigma_i^z \sigma_j^z + \sum_{i=1}^n C \sigma_i^z $$
+$$ \mathcal{H}_C = \sum_{i=1}^n h_i \sigma_i^z + \sum_{i,j} J_{i j} \sigma_i^z \sigma_j^z  $$
 
 where $\sigma_i^z$ is the Pauli Z matrix applied to the $i$ qubit.
 
@@ -76,9 +76,9 @@ As the terms of these Hamiltonians commute, we can write:
 
 $$U(\mathcal{H}_X,\beta_j) = e^{-i\beta_j \mathcal{H}_X} = \prod_k^n e^{-i\beta_j \sigma_{k}^x}, $$
 
-$$U(\mathcal{H}_C,\gamma_j) = e^{-i\gamma_j \mathcal{H}_C} = \prod_k^n\prod_l^k e^{-i\gamma_j Q_{kl} \sigma_{k}^z\sigma_{l}^z}\,\prod_k^n e^{-i\gamma_j C \sigma_{k}^z}.$$
+$$U(\mathcal{H}_C,\gamma_j) = e^{-i\gamma_j \mathcal{H}_C} = \prod_k^n e^{-i\gamma_j h_i \sigma_{k}^z}\,\prod_{k, l}e^{-i\gamma_j J_{kl} \sigma_{k}^z\sigma_{l}^z}\,.$$
 
-We know that $e^{-i\alpha \sigma_{k}^x}$ is the RX gate of $2\alpha$ applied at the $k$ qubit, $e^{-i\alpha \sigma_{k}^z}$ is the RZ gate of $2\alpha$ applied at the $k$ qubit, and $e^{-i\alpha \sigma_{k}^z\sigma_{l}^z}$ is the RZZ gate of $2\alpha$ applied at the $k$ and $l$ qubits.
+We know that $e^{-iC \sigma_{k}^x}$ is the RX gate of $2C$ applied at the $k$ qubit, $e^{-iC \sigma_{k}^z}$ is the RZ gate of $2C$ applied at the $k$ qubit, and $e^{-iC \sigma_{k}^z\sigma_{l}^z}$ is the RZZ gate of $2C$ applied at the $k$ and $l$ qubits, where $C$ is any constant.
 
 This means that we now know how to construct the QAOA circuit for any QUBO problem.
 
@@ -88,7 +88,7 @@ The classical loop procedure in quantum computing involves the following steps:
 
 1. Encoding the optimization problem into a parametric quantum circuit
 2. InitializingInitializing the circuit parameters
-3. Evaluating the cost function, which represents the energy of the system described by the quantum circuit, by measuring the expectation value of the cost Hamiltonian $\langle \psi|\mathcal{H}_C|\psi\rangle $.
+3. Evaluating the cost function, which represents the energy of the system described by the quantum circuit, by measuring the expectation value of the cost Hamiltonian $\langle \psi|\mathcal{H}_C|\psi\rangle$.
 4. Updating the circuit parameters using a classical optimization algorithm, such as gradient descent or COBYLA, to minimize the cost function and find the optimal solution to the optimization problem.
 
 The goal of the QAOA is to find the set of parameters ($\gamma^\text{opt}, \beta^\text{opt}$) that result in the minimum value of the cost function ($\langle \psi^\text{opt} |\mathcal{H}_C|\psi^\text{opt}\rangle$), thereby finding the approximate solution to the optimization problem encoded in the quantum circuit. The classical loop procedure is repeated multiple times until convergence to the optimal solution is achieved.
