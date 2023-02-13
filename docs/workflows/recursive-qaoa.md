@@ -27,7 +27,8 @@ This version of RQAOA is included in OpenQAOA. Additionally, OpenQAOA incorporat
 
 * The ``adaptive`` strategy selects how many qubits to eliminate at each step adaptively. The maximum number of allowed eliminations is given by the parameter ``n_max``. At each step, the algorithm selects the top ``n_max+1`` expectation values (ranked in magnitude), computes the mean among them, and uses the ones lying above it for qubit elimination. This corresponds to a maximum of ``n_max`` possible elimination per step. For ``n_max=1``, the algorithm reduces to the original form of RQAOA presented in [1].
 
-**NOTE**: The specific performance of these generalizations is currently under investigation. In particular, the development of Adaptive RQAOA is associated with an internal research project at Entropica Labs to be released publicly in the near future [4]. We make these strategies already available to the community in order to strengthen the exploration of more complex elimination schemes for RQAOA, beyond its original formulation [1].
+!!! note "Active Research"
+    The specific performance of these generalizations is currently under investigation. In particular, the development of Adaptive RQAOA is associated with an internal research project at Entropica Labs to be released publicly in the near future [4]. We make these strategies already available to the community in order to strengthen the exploration of more complex elimination schemes for RQAOA, beyond its original formulation [1].
 
 
 ## The full RQAOA workflow. 
