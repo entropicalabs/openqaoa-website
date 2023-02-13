@@ -54,3 +54,20 @@ qasm_sim_device = create_device(location='ibmq',
 
 q.set_device(qasm_sim_device)
 ```
+
+#### Find an available Device
+
+If you are unsure about what devices are available to you, you can do the following:
+
+```Python
+q_device = create_device(location='ibmq', 
+                        name='', hub='ibm-q', 
+                        group='open', project='main')
+
+q_device.check_connection()
+q_device.available_qpus
+```
+
+The attribute `check_connection` authenticates your IBMQ credentials while `available_qpus` returns a list of IBMQ devices that are available to your IBMQ account, based on your API Token.
+
+Once you've selected the desired device, recreate the device object with the selected device's name as `name` in the `create_device` function.
