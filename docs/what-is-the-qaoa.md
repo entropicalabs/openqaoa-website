@@ -76,7 +76,7 @@ As the terms of these Hamiltonians commute, we can write:
 
 $$U(\mathcal{H}_X,\beta_j) = e^{-i\beta_j \mathcal{H}_X} = \prod_k^n e^{-i\beta_j \sigma_{k}^x}, $$
 
-$$U(\mathcal{H}_C,\gamma_j) = e^{-i\gamma_j \mathcal{H}_C} = \prod_k^n\prod_l^k e^{-i\gamma_j J_{kl} \sigma_{k}^z\sigma_{l}^z}\,\prod_k^n e^{-i\gamma_j h_i \sigma_{k}^z}.$$
+$$U(\mathcal{H}_C,\gamma_j) = e^{-i\gamma_j \mathcal{H}_C} = \prod_k^n e^{-i\gamma_j h_i \sigma_{k}^z}\,\prod_{k, l}e^{-i\gamma_j J_{kl} \sigma_{k}^z\sigma_{l}^z}\,.$$
 
 We know that $e^{-iC \sigma_{k}^x}$ is the RX gate of $2C$ applied at the $k$ qubit, $e^{-iC \sigma_{k}^z}$ is the RZ gate of $2C$ applied at the $k$ qubit, and $e^{-iC \sigma_{k}^z\sigma_{l}^z}$ is the RZZ gate of $2C$ applied at the $k$ and $l$ qubits, where $C$ is any constant.
 
