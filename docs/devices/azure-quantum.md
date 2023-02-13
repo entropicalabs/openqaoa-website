@@ -52,3 +52,21 @@ q.set_device(device_azure)
 ```
 
 Please, note that you need to specify the correct path for your `resource_id` and select the correct `az_location`!
+
+#### Find an Available Device
+
+If you are unsure about what devices are available to you, you can do the following:
+
+```Python
+az_device = create_device(location='azure',
+                        name='', 
+                        resource_id="/subscriptions/****/resourceGroups/****/providers/****/Workspaces/****", 
+                        az_location='westus')
+
+az_device.check_connection()
+az_device.available_qpus
+```
+
+The attribute `check_connection` authenticates your Azure credentials while `available_qpus` returns a list of Azure devices available to your Azure account and specified Workspace.
+
+Once you've selected the desired device, recreate the device object with the selected device's name as `name` in the `create_device` function.
