@@ -102,6 +102,7 @@ nav:
         - devices/qiskit.md
         - devices/rigetti-qvm.md
         - devices/entropica-labs-vectorized.md
+        - devices/analytical-simulator.md
       - Quantum Processing Units:
         - devices/amazon-braket.md
         - devices/azure-quantum.md
