@@ -15,7 +15,7 @@ $$
 Where $\text{Cost}(x)$ is the usually referred to as the cost function of the problem.
 
 !!! note "{0,1} or {-1,+1}"
-    Both choices are valid encodings for binary problems. QAOA, works best with the $\{-1, +1\}$ encoding (also known as the Ising encoding). 
+    In OpenQAOA we always use the $\{-1, +1\}$ encoding (also known as the Ising encoding). 
 
 ## How to write a QUBO
 
@@ -40,10 +40,10 @@ as you can see, we only have linear and quadratic terms in $x$.
 
 ## From QUBOs to QAOA
 
-As explained in the [what-is-the-qaoa](../what-is-the-qaoa.md) page, the QUBO can be directly cast into a Cost Hamiltonian. There are two important points worth mentioning explicitly:
+As explained in the [what-is-the-qaoa](../what-is-the-qaoa.md) page, QUBOs are used int QAOA to build the Cost Hamiltonian. There are two important points worth mentioning explicitly:
 
-1. The QUBO can be represented by a weighted graph $G(V,E)$ defined by $V$ vertexes and $E$ edges, where the linear part of the QUBO represent the weight of the vertexes and the quadratic is the weight associated to the edges
-2. The QAOA cost function should be defined as an Ising model, that is $\{ -1, +1\} $
+1. The QUBO can be represented by a weighted graph $G(V,E)$ defined by $V$ vertexes and $E$ edges, where the linear part of the QUBO represent the weight of the vertexes and the quadratic is the weight associated to the edges,
+2. The QAOA cost function should be defined as an Ising model, that is $$\{ -1, +1\}$$.
 
 
 
@@ -51,7 +51,11 @@ As explained in the [what-is-the-qaoa](../what-is-the-qaoa.md) page, the QUBO ca
 
 A QUBO in OpenQAOA is simply described by two lists, and a number for the constant value. Using the example above, we have
 
-$$ 3x_1 + 2x_2 + 6x_1x_2 + 4x_1x_2 + 5x_1x_3 $$ we have
+$$ 
+3x_1 + 2x_2 + 6x_1x_2 + 4x_1x_2 + 5x_1x_3 
+$$
+
+we have
 
 ```Python
 terms = [[0], [1], [0,1], [1,2], [0,2]]
