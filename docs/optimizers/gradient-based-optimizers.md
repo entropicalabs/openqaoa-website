@@ -66,7 +66,7 @@ q = QAOA()
 
 # set optimizer and properties
 q.set_classical_optimizer(
-    method='vgd', 
+    method='rmsprop', 
     jac="finite_difference", 
     optimizer_options=dict(
         stepsize=0.001,
@@ -87,13 +87,60 @@ $$ \vec\gamma^{(k+1)} = \vec\gamma^{(k)} - \alpha [\vec{\vec{\nabla}} {}^2 f(\ve
 
 where $[\vec{\vec{\nabla}} {}^2 f(\vec\gamma^{(k)})]^{-1}$ is the inverse of the Hessian matrix of the cost function, and $\alpha$ is the step size.
 
+#### OpenQAOA example
+In the example code below, the QAOA is configured to use the Newton's method with a step size of 0.1, and the finite difference method for approximating the Jacobian and the Hessian.
+
+```Python hl_lines="6-14"
+from openqaoa import QAOA 
+
+# create the QAOA object
+q = QAOA()
+
+# set optimizer and properties
+q.set_classical_optimizer(
+    method='newton', 
+    jac="finite_difference",
+    hess="finite_difference",
+    optimizer_options=dict(
+        stepsize=0.1,
+    )
+)
+
+# compile and optimize using the chosen optimizer
+q.compile(problem)
+q.optimize()
+```
+
 ### Quantum Natural Gradient Descent
 
-Quantum Natural Gradient Descent is a quantum optimization method that leverages the geometry of the parameter space and the quantum Fisher information matrix to improve convergence speed. In QNGD, the cost function and the gradient are transformed in a way that preserves the geometry of the parameter space. The update rule for QNGD is given by:
+Quantum natural gradient descent is a quantum optimization method that leverages the geometry of the parameter space and the quantum Fisher information matrix to improve convergence speed. In QNGD, the cost function and the gradient are transformed in a way that preserves the geometry of the parameter space. The update rule for QNGD is given by:
 
 $$ \vec\gamma^{(k+1)} = \vec\gamma^{(k)} - \alpha \,[\vec{\vec{\mathcal{F}}}(f(\vec\gamma^{(k)}))+\lambda]^{-1}\,\vec\nabla f(\vec\gamma^{(k)}), $$
 
-where $\alpha$ is an adaptive step size, $\vec{\vec{\mathcal{F}}}(f(\vec\gamma^{(k)}))$ is the  Fubini-Study metric tensor, and $\lambda$ is a small hyperparameter to avoid singularity of the inverse of the metric tensor.  
+where $\alpha$ is an adaptive step size, $\vec{\vec{\mathcal{F}}}(f(\vec\gamma^{(k)}))$ is the Fubini-Study metric tensor, and $\lambda$ is a small hyperparameter to avoid singularity of the inverse of the metric tensor. 
+
+#### OpenQAOA example
+In the example code below, the QAOA is configured to use the Quantum Natural Gradient Descent optimizer with a step size of 0.1 and the finite difference method for approximating the Jacobian. When using this optimizer, the Fubini-Study metric tensor is automatically computed by OpenQAOA.
+
+```Python hl_lines="6 7 8 9 10 11 12 13"
+from openqaoa import QAOA 
+
+# create the QAOA object
+q = QAOA()
+
+# set optimizer and properties
+q.set_classical_optimizer(
+    method='natural_grad_descent', 
+    jac="finite_difference",
+    optimizer_options=dict(
+        stepsize=0.1,
+    )
+)
+
+# compile and optimize using the chosen optimizer
+q.compile(problem)
+q.optimize()
+```
 
 ### Simultaneous Perturbation Stochastic Approximation
 Simultaneous Perturbation Stochastic Approximation (SPSA) is a gradient-free optimization method that uses stochastic approximations of the gradient. Unlike real gradient-based methods like gradient descent, SPSA does not require knowledge of the gradient of the function being optimized. Instead, SPSA estimates the gradient by perturbing the parameters of the function in a random direction and observing the resulting change in the cost function. The update rule for SPSA is given by:
@@ -115,7 +162,7 @@ $$ \vec\Delta_k = \frac{f(\vec\gamma^{(k)} + c_k \vec\Delta) - f(\vec\gamma^{(k)
 
 where $\vec\Delta$ is a vector of random perturbations that are generated independently for each parameter at each iteration:
 
-$$ \vec\Delta = (\delta_1, \delta_2, ..., \delta_n), \quad \delta_i \in \{-1, 1\} \text{ random generated}, $$
+$$ \vec\Delta = (\delta_1, \delta_2, ..., \delta_n), \quad \delta_i \in \{-1, 1\} \text{ randomly generated}, $$
 
 and $c_k$ is a perturbation sequence that ensures that the perturbations are small enough to avoid large changes in the cost function, but large enough to estimate the gradient accurately. It is computed as:
 
@@ -156,12 +203,12 @@ q.optimize()
 
 ## Gradient computation
 
-When optimizing the parameters in the QAOA we don't know the analytical form of the cost function therefore we need some method to compute the Jacobian $\vec\nabla f(\gamma)$. OpenQAOA offers different methods to compute it. Here you can find a list and a brief description of those:
+When optimizing the parameters in the QAOA we don't know the analytical form of the cost function therefore we need some method to compute the Jacobian $\vec\nabla f(\vec\gamma)$. OpenQAOA offers different methods to compute it. Here you can find a list and a brief description of those:
 
 | Name | Method | Description |
 | :--- | :----- | :---------- |
 | `finite_difference` | Finite Difference  | Computes the gradient by evaluating the function at points that are slightly perturbed from the current point. |
-| `param_shift` | Parameter-shift | Compute exact derivative by evaluating the circuit at two points offset by π/2 from the parameter value using the parameter-shift rule.|
+| `param_shift` | Parameter-shift | Compute exact derivative by evaluating the circuit at two points offset by $\pi/2$ from the parameter value using the parameter-shift rule.|
 | `stoch_param_shift` | Stochastic Parameter-shift | Compute derivative by adding random components to the parameter-shift rule |
 | `grad_spsa` | Gradient Simultaneous Perturbation Stochastic Approximation | A method for stochastic gradient descent that estimates the gradient using a finite-difference approximation with random perturbations of the parameters. |
 
@@ -171,9 +218,32 @@ When optimizing the parameters in the QAOA we don't know the analytical form of 
 
 The finite difference method is a numerical technique for approximating derivatives of a function. Given a function $f(\vec{\gamma})$, we want to approximate its Jacobian $\vec\nabla f(\vec{\gamma})=(\partial_1f, \partial_2f, ..., \partial_nf)$. The finite difference method uses the following formula to compute an approximation of the derivative:
 
-$$ \frac{\partial f(\vec{\gamma})}{\partial\gamma_i} \approx \frac{f(\vec\gamma_i + \eta\,\vec{e}_i) - f(\vec\gamma_i - \eta\,\vec{e}_i)}{2\eta} $$
+$$ \frac{\partial f(\vec{\gamma})}{\partial\gamma_i} \approx \frac{f(\vec\gamma + \eta\,\vec{e}_i) - f(\vec\gamma - \eta\,\vec{e}_i)}{2\eta} $$
 
 where $\eta$ is a small positive number, often called the step size, and $\vec{e}_i$ is the $i$ base vector: $\vec{e}_i = (0,...,0,1,0,...,0)$, where the $1$ is found the $i\text{th}$ position. Note that the accuracy of the approximation depends on the choice of $\eta$.
+
+#### OpenQAOA example
+In the code below it is shown how to run QAOA with a gradient-based optimizer like gradient descent and approximating the Jacobian with finite difference method. Here we are specifying the step size $\eta$ of the finite difference method through the `jac_options` argument.
+
+```Python hl_lines="6 7 8 9 10 11 12 13"
+from openqaoa import QAOA 
+
+# create the QAOA object
+q = QAOA()
+
+# set optimizer and properties
+q.set_classical_optimizer(
+    method='vgd', 
+    jac="finite_difference", 
+    jac_options=dict(
+        stepsize=0.001,
+    )
+)
+
+# compile and optimize using the chosen optimizer
+q.compile(problem)
+q.optimize()
+```
 
 
 ### Parameter-shift
@@ -198,9 +268,53 @@ where $\vec{e}_j$ is the $j$ base vector: $\vec{e}_j = (0,...,0,1,0,...,0)$, whe
 
 In the QAOA, it turns out that the cost function can be expressed as above for all the gates when we are using the extended parameters. This means that we can use the parameter-shift rule to compute the Jacobian when we are solving QAOA with extended parameters. However, we can also use standard parameters if we convert the standard parameters to extended before the gradient computation and after it we convert them back. To learn about the various parametrizations, please refer to the [Parametrization and Initialization page](../parametrization/parametrization.md).
 
+#### OpenQAOA example
+In the code below it is shown how to run QAOA with a gradient-based optimizer like gradient descent and approximating the Jacobian with the parameter-shift method.
+
+```Python hl_lines="6 7 8 9 10"
+from openqaoa import QAOA 
+
+# create the QAOA object
+q = QAOA()
+
+# set optimizer and properties
+q.set_classical_optimizer(
+    method='vgd', 
+    jac="param_shift",
+)
+
+# compile and optimize using the chosen optimizer
+q.compile(problem)
+q.optimize()
+```
+
 ### Stochastic Parameter-shift
 
 The Stochastic Parameter-Shift method is a gradient approximation technique that randomly samples a fixed number of parameters to compute the gradient using the Parameter-Shift method explained above. With this method, some of the partial derivatives will not be computed and will be left as zero. This method is only applicable to QAOA with standard parameterization since the gradient of each standard parameter is a combination of gradients of some extended parameters.
+
+#### OpenQAOA example
+In the code below it is shown how to run QAOA with a gradient-based optimizer like gradient descent and approximating the Jacobian with the stochastic parameter-shift method. In the Jacobian options we are setting the number of sampled $\beta$ and $\gamma$ parameters will be $4$ and $6$ respectively. 
+
+```Python hl_lines="6 7 8 9 10 11 12 13 14"
+from openqaoa import QAOA 
+
+# create the QAOA object
+q = QAOA()
+
+# set optimizer and properties
+q.set_classical_optimizer(
+    method='vgd', 
+    jac="stoch_param_shift",
+    jac_options=dict(
+        n_beta_single=4,
+        n_gamma_pair=6,
+    ),
+)
+
+# compile and optimize using the chosen optimizer
+q.compile(problem)
+q.optimize()
+```
 
 ### Gradient Simultaneous Perturbation Stochastic Approximation
 The Gradient Simultaneous Perturbation Stochastic Approximation is a method for stochastic gradient descent that estimates the gradient using a finite-difference approximation with random perturbations of the parameters. 
@@ -209,9 +323,32 @@ The parameters are perturbed by a random vector that takes values of +1 or -1 wi
 
 $$ \vec\nabla f(\vec\gamma) \approx \frac{f(\vec\gamma + c \vec\Delta) - f(\vec\gamma - c \vec\Delta)}{2c} \odot  \vec\Delta $$
 
-where $c$ is a constant that determines the step size, and $\vec\Delta$ is the perturbation vector: $\vec\Delta = (\delta_1, \delta_2, ..., \delta_n)$ where $ \delta_i \in \{-1, 1\}$ are random generated.
+where $c$ is a constant that determines the step size, and $\vec\Delta$ is the perturbation vector: $\vec\Delta = (\delta_1, \delta_2, ..., \delta_n)$ where $ \delta_i \in \{-1, 1\}$ are randomly generated.
 
 The primary benefit of Gradient SPSA is that it requires only two evaluations of the cost function to estimate the Jacobian, unlike the finite difference method, which requires two evaluations for each parameter.
+
+#### OpenQAOA example
+In the code below it is shown how to run QAOA with a gradient-based optimizer like gradient descent and approximating the Jacobian with the gradient SPSA method. In the Jacobian options we are setting the step size $c$ to $0.0003$. 
+
+```Python hl_lines="6 7 8 9 10 11 12 13"
+from openqaoa import QAOA 
+
+# create the QAOA object
+q = QAOA()
+
+# set optimizer and properties
+q.set_classical_optimizer(
+    method='vgd', 
+    jac="grad_spsa",
+    jac_options=dict(
+        stepsize=0.0003,
+    ),
+)
+
+# compile and optimize using the chosen optimizer
+q.compile(problem)
+q.optimize()
+```
 
 
 <style>
