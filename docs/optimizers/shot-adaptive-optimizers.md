@@ -120,5 +120,7 @@ We get the graph below, where it can be seen that at each iteration a different 
 
     When using CANS and iCANS optimizers, one has to keep in mind that they are optimized to be efficient when using the parameter-shift rule to compute the gradient. Therefore, it is important to specify this method when computing the Jacobian to ensure the optimizers perform as expected.
 
-
+References
+----------
+1. Jonas M. Kübler, Andrew Arrasmith, Lukasz Cincio, and Patrick J. Coles (2020). An Adaptive Optimizer for Measurement-Frugal Variational Algorithms, [https://arxiv.org/abs/1909.09083](https://arxiv.org/abs/1909.09083).
 
