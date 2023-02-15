@@ -37,7 +37,7 @@ The final optimized value of $\gamma$ is $\gamma^{(\text{opt})}=-0.89$, represen
 
 ## Optimizers in OpenQAOA
 
-As previously noted, the QAOA parameters are optimized through the use of a classical computer and a quantum computer. The quantum computer evaluates the cost function, while the classical computer updates the parameters. The cost function of QAOA is $f(\gamma, \beta) = \langle \psi(\gamma, \beta)|\mathcal{H}_C|\psi(\gamma, \beta)\rangle$, where $\gamma$ and $\beta$ are the parameters sets, which have to be optimized. 
+As previously noted, the QAOA parameters are optimized through the use of a classical computer and a quantum computer. The quantum computer evaluates the cost function, while the classical computer updates the parameters. The cost function of QAOA is $f(\vec\gamma, \vec\beta) = \langle \psi(\vec\gamma, \vec\beta)|\mathcal{H}_C|\psi(\vec\gamma, \vec\beta)\rangle$, where $\vec\gamma$ and $\vec\beta$ are the parameters sets, which have to be optimized. 
 
 OpenQAOA provides the ability to choose the optimization algorithm to be used and to configure its parameters. An example of how to set the optimizer in OpenQAOA is shown below:
 
@@ -56,16 +56,16 @@ q.optimize()
 ```
 In this example, the optimizer used is COBYLA, which is a gradient-free optimization algorithm with a maximum number of iterations set to 100. The following is a comprehensive list of all optimization algorithms available in OpenQAOA:
 
-- <a style="color:inherit; font-weight:bold" href="/optimizers/gradient-free-optimizers">Gradient-free optimizers</a>: 'nelder-mead', 'powell', 'cg', 'bfgs', 'newton-cg', 'l-bfgs-b', 'tnc', 'cobyla', 'slsqp', 'trust-constr', 'dogleg', 'trust-ncg', 'trust-exact', and 'trust-krylov'.
-- <a style="color:inherit; font-weight:bold" href="/optimizers/gradient-based-optimizers">Gradient-based optimizers</a>: 'vgd', 'newton', 'rmsprop', 'natural_grad_descent', and 'spsa'.
+- <a style="color:inherit; font-weight:bold" href="/optimizers/gradient-free-optimizers">Gradient-free optimizers</a>: `nelder-mead`, `powell`, `cg`, `bfgs`, `newton-cg`, `l-bfgs-b`, `tnc`, `cobyla`, `slsqp`, `trust-constr`, `dogleg`, `trust-ncg`, `trust-exact`, and `trust-krylov`.
+- <a style="color:inherit; font-weight:bold" href="/optimizers/gradient-based-optimizers">Gradient-based optimizers</a>: `vgd`, `newton`, `rmsprop`, `natural_grad_descent`, and `spsa`.
 
 In addition to these, some optimizers from the PennyLane library have been adapted for use in OpenQAOA. These include:
 
-- <a style="color:inherit; font-weight:bold" href="/optimizers/pennylane-optimizers">PennyLane optimizers</a>: 'pennylane_adagrad', 'pennylane_adam', 'pennylane_vgd', 'pennylane_momentum', 'pennylane_nesterov_momentum', 'pennylane_rmsprop', 'pennylane_rotosolve', and 'pennylane_spsa'.
+- <a style="color:inherit; font-weight:bold" href="/optimizers/pennylane-optimizers">PennyLane optimizers</a>: `pennylane_adagrad`, `pennylane_adam`, `pennylane_vgd`, `pennylane_momentum`, `pennylane_nesterov_momentum`, `pennylane_rmsprop`, `pennylane_rotosolve`, and `pennylane_spsa`.
 
 OpenQAOA also includes a group of gradient-based optimizers that have not been listed, as these optimizers have been specifically designed for use in quantum algorithms. These are referred to as shot adaptive optimizers and modify the number of shots used to evaluate the gradient at each iteration. The available shot adaptive optimizers in OpenQAOA are:
 
-- <a style="color:inherit; font-weight:bold" href="/optimizers/shot-adaptive-optimizers">Shot adaptive optimizers</a>: 'cans', and 'icans'.
+- <a style="color:inherit; font-weight:bold" href="/optimizers/shot-adaptive-optimizers">Shot adaptive optimizers</a>: `cans`, and `icans`.
 
 To gain a deeper understanding of all the available optimizers in OpenQAOA and learn how to utilize them, please refer to the sections dedicated to [Gradient-based](/optimizers/gradient-based-optimizers), [Gradient-free](/optimizers/gradient-free-optimizers), [PennyLane](/optimizers/pennylane-optimizers), and [Shot adaptive](/optimizers/shot-adaptive-optimizers) optimizers. 
 
