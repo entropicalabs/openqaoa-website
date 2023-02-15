@@ -29,7 +29,7 @@ $$ \vec\gamma^{(k+1)} = \vec\gamma^{(k)} - \vec a^{(t+1)}, $$
 
 where
 
-$$ \vec a^{(t+1)}=m ,\vec a^{(t)}+\alpha \vec \nabla f\left(\vec\gamma^{(k)}-m ,\vec a^{(t)}\right),$$
+$$ \vec a^{(t+1)}=m \,\vec a^{(t)}+\alpha \vec \nabla f\left(\vec\gamma^{(k)}-m ,\vec a^{(t)}\right),$$
 
 here, $\alpha$ denotes the step size, and $m$ denotes the momentum.
 
