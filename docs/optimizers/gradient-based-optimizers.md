@@ -20,7 +20,7 @@ The gradient descent optimizer updates the values in each iteration by applying 
 
 $$ \vec\gamma^{(k+1)} = \vec\gamma^{(k)} - \alpha \vec\nabla f(\vec\gamma^{(k)}), $$
 
-where $\vec\gamma^{(k)}$ is the set of parameters at the $k\text{th}$ iteration, $f$ the cost function and $\alpha$ is the step size.
+where $\vec\gamma^{(k)}$ is the set of parameters at the $k\text{-th}$ iteration, $f$ the cost function and $\alpha$ is the step size.
 
 #### OpenQAOA example
 In the code below it is shown how to run QAOA with the gradient decent optimizer, using a step size $\alpha=0.001$ and approximating the Jacobian with finite difference method.
@@ -220,7 +220,7 @@ The finite difference method is a numerical technique for approximating derivati
 
 $$ \frac{\partial f(\vec{\gamma})}{\partial\gamma_i} \approx \frac{f(\vec\gamma + \eta\,\vec{e}_i) - f(\vec\gamma - \eta\,\vec{e}_i)}{2\eta} $$
 
-where $\eta$ is a small positive number, often called the step size, and $\vec{e}_i$ is the $i$ base vector: $\vec{e}_i = (0,...,0,1,0,...,0)$, where the $1$ is found the $i\text{th}$ position. Note that the accuracy of the approximation depends on the choice of $\eta$.
+where $\eta$ is a small positive number, often called the step size, and $\vec{e}_i$ is the $i$ base vector: $\vec{e}_i = (0,...,0,1,0,...,0)$, where the $1$ is found the $i\text{-th}$ position. Note that the accuracy of the approximation depends on the choice of $\eta$.
 
 #### OpenQAOA example
 In the code below it is shown how to run QAOA with a gradient-based optimizer like gradient descent and approximating the Jacobian with finite difference method. Here we are specifying the step size $\eta$ of the finite difference method through the `jac_options` argument.
@@ -264,7 +264,7 @@ where $r$ is a constant, and $P$ is a Pauli gate. Then it can be shown that the 
 $$ \frac{\partial f(\vec\gamma)}{\partial\gamma_i} 
 = r \, \bigg[ f\left(\vec\gamma + \frac{\pi}{4r}\vec{e}_j\right) - f\left(\vec\gamma - \frac{\pi}{4r}\, \vec{e}_j\right) \bigg],$$
 
-where $\vec{e}_j$ is the $j$ base vector: $\vec{e}_j = (0,...,0,1,0,...,0)$, where the $1$ is found the $j\text{th}$ position. 
+where $\vec{e}_j$ is the $j$ base vector: $\vec{e}_j = (0,...,0,1,0,...,0)$, where the $1$ is found the $j\text{-th}$ position. 
 
 In the QAOA, it turns out that the cost function can be expressed as above for all the gates when we are using the extended parameters. This means that we can use the parameter-shift rule to compute the Jacobian when we are solving QAOA with extended parameters. However, we can also use standard parameters if we convert the standard parameters to extended before the gradient computation and after it we convert them back. To learn about the various parametrizations, please refer to the [Parametrization and Initialization page](../parametrization/parametrization.md).
 
