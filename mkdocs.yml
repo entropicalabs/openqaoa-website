@@ -21,8 +21,8 @@ theme:
       bug: octicons/bug-16
       example: octicons/beaker-16
       quote: octicons/quote-16
-  logo: img/entropica_logo.png
-  favicon: img/entropica_logo.png
+  logo: img/entropicalabs_logo.svg
+  favicon: img/entropicalabs_logo.svg
   language: en 
   palette: 
     # Palette toggle for light mode
@@ -38,9 +38,15 @@ theme:
   features:
     - content.code.copy
     - content.code.annotate
+    # - navigation.instant
+    - navigation.indexes
     - navigation.sections
     - navigation.footer
-    - toc.integrate
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+    # - navigation.tabs
+    # - toc.integrate
 
 plugins:
   - search
@@ -54,6 +60,9 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:
+  - toc:
+      permalink: true
+      title: Table of contents
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
@@ -63,6 +72,11 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 
 nav:
@@ -74,26 +88,43 @@ nav:
       - the-simplest-workflow.md
       - making-sense-of-the-result.md
   - Workflows:
-      - customise-the-QAOA-workflow.md
-      - recursive-qaoa.md
+      - workflows/customise-the-QAOA-workflow.md
+      - workflows/recursive-qaoa.md
   - Parametrizations:
       - parametrization/parametrization.md
       - parametrization/standard-parametrization.md
       - parametrization/extended-parametrization.md
       - parametrization/fourier-parametrization.md
-  - The devices:
+      - parametrization/annealing-parametrization.md
+  - Optimizers:
+      - optimizers/optimizers.md
+      - optimizers/gradient-based-optimizers.md
+      - optimizers/gradient-free-optimizers.md
+      - optimizers/pennylane-optimizers.md
+      - optimizers/shot-adaptive-optimizers.md
+  - The Devices:
       - devices/device.md
-      - Local simulators:
-        - devices/entropica-labs-vectorized.md
+      - Local Simulators:
         - devices/qiskit.md
+        - devices/rigetti-qvm.md
+        - devices/entropica-labs-vectorized.md
+        - devices/analytical-simulator.md
       - Quantum Processing Units:
         - devices/amazon-braket.md
         - devices/azure-quantum.md
         - devices/ibmq.md
         - devices/rigetti-qcs.md
-  - QUBO problems:
-      - generic-qubo.md
-      - built-in-qubos.md
+  - QUBO Problems:
+      - problems/what-is-a-qubo.md
+      - Built-in QUBO:
+        - problems/knapsack.md
+        - problems/maximum-cut.md
+        - problems/minimum-vertex-cover.md
+        - problems/number-partition.md
+        - problems/shortest-path-problem.md
+        - problems/traveling-sales-person.md
+  - Challenges:
+    - hackatons/bath-challenge.md
 
 
 extra:
@@ -104,4 +135,3 @@ extra:
     link: https://discord.gg/ana76wkKBd
   - icon: fontawesome/brands/medium
     link: https://medium.com/@entropicalabs
-    

@@ -22,6 +22,9 @@ To install from github first
 git clone https://github.com/entropicalabs/openqaoa.git
 ```
 
+!!! note
+    If you want to test some experimental features, after cloning the repository feel free to checkout the dev branch. It is simple, just type `git checkout dev` :)
+
 2. Creating a python `virtual environment` for this project is recommended. (for instance, using conda). Instructions on how to create a virtual environment can be found [here](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands). Make sure to use a python version between **python 3.8** and **python 3.10**.
 
 3. After cloning the repository `cd openqaoa` and pip install the package. Use the following command for a vanilla install with the `scipy` optimizers:
@@ -35,4 +38,4 @@ If you are interested in running the tests or the docs you can do so by using th
 pip install .[tests]
 ```
 
-Should you face any issues during the installation, please drop us an email at [openqaoa@entropicalabs.com](openqaoa@entropicalabs.com) or [open an issue](https://github.com/entropicalabs/openqaoa/issues)!
+Should you face any issues during the installation, please drop us an email at [openqaoa@entropicalabs.com](mailto:openqaoa@entropicalabs.com) or [open an issue](https://github.com/entropicalabs/openqaoa/issues)!
