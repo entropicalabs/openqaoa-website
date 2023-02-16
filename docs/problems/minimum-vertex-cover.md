@@ -12,10 +12,7 @@ where $\boldsymbol{x}\in \{0, 1\}^{|V|}$ and $P>1$ is a parameter controlling th
 
 Interpreting a variable $x_i$ being equal to 1 as being part of the vertex cover, the first summation counts the size of the selected cover while the second summation ensures that the selected cover indeed covers all edges. Hence, minimizing it ensures we find the minimum vertex cover.
 
-Note that this cost function can be conveniently converted to the form of an Ising problem and we get
-$$\begin{equation*}
-    C(\textbf{x}) = TBA.
-\end{equation*}$$
+Note that this cost function can be conveniently converted to the form of an Ising problem in order to be usable with QAOA (see [what-is-a-qubo](/docs/problems/what-is-a-qubo.md)).
 
 ## Minimum Vertex Cover in OpenQAOA
 

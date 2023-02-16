@@ -16,10 +16,10 @@ where $w_{ij}$ is the weight corresponding to the edge $(i,j) \in E$, and $\text
 Note that the equivalent formulation in terms of Ising variables is the following
 
 $$
-C(\textbf{x}) = -\sum_{(i, j)\in E} w_{ij} x_ix_j,
+C(\boldsymbol{\sigma}) = -\sum_{(i, j)\in E} w_{ij} \sigma_i\sigma_j,
 $$
 
-where this time $\textbf{x}\in \{-1, 1\}^{|V|}$.
+where this time $\boldsymbol{\sigma}\in \{-1, 1\}^{|V|}$.
 
 ## MaxCut in OpenQAOA
 
