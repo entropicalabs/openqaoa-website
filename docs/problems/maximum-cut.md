@@ -11,7 +11,7 @@ $$
 C(\vec{x}) = -\sum_{(i, j)\in E} w_{ij} (x_i+x_j - 2x_i x_j )
 $$
 
-where $w_{ij}$ is the weight corresponding to the edge $(i,j) \in E$, and $x_i\in \{0, 1\}$ is the binary variable indicating whether node $i$ is in set $S$ or $T$. This works because each term $x_i+x_j - 2x_i x_j$ is equal to 1 if an edge is in the cut, and 0 otherwise.
+where $w_{ij}$ is the weight corresponding to the edge $(i,j) \in E$, and $\vec{x}\in \{0, 1\}^{|V|}$ is the binary variable indicating whether node $i$ is in set $S$ or $T$. This works because each term $x_i+x_j - 2x_i x_j$ is equal to 1 if an edge is in the cut, and 0 otherwise.
 
 Note that the equivalent formulation in terms of Ising variables is the following
 
@@ -19,11 +19,11 @@ $$
 C(\vec{x}) = -\sum_{(i, j)\in E} w_{ij} x_ix_j,
 $$
 
-where $x_i\in \{\pm1\}$.
+where this time $\vec{x}\in \{-1, 1\}^{|V|}$.
 
 ## MaxCut in OpenQAOA
 
-MaxCut being a graph problem, you can leverage the popular `networkx` to easily create a variety of graphs.  For example, an Erdös-Rényi graph can be instantiated with
+MaxCut being a graph problem, you can leverage the popular `networkx` to easily create a variety of graphs. For example, an Erdös-Rényi graph can be instantiated with
 
 ```Python
 import networkx as nx
