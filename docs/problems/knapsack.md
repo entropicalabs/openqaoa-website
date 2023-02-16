@@ -27,8 +27,8 @@ $$\begin{equation}
 
 Now that we have an equality constraint, the corresponding QUBO formulation is retrieved by turning the constraint into a so-called quadratic penalty. That is, the cost function is
 
-$$C(\vec{x}, \vec{y}) = -\sum_{i=0}^n v_i x_i + P\Big(\sum_{i=1}^n w_i x_i + \sum_{k=0}^k 2^i y_i- W\Big)^2,$$
-where $\vec{x} = \{0,1\}^n, \ \ \vec{y} = \{0, 1\}^k$. 
+$$C(\textbf{x}, \vec{y}) = -\sum_{i=0}^n v_i x_i + P\Big(\sum_{i=1}^n w_i x_i + \sum_{k=0}^k 2^i y_i- W\Big)^2,$$
+where $\textbf{x} = \{0,1\}^n, \ \ \vec{y} = \{0, 1\}^k$. 
 
 This cost function can of course be converted in the form of an Ising formulation (so that variables take values in $\{-1, 1\}$) in order to be used with the QAOA algorithm.
 

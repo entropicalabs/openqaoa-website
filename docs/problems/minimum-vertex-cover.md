@@ -6,7 +6,7 @@ The Minimum Vertex Cover (MVC) problem is a common constrained optimization prob
 
 The corresponding function to minimize can be derived as:
 $$\begin{equation*}
-    C(\vec{x}) = \sum_{i \in V}x_i + P\sum_{(i, j) \in E}\left(1-x_i\right)\left(1-x_j\right),
+    C(\textbf{x}) = \sum_{i \in V}x_i + P\sum_{(i, j) \in E}\left(1-x_i\right)\left(1-x_j\right),
 \end{equation*}$$
 where $\boldsymbol{x}\in \{0, 1\}^{|V|}$ and $P>1$ is a parameter controlling the strength of penalization of configurations which are not covers. 
 
@@ -14,7 +14,7 @@ Interpreting a variable $x_i$ being equal to 1 as being part of the vertex cover
 
 Note that this cost function can be conveniently converted to the form of an Ising problem and we get
 $$\begin{equation*}
-    C(\vec{x}) = TBA.
+    C(\textbf{x}) = TBA.
 \end{equation*}$$
 
 ## Minimum Vertex Cover in OpenQAOA

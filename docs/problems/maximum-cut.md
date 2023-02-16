@@ -8,18 +8,18 @@ A maximum cut of a graph is a partition of its vertices into two sets, $S$ and $
 Given a graph $G=(V, E)$, the cost function to minimize for the MaxCut problem is given by
 
 $$
-C(\vec{x}) = -\sum_{(i, j)\in E} w_{ij} (x_i+x_j - 2x_i x_j )
+C(\textbf{x}) = -\sum_{(i, j)\in E} w_{ij} (x_i+x_j - 2x_i x_j )
 $$
 
-where $w_{ij}$ is the weight corresponding to the edge $(i,j) \in E$, and $\vec{x}\in \{0, 1\}^{|V|}$ is the binary variable indicating whether node $i$ is in set $S$ or $T$. This works because each term $x_i+x_j - 2x_i x_j$ is equal to 1 if an edge is in the cut, and 0 otherwise.
+where $w_{ij}$ is the weight corresponding to the edge $(i,j) \in E$, and $\textbf{x}\in \{0, 1\}^{|V|}$ is the binary variable indicating whether node $i$ is in set $S$ or $T$. This works because each term $x_i+x_j - 2x_i x_j$ is equal to 1 if an edge is in the cut, and 0 otherwise.
 
 Note that the equivalent formulation in terms of Ising variables is the following
 
 $$
-C(\vec{x}) = -\sum_{(i, j)\in E} w_{ij} x_ix_j,
+C(\textbf{x}) = -\sum_{(i, j)\in E} w_{ij} x_ix_j,
 $$
 
-where this time $\vec{x}\in \{-1, 1\}^{|V|}$.
+where this time $\textbf{x}\in \{-1, 1\}^{|V|}$.
 
 ## MaxCut in OpenQAOA
 

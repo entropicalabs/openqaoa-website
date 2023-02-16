@@ -4,12 +4,12 @@ QAOA can solve binary optimization problems known as QUBOs. QUBO stands for _Qua
 
 ## Binary optimization
 
-Binary optimization is a type of combinatorial optimization problem in which the variables are limited to two values. For example, a variable $x$ can be either 0 or 1. A binary optimzsation problem then reflect the effort of minimizing a cost function $C(\vec{x})$ of $n$ variables, where $\vec{x} =(x_1, \dots, x_n)^\top$ is a vector collecting all variables.
+Binary optimization is a type of combinatorial optimization problem in which the variables are limited to two values. For example, a variable $x$ can be either 0 or 1. A binary optimzsation problem then reflect the effort of minimizing a cost function $C(\textbf{x})$ of $n$ variables, where $\textbf{x} =(x_1, \dots, x_n)^\top$ is a vector collecting all variables.
 
 In its most general form, a binary optimization problem can be written as
 
 $$
-\textit{min}_{\vec{x}} \{ C(\vec{x}) |x \in \{0,1\}^n \}.
+\textit{min}_{\textbf{x}} \{ C(\textbf{x}) | \textbf{x} \in \{0,1\}^n \}.
 $$
 
 !!! note "{0,1} or {-1,+1}"
@@ -23,7 +23,7 @@ For our needs, we will be limiting ourself to Quadratic Unconstrained Binary Opt
 The most general formulation of a QUBO is then
 
 $$
-C(\vec{x})=\sum_{i=1}^n h_i x_i + \sum_{i,j=1}^n J_{ij} x_ix_j,
+C(\textbf{x})=\sum_{i=1}^n h_i x_i + \sum_{i,j=1}^n J_{ij} x_ix_j,
 $$
 
 where $x_i \in\{\pm1\}$ are the binary variables and $h_i$ and $J_{ij}$ represents the coefficients for the linear and quadratic coefficients, respectively. We note that the cost function can in principle also include a constant term, but this will not change which configuration minimizes $C(\cdot)$.
