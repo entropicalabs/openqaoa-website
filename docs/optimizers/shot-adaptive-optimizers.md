@@ -25,7 +25,7 @@ $$ g_i(\vec \gamma^{(k)}) = r \, \bigg[ f_{N_i^{(k)}}\left(\vec\gamma^{(k)} + \f
 where ${N_i^{(k)}}$ is an integer that can change for each component at each iteration. Let us see the strategies that CANS and iCANS follow to compute ${N_i^{(k)}}$.
 
 
-## CANS
+## Coupled Adaptive Number of Shots (CANS)
 
 This optimizer uses the same number of shots for each gradient component, adjusting this number at each iteration, therefore we can write:
 
@@ -58,7 +58,7 @@ where $n_{\text{max}}$ is also a hyperparameter. These bounds are imposed to ens
 
     An upperbound of the Lipschitz constant can be computed as: $L < \sum_i |c_i|,$ where $c_i$ are the coefficients of the cost Hamiltonian. 
 
-## iCANS
+## individual Coupled Adaptive Number of Shots (iCANS)
 iCANS is another optimizer that is based on the same idea as CANS, but it uses a different number of shots for each gradient component. The number of shots for each component is updated at each iteration, based on the variance of the gradient estimate of that component.
 
 The number of shots for the $i\text{-th}$ component at iteration $k$ is denoted by $N_i^{(k)}$, and is computed as follows:
