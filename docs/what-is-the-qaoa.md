@@ -29,13 +29,13 @@ graph TB
 
 The starting state of the quantum circuit is $|0\rangle^{\otimes n}$, where $n$ is the number of qubits being used. The state after the circuit is applied is given by:
 
-$$|\psi\rangle \equiv |\psi(\gamma,\beta)\rangle \equiv \mathcal{U}(\gamma,\beta)\,|0\rangle^{\otimes n},$$
+$$|\psi\rangle \equiv |\psi(\vec\gamma,\vec\beta)\rangle \equiv \mathcal{U}(\vec\gamma,\vec\beta)\,|0\rangle^{\otimes n},$$
 
-where ${\gamma}={\gamma_1, \gamma_2, ..., \gamma_p}$ and ${\beta}={\beta_1, \beta_2, ..., \beta_p}$ are two sets of $p$ parameters.
+where ${\vec\gamma}={\gamma_1, \gamma_2, ..., \gamma_p}$ and ${\vec\beta}={\beta_1, \beta_2, ..., \beta_p}$ are two sets of $p$ parameters.
 
 The circuit of the QAOA algorithm is defined as follows:
 
-$$\mathcal{U} (\gamma,\beta) = U(\mathcal{H}_X,\beta_p)U(\mathcal{H}_C,\gamma_p) ... U(\mathcal{H}_X,\beta_1)U(\mathcal{H}_C,\gamma_1) \, H^{\otimes n} ,$$
+$$\mathcal{U} (\vec\gamma,\vec\beta) = U(\mathcal{H}_X,\beta_p)U(\mathcal{H}_C,\gamma_p) ... U(\mathcal{H}_X,\beta_1)U(\mathcal{H}_C,\gamma_1) \, H^{\otimes n} ,$$
 
 where $H$  is a Hadamard gate, $U(\mathcal{H}_X,\beta_j) = e^{-i\beta_j \mathcal{H}_X}$ and $U(\mathcal{H}_C,\gamma_j) = e^{-i\gamma_j \mathcal{H}_C}$.
 
@@ -45,7 +45,7 @@ $$\mathcal{H}_X = \sum_{i=1}^n \sigma_{i}^x, $$
 
 where $\sigma_{i}^x$ is the Pauli X matrix applied to the $i$ qubit.
 
-The goal of the QAOA algorithm is to find the optimal sets of angles ${\gamma^{\text{opt}}}$ and ${\beta^{\text{opt}}}$ that minimize $\langle\psi|\mathcal{H}_C|\psi\rangle$. With the optimal parameters, $|\psi(\gamma,\beta)\rangle$ is a superposition of base states, and the state with the highest probability will be the solution to the problem.
+The goal of the QAOA algorithm is to find the optimal sets of angles ${\vec\gamma^{\text{opt}}}$ and ${\vec\beta^{\text{opt}}}$ that minimize $\langle\psi|\mathcal{H}_C|\psi\rangle$. With the optimal parameters, $|\psi(\vec\gamma^{\text{opt}},\vec\beta^{\text{opt}})\rangle$ is a superposition of base states, and the state with the highest probability will be the solution to the problem.
 
 The optimization of the parameters is carried out iteratively using a classical optimization algorithm such as cobyla or gradient descent.
 
@@ -91,11 +91,11 @@ The classical loop procedure in quantum computing involves the following steps:
 3. Evaluating the cost function, which represents the energy of the system described by the quantum circuit, by measuring the expectation value of the cost Hamiltonian $\langle \psi|\mathcal{H}_C|\psi\rangle$.
 4. Updating the circuit parameters using a classical optimization algorithm, such as gradient descent or COBYLA, to minimize the cost function and find the optimal solution to the optimization problem.
 
-The goal of the QAOA is to find the set of parameters ($\gamma^\text{opt}, \beta^\text{opt}$) that result in the minimum value of the cost function ($\langle \psi^\text{opt} |\mathcal{H}_C|\psi^\text{opt}\rangle$), thereby finding the approximate solution to the optimization problem encoded in the quantum circuit. The classical loop procedure is repeated multiple times until convergence to the optimal solution is achieved.
+The goal of the QAOA is to find the set of parameters ($\vec\gamma^\text{opt}, \vec\beta^\text{opt}$) that result in the minimum value of the cost function ($\langle \psi^\text{opt} |\mathcal{H}_C|\psi^\text{opt}\rangle$), thereby finding the approximate solution to the optimization problem encoded in the quantum circuit. The classical loop procedure is repeated multiple times until convergence to the optimal solution is achieved.
 
 ## Output
 
-The output of the QAOA algorithm can be obtained by measuring the probabilities of the base states of the final quantum state after evaluating the circuit using the optimized parameters, $|\psi^\text{opt}\rangle=|\psi(\gamma^\text{opt}, \beta^\text{opt})\rangle = \mathcal{U}(\gamma^\text{opt},\beta^\text{opt})\,|0\rangle^{\otimes n}$ . This will result in a histogram, such as the one shown in the image below.
+The output of the QAOA algorithm can be obtained by measuring the probabilities of the base states of the final quantum state after evaluating the circuit using the optimized parameters, $|\psi^\text{opt}\rangle=|\psi(\vec\gamma^\text{opt}, \vec\beta^\text{opt})\rangle = \mathcal{U}(\vec\gamma^\text{opt},\vec\beta^\text{opt})\,|0\rangle^{\otimes n}$ . This will result in a histogram, such as the one shown in the image below.
 
 In the histogram, we can observe that the states $x_1 = 00011$ and $x_2 = 11100$ have higher probabilities compared to the other states, indicating that these two are likely solutions to the problem being addressed.
 
