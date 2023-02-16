@@ -4,12 +4,12 @@ QAOA can solve binary optimization problems known as QUBOs. QUBO stands for _Qua
 
 ## Binary optimization
 
-Binary optimization is a type of combinatorial optimization problem in which the variables are limited to two values. For example, a variable $x$ can be either 0 or 1. A binary optimzsation problem then reflect the effort of minimizing a cost function $C(\textbf{x})$ of $n$ variables, where $\textbf{x} =(x_1, \dots, x_n)^\top$ is a vector collecting all variables.
+Binary optimization is a type of combinatorial optimization problem in which the variables are limited to two values. For example, a variable $x$ can be either 0 or 1. A binary optimization problem then reflect the effort of minimizing a cost function $C(\textbf{x})$ of $n$ variables, where $\textbf{x} =(x_1, \dots, x_n)^\top$ is a vector collecting all variables.
 
 In its most general form, a binary optimization problem can be written as
 
 $$
-\textit{min}_{\textbf{x}} \{ C(\textbf{x}) | \textbf{x} \in \{0,1\}^n \}.
+\min_{\textbf{x}} \{ C(\textbf{x}) | \textbf{x} \in \{0,1\}^n \}.
 $$
 
 !!! note "{0,1} or {-1,+1}"
@@ -23,10 +23,19 @@ For our needs, we will be limiting ourself to Quadratic Unconstrained Binary Opt
 The most general formulation of a QUBO is then
 
 $$
-C(\textbf{x})=\sum_{i=1}^n h_i x_i + \sum_{i,j=1}^n J_{ij} x_ix_j,
+C(\textbf{x})=\sum_{i=1}^n\sum_{j=i}^n Q_{ij} x_ix_j,
 $$
 
-where $x_i \in\{\pm1\}$ are the binary variables and $h_i$ and $J_{ij}$ represents the coefficients for the linear and quadratic coefficients, respectively. We note that the cost function can in principle also include a constant term, but this will not change which configuration minimizes $C(\cdot)$.
+where $x_i \in\{0, 1\}$ are the binary variables and $Q_{ij}$ represents the quadratic coefficients. We note that the cost function can in principle also include a constant term, but this will not change which configuration minimizes $C(\cdot)$.
+
+In the context of QAOA, we will be interested in the equivalent formulation known as Ising model, where the cost function is
+$$
+C(\boldsymbol{\sigma})=\sum_{i=1}^n h_i \sigma_i + \sum_{i,j=1}^n J_{ij} \sigma_i\sigma_j,
+$$
+where $\sigma_i \in\{-1, 1\}$ are Ising variables and $h_i$ and $J_{ij}$ represent the coefficients for the linear and quadratic coefficients.
+
+!!! note "From QUBO to Ising Model and Back"
+    One can easily convert a QUBO problem to an equivalent Ising formulation by subtituting each $x_i$ with $\frac{1+\sigma_i}{2}$. Similarly, one can convert an Ising problem to an equivalent QUBO formulation by subtituting each $\sigma_i$ with $2x_i-1$.
 
 The following equation shows an example of a QUBO problem involving three variables
 

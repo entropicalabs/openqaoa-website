@@ -13,7 +13,7 @@ $$\begin{equation}
     \end{split}
 \end{equation}$$
 
-so that a variable with value 1 indicates it is chosen to be in the knapsack.
+where a variable with value 1 indicates that the corresponding item is chosen to be in the knapsack.
 
 In order to turn such a formulation into a QUBO one, we must first make the inequality constraint an equality. This is done by introducing extra variable (sometimes called "slack variables") $y_1, \dots, y_k$ where $k=\lfloor\log W\rfloor +1$, so that one can rewrite the inequality constraint as $\sum_{i=1}^n w_i x_i + \sum_{i=0}^{k}2^iy_i = W$. This way, if the sum of the weights of the chosen items is less than or equal to $W$ (which would mean the inequality constraint is satisfied), there is then some configuration of the slack variables that will allow the equality to be satisfied. In fact, the slack variables form the binary representation of the value needed to meet equality, which is why $\sum_{i=0}^{k}2^iy_i$ appears. The new problem is thus
 
