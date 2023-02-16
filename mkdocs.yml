@@ -96,6 +96,12 @@ nav:
       - parametrization/extended-parametrization.md
       - parametrization/fourier-parametrization.md
       - parametrization/annealing-parametrization.md
+  - Optimizers:
+      - optimizers/optimizers.md
+      - optimizers/gradient-based-optimizers.md
+      - optimizers/gradient-free-optimizers.md
+      - optimizers/pennylane-optimizers.md
+      - optimizers/shot-adaptive-optimizers.md
   - The Devices:
       - devices/device.md
       - Local Simulators:
