@@ -72,5 +72,5 @@ States that minimize $C_P(\textbf{x})$ then constitute valid paths that start at
     In OpenQAOA, where we work with Ising variables $\{-1,1\}$, a transformation of variables $x_i \rightarrow (1-Z_i)/2$ transforms the cost function $C(\textbf{x})$ to  the QAOA cost Hamiltonian $H$.
 
 
-## The shortest path problem in OpenQAOA
+## The Shortest Path Problem in OpenQAOA
 
