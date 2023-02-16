@@ -58,3 +58,22 @@ sv1_device = create_device(location='aws',
                             aws_region='us-west-1')
 q.set_device(sv1_device)
 ```
+
+#### Find an Available Device
+
+If you are unsure about what devices are available to you, you can do the following:
+
+```Python
+b_device = create_device(location='aws', 
+                        name='', aws_region='us-west-1')
+
+b_device.check_connection()
+b_device.available_qpus
+```
+
+The attribute `check_connection` authenticates your Braket credentials while `available_qpus` returns a list of Braket device arn strings representing the available devices to your Braket account, based on your access keys.
+
+!!! info
+    Note that the list of available devices depend on the `aws_region`. If the device you are looking for does not exist, try another region name.
+
+Once you've selected the desired device, recreate the device object with the selected device's arn name as `name` in the `create_device` function.
