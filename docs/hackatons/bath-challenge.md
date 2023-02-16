@@ -15,15 +15,16 @@ The original QAOA paper can be found on the arxiv ([Farhi, Edward, Jeffrey Golds
 Quantum computations are not easy. So, we broke the challenge into a series of sequential steps. 
 
 You don't need to strictly follow the steps as we have outlined them. The most important things are:
-- A correct implementation of the graph coloring problem
-- Your exploration of the problem space!
+
+ - A correct implementation of the graph coloring problem
+ - Your exploration of the problem space!
 
 The last section includes some ideas on how to further explore the challenge.
 
 
 ##  **The cost function**
 
-First things first: what are we trying to do? We are given a graph with $N$ verteces and some connectivity, and a set of $n$ colors. The optimization problem then is to find a color for each vertex such that no edge connects two vertexes of the same color. Two simple examples are given by the following choices of graphs and coloring: 
+First things first: what are we trying to do? We are given a graph with $N$ vertexes and some connectivity, and a set of $n$ colors. The optimization problem then is to find a color for each vertex such that no edge connects two vertexes of the same color. Two simple examples are given by the following choices of graphs and coloring: 
 
 ![graph_coloring](/img/Greedy_colourings.svg.png)
 
@@ -37,7 +38,7 @@ $$
 A \sum_v(1 - \sum_{i=1}^{n} x_{v,i})^2 + A \sum_{(uv) \in E} \sum_{i=1}^{n} x_{u,i}x_{v,i}
 $$
 
-We left any explanation of the terms just to make sure you do check out Andrew Lucas paper ;)
+We left any detailed explanation of the terms in the above equation just to make sure you do check out Andrew Lucas paper ;)
 
 !!! hint
     If you are stuck, and you need some inspiration you can check how some of the other problem classes are structured in OpenQAOA by checking out the [OpenQAOA github page](https://github.com/entropicalabs/openqaoa/tree/dev/openqaoa/problems). In particular, note that in some cases we wrote the cost function using the binary variables $0,1$ and converted them to Ising variables by invoking the method `get_qubo_problem()`
