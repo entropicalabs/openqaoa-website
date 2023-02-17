@@ -194,7 +194,7 @@ You can try to color other more complicated graphs, some examples could be:
 
 
 !!! danger "Try not to crash your laptop!"
-    Remember that to simulate a quantum computer you need $2^{n}$ variables, where $n$ is the number of qubits. In our case this means that given $n$ colors and $N$ vertexes you will need $2^{nN}$ numbers. Typically each number is represented by 128bits. You can try to plot $128 * 2^{nN}$ to see how quickly you will run out RAM! 
+    Remember that to simulate a quantum computer you need $2^{n}$ variables, where $n$ is the number of qubits. In our case this means that given $k$ colors and $N$ vertexes you will need $2^{kN}$ numbers. Typically each number is represented by 128bits. You can try to plot $128 * 2^{kN}$ to see how quickly you will run out RAM! 
 
 ### **STEP 3. Interpret the result**
 
