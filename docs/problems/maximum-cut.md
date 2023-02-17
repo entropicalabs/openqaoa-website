@@ -46,7 +46,7 @@ Once the graph is defined, creating a MaxCut problem class requires only a few l
 from openqaoa.problems.problem import MaximumCut
 
 maxcut_prob = MaximumCut(G)
-maxcut_qubo = maxcut_prob.get_qubo_problem()
+maxcut_qubo = maxcut_prob.quno
 ```
 
 We can then access the underlying cost hamiltonian 

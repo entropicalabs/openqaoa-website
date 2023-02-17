@@ -11,7 +11,7 @@ import networkx
 from openqaoa.problems import MinimumVertexCover
 g = networkx.circulant_graph(6, [1])
 vc = MinimumVertexCover(g, field=1.0, penalty=10)
-qubo_problem = vc.get_qubo_problem()
+qubo_problem = vc.quno
 ```
 !!! note "QUBO"
     QUBO stands for _Quadratic unconstrained binary optimization_, and a QUBO problem represent, loosely speaking, a binary problem with at most quadratic terms. In general any optimisation problem can be cast as a binary problem, but not all of them will be quadratic in the resulting binary variables. For a very nice paper showcasing most common QUBOs please check out Andrew Lucas's paper [Ising formulations of many NP problems](https://arxiv.org/abs/1302.5843)

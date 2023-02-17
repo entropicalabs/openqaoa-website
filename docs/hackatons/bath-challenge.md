@@ -41,7 +41,7 @@ $$
 We left any detailed explanation of the terms in the above equation just to make sure you do check out Andrew Lucas paper ;)
 
 !!! hint
-    If you are stuck, and you need some inspiration you can check how some of the other problem classes are structured in OpenQAOA by checking out the [OpenQAOA github page](https://github.com/entropicalabs/openqaoa/tree/dev/openqaoa/problems). In particular, note that in some cases we wrote the cost function using the binary variables $0,1$ and converted them to Ising variables by invoking the method `get_qubo_problem()`
+    If you are stuck, and you need some inspiration you can check how some of the other problem classes are structured in OpenQAOA by checking out the [OpenQAOA github page](https://github.com/entropicalabs/openqaoa/tree/dev/openqaoa/problems). In particular, note that in some cases we wrote the cost function using the binary variables $0,1$ and converted them to Ising variables by invoking the method `quno`
 
 
 ## **Solve the Graph coloring problem using OpenQAOA**

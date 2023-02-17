@@ -28,7 +28,7 @@ import networkx
 from openqaoa.problems import MinimumVertexCover
 g = networkx.circulant_graph(6, [1])
 vc = MinimumVertexCover(g, field=1.0, penalty=10)
-qubo_problem = vc.get_qubo_problem()
+qubo_problem = vc.quno
 ```
 
 Now that we have the qubo problem, we can create a custom workflow as follows
