@@ -4,9 +4,10 @@ Welcome to the OpenQAOA challenge!
 
 Our challenge is to solve the [Graph Colouring problem](https://en.wikipedia.org/wiki/Graph_coloring), one of the famous NP-complete problems, with a quantum computer.
 
-As far as we know, it is not possible to sole a NP problem in polynomial time. Therefore, one way to tackle NP problems is to employ heuristics. The **quantum approximate optimization algorithm (QAOA)** is one such heuristic algorithm, and it can be used to solve (small!) binary optimization problems. What interests us today, is that QAOA is an algorithm that can be run on existing quantum computers! 
+As far as we know, it is not possible to solve a NP problem in polynomial time. Therefore, one way to tackle NP problems is to employ heuristics. The **quantum approximate optimization algorithm (QAOA)** is one such heuristic algorithm, and it can be used to solve (small!) binary optimization problems. What interests us today, is that QAOA is an algorithm that can be run on existing quantum computers! 
 
-The original QAOA paper can be found on the arxiv ([Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. "A quantum approximate optimization algorithm](https://arxiv.org/abs/1411.4028)). The paper is a bit technical, and may not be the best reference for a 12h challenge. So, if you need a more lay-down intro, please check out the OpenQAOA [what-is-the-qaoa](/docs/what-is-the-qaoa.md) reference. There are also a lot of great references out there on the web.
+!!! info "For the curious"
+    The original QAOA paper can be found on the arxiv ([Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. "A quantum approximate optimization algorithm](https://arxiv.org/abs/1411.4028)). The paper is a bit technical, and may not be the best reference for a 12h challenge. So, if you need a more lay-down intro, please check out the OpenQAOA [what-is-the-qaoa](/docs/what-is-the-qaoa.md) reference.
 
 
 ## **How to approach the challenge**
@@ -22,7 +23,7 @@ The last section includes some ideas on how to further explore the challenge.
 
 ###  **STEP 1. Find the cost function**
 
-First things first: what are we trying to do? We are given a graph with $N$ vertexes and some connectivity, and a set of $k$ colors. The optimization problem then is to find a color for each vertex such that no edge connects two vertexes of same color. Two simple examples are given by the following choices of graphs and coloring: 
+First things first: what are we trying to do? We are given a graph with $N$ vertexes and some connectivity, and a set of $k$ colors. The optimization problem then is to **find a color for each vertex such that no edge connects two vertexes of same color.** Two simple examples are given by the following choices of graphs and coloring: 
 
 ![graph_coloring](../img/Greedy_colourings.svg.png)
 
@@ -32,25 +33,28 @@ Now that we have an idea of the problem that we are trying to solve, we need to 
 
 $$ \vec y^*=\underset{\vec y}{\arg \min } f(\vec y),$$
 
-However, we want to solve the problem in a quantum computer, where the qubits only have two positions $\uparrow$ and $\downarrow$. This requires you to write the cost function in terms of **binary variables**, $\vec x = (x_1, ..., x_n)$ where $x_i \in \{0,1\}$ and $n$ is the number of qubits that you will use. 
+However, we want to solve the problem on a quantum computer, where the qubits only have two positions: $\uparrow$ and $\downarrow$. This requires you to write the cost function in terms of **binary variables**, $\vec x = (x_1, ..., x_n)$ where $x_i \in \{0,1\}$ and $n$ is the number of qubits that you will use. 
 
 A good place to familiarize yourself with these type of cost functions is the great paper [Ising formulations of many NP problems](https://arxiv.org/abs/1302.5843) by Andrew Lucas. In section $6.1$ he introduces graph colouring problems, and it offers the following cost function:
 
 $$ f(\vec x) = 
-A \sum_v(1 - \sum_{i=1}^{N} x_{v,i})^2 + A \sum_{(uv) \in E} \sum_{i=1}^{N} x_{u,i}x_{v,i}
+A \sum_v^N(1 - \sum_{i=1}^{k} x_{v,i})^2 + A \sum_{(uv) \in E} \sum_{i=1}^{k} x_{u,i}x_{v,i}
 $$
 
-Here the indices $u, v$ indicate the label of the graph node, $i$ indicates the color and $E$ the edges of the graph that we want to color. This means that $n = N*k$. 
+Here the indices $u, v$ indicate the label of the graph node, $i$ indicates the color and $E$ the edges of the graph that we want to color. 
 
-Knowing that, we could already create a QAOA circuit and try to solve the problem. However, it is not trivial to see the decomposition of the QAOA circuit from this function. We recommend you to encode this cost function as a QUBO problem:
+!!! info "Think"
+    Spend some time convincing yourself that the above cost function makes sense! What is the significance of the first term? And the second? How many **binary variables, n** would you need to encode a N-nodes graph given k-colours? How does the size of the problem scale?
+
+
+Although this is the right cost function, it is not trivial to see the decomposition of the QAOA circuit from it. Instead, you should convert it to a QUBO problem:
 
 $$ f(\vec x) = \sum_i^n \sum_j^n Q_{ij} x_ix_j,$$
 
-where $Q$ is a matrix that encodes the whole problem. You can check out the [what-is-a-qubo](/docs/problems/what-is-a-qubo.md) to learn more about QUBO problems.
+where $Q$ is a matrix that encodes the whole problem. 
 
-To encourage you to learn more about the terms in the equation above, we refrained from providing a detailed explanation and suggest you refer to Andrew Lucas' paper for further understanding.
-
-We didn't explain the equation in too much detail because we want you to check out Andrew Lucas' paper and get a better understanding of the terms used in it. So go ahead and give it a read ;)
+!!! info "For the curious"
+    QUBO stands for quadratic unconstrained binary optimization. You can check out the [what-is-a-qubo](/docs/problems/what-is-a-qubo.md) to learn more about it and see some examples.
 
 ### **STEP 2. Solve the Graph coloring problem using OpenQAOA** 
 
@@ -88,7 +92,7 @@ $$ Q =
 \end{bmatrix},
 $$
 
-where the second equality hols because QUBO matrices are symmetric, then the QUBO object would be initialized as:
+where the second equality holds because QUBO matrices are symmetric, then the QUBO object would be initialized as:
 ```Python
 qubo_problem = QUBO(terms=  [[0,1], [0,2], [1,2], [0], [1], [2]],
                     weights= [Q_01,  Q_02,  Q_12, Q_0, Q_1, Q_2],
@@ -115,21 +119,24 @@ def graph_coloring_qubo(graph, k) -> QUBO:
 
 #### **STEP 2.2. Run QAOA**
 
-Now it's time to try to color some graphs running a QAOA in a quantum simulator. 
+Now it's time to try to color some graphs running a QAOA on a quantum simulator. 
 
-Let's start with a small graph like
+Let's start with only $k=3$ colors on a small graph such as:
 
 <img src="/img/graph-1.png" alt="graph1" width="50%" height="50%" style="display: block; margin: 0 auto;"> 
 
-
-and $k=3$. Try to code the graph in python use the `graph_coloring_qubo` function that you have implemented to run:
+Now convert this problem instance to a qubo using the `graph_coloring_qubo` function that you have implemented already by doing:
 
 ```Python
+gc_qubo = graph_coloring_qubo(graph, k)
+```
+and simply compile the QAOA object with this qubo. As simple as this:
+```Python
 q = QAOA()
-q.compile(graph_coloring_qubo(graph, k))
+q.compile(gc_qubo)
 q.optimize()
 ```
-When you compile the object, OpenQAOA translates the QUBO to an ising Hamiltonian and compose the QAOA circuit. After that, when you optimize the algorithm tries to find the optimal parameters. This means that you have colored your first graph! To check the solutions you can do:
+When you compile the object, OpenQAOA translates the QUBO to an ising Hamiltonian and compose the QAOA circuit. After that, when you optimize the algorithm tries to find the optimal parameters. This means that you have colored your first graph! Congratulations! To check the solutions you can do:
 ```Python
 q.results.most_probable_states
 ```
@@ -142,7 +149,7 @@ You can try to color other more complicated graphs, some examples could be:
 
 !!! warning "QAOA is heuristic"
 
-    You may find solutions that are not optimal. This can happen because QAOA is an approximation and quantum computers are noisy. We recommend you to solve the problem classically to see the optimal solutions that we are trying to find with QAOA. You can do that with OpenQAOA doing: 
+    You may find solutions that are not optimal. This can happen because QAOA is an approximation and quantum computers are noisy. We recommend you to solve the problem classically to see the optimal solutions that we are trying to find with QAOA. You can do that with OpenQAOA: 
 
         ground_state_hamiltonian(qubo.hamiltonian)
 
@@ -181,7 +188,7 @@ Can you find a combination of QAOA Parameters that gives you the best result for
 
 ### **OPTIONAL. Study the Graph and the Solution**
 
-Andrew Lukas paper says that given `n` colors and `N` vertexes it takes `nN` qubits to encode the problem. Without saturating your RAM, do you think you can play around with different graph topologies and colouring schemes?
+Andrew Lukas paper says that given `k` colors and `N` vertexes it takes `nN` qubits to encode the problem. Without saturating your RAM, do you think you can play around with different graph topologies and colouring schemes?
 
 Maybe try to plot a scaling of the performance of the algorithm as a function of changing graph properties (e.g. edge connectivity).
 
