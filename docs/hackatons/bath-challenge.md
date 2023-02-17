@@ -23,9 +23,12 @@ The last section includes some ideas on how to further explore the challenge.
 
 ###  **STEP 1. Find the cost function**
 
-First things first: what are we trying to do? We are given a graph with $N$ vertexes and some connectivity, and a set of $k$ colors. The optimization problem then is to **find a color for each vertex such that no edge connects two vertexes of same color.** Two simple examples are given by the following choices of graphs and coloring: 
+First things first: what are we trying to do? We are given a graph with $N$ vertexes and some connectivity, and a set of $k$ colors. The optimization problem then is to **find a color for each vertex such that no edge connects two vertexes of same color.** Four simple examples are given by the following choices of graphs and coloring: 
 
-![graph_coloring](../img/Greedy_colourings.svg.png)
+<img src="/img/graph-ex-1.png" alt="graph1" width="40%" style="display: float; margin-right: 2.5%; margin-left: 2.5%;"> 
+<img src="/img/graph-ex-2.png" alt="graph2" width="40%" style="display: float; margin-right: 2.5%; margin-left: 2.5%;"> 
+<img src="/img/graph-ex-3.png" alt="graph3" width="40%" style="display: float; margin-right: 2.5%; margin-left: 2.5%;"> 
+<img src="/img/graph-ex-4.png" alt="graph4" width="40%" style="display: float; margin-right: 2.5%; margin-left: 2.5%;"> 
 
 
 
@@ -51,7 +54,7 @@ Although this is the right cost function, it is not trivial to see the decomposi
 
 $$ f(\vec x) = \sum_i^n \sum_j^n Q_{ij} x_ix_j,$$
 
-where $Q$ is a matrix that encodes the whole problem. 
+where $Q$ is a matrix that encodes the whole problem. Therefore, your task is to find the expression for the $Q_{ij}$ for any given graph and $k$ colors.
 
 !!! info "For the curious"
     QUBO stands for quadratic unconstrained binary optimization. You can check out the [what-is-a-qubo](/docs/problems/what-is-a-qubo.md) to learn more about it and see some examples.
