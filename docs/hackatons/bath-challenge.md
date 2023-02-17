@@ -119,7 +119,8 @@ Now it's time to try to color some graphs running a QAOA in a quantum simulator.
 
 Let's start with a small graph like
 
-IMAGE JJJ
+<img src="/img/graph-1.png" alt="graph1" width="50%" height="50%" style="display: block; margin: 0 auto;"> 
+
 
 and $k=3$. Try to code the graph in python use the `graph_coloring_qubo` function that you have implemented to run:
 
@@ -128,14 +129,16 @@ q = QAOA()
 q.compile(graph_coloring_qubo(graph, k))
 q.optimize()
 ```
-You have colored your first graph! To check the solutions you can do:
+When you compile the object, OpenQAOA translates the QUBO to an ising Hamiltonian and compose the QAOA circuit. After that, when you optimize the algorithm tries to find the optimal parameters. This means that you have colored your first graph! To check the solutions you can do:
 ```Python
 q.results.most_probable_states
 ```
 
+<br>
 You can try to color other more complicated graphs, some examples could be:
 
-IMAGE KKK
+<img src="/img/graph-2.png" alt="graph2" width="40%" style="display: float; margin-right: 2.5%; margin-left: 2.5%;"> 
+<img src="/img/graph-3.png" alt="graph2" width="40%" style="display: float; margin: 0 auto;"> 
 
 !!! warning "QAOA is heuristic"
 
@@ -176,13 +179,13 @@ q.set_circuit_properties(p=3, param_type='fourier', q=2)
 
 Can you find a combination of QAOA Parameters that gives you the best result for any random graph?
 
-## **OPTIONAL. Study the Graph and the Solution**
+### **OPTIONAL. Study the Graph and the Solution**
 
 Andrew Lukas paper says that given `n` colors and `N` vertexes it takes `nN` qubits to encode the problem. Without saturating your RAM, do you think you can play around with different graph topologies and colouring schemes?
 
 Maybe try to plot a scaling of the performance of the algorithm as a function of changing graph properties (e.g. edge connectivity).
 
-## **Extras** 
+### **Extras** 
 
 In the eventuality that you have had the time to explore QAOA and the graph colouring problem, here are a few ideas to keep you entertained:
 
