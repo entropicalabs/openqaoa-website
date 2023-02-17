@@ -1,43 +1,51 @@
 # Maximum Cut
 
-A maximum cut of a graph is a partition of its vertices into two complementary sets, $S$ and $T$, such that the number of edges between them is maximized. This problem, known as the Max-Cut Problem, is the task of finding such a cut.
+A maximum cut of a graph is a partition of its vertices into two sets, $S$ and $T$, such that the number of edges between them is maximized. The task of finding such a cut is known as the MaxCut Problem.
 
 
+## The Cost Function
+
+Given a graph $G=(V, E)$, the cost function to minimize for the MaxCut problem is given by
+
+$$
+C(\textbf{x}) = -\sum_{(i, j)\in E} w_{ij} (x_i+x_j - 2x_i x_j )
+$$
+
+where $w_{ij}$ is the weight corresponding to the edge $(i,j) \in E$, and $\textbf{x}\in \{0, 1\}^{|V|}$ is the binary variable indicating whether node $i$ is in set $S$ or $T$. This works because each term $x_i+x_j - 2x_i x_j$ is equal to 1 if an edge is in the cut, and 0 otherwise.
+
+Note that the equivalent formulation in terms of Ising variables is the following
+
+$$
+C(\boldsymbol{\sigma}) = -\sum_{(i, j)\in E} w_{ij} \sigma_i\sigma_j,
+$$
+
+where this time $\boldsymbol{\sigma}\in \{-1, 1\}^{|V|}$.
 
 ## MaxCut in OpenQAOA
 
-The cost function for a MaxCut is given by
-
-$$
-H_C = \frac{1}{2} \sum_{\langle i, j\rangle} w_{ij} (1 - Z_i Z_j )
-$$
-
-where $\langle i, j\rangle$ denotes qubits connected by an edge, $w_{ij}$ is the weight corresponding to the edge $ij$, and $Z_i$ is the Pauli-Z operator acting on the i-th qubit.
-
-## MaxCut from Graphs
-
-Max cut is a graph problem, and as such you can leverage the popular `networkx` to create the graph. 
+MaxCut being a graph problem, you can leverage the popular `networkx` to easily create a variety of graphs. For example, an Erdös-Rényi graph can be instantiated with
 
 ```Python
 import networkx as nx
 
-g = nx.generators.fast_gnp_random_graph(n=6, p=0.6, seed=42)
+G = nx.generators.fast_gnp_random_graph(n=6, p=0.6, seed=42)
 ```
 
 OpenQAOA has a nice wrapper to plot networkx graphs
 
 ```Python
 from openqaoa.utilities import plot_graph
-plot_graph(g)
+plot_graph(G)
 ```
 
 ![seed_42_graph](/img/seed_42_graph.png)
 
-Then, creating a Max Cut problem class is a one liner:
+Once the graph is defined, creating a MaxCut problem class requires only a few lines of code:
 
 ```Python
-maxcut_prob = MaximumCut(g)
+from openqaoa.problems.problem import MaximumCut
 
+maxcut_prob = MaximumCut(G)
 maxcut_qubo = maxcut_prob.get_qubo_problem()
 ```
 
