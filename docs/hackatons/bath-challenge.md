@@ -4,7 +4,7 @@ Welcome to the OpenQAOA challenge!
 
 Our challenge is to solve the [Graph Colouring problem](https://en.wikipedia.org/wiki/Graph_coloring), one of the famous NP-complete problems, with a quantum computer.
 
-As far as we know, it is not possible to solve a NP problem in polynomial time. Therefore, one way to tackle NP problems is to employ heuristics. The **quantum approximate optimization algorithm (QAOA)** is one such heuristic algorithm, and it can be used to solve (small!) binary optimization problems. What interests us today, is that QAOA is an algorithm that can be run on existing quantum computers! 
+As far as we know, it is not possible to solve a NP-Complete problem in polynomial time. However, one way to tackle NP problems is to employ heuristics. The **quantum approximate optimization algorithm (QAOA)** is one such heuristic algorithm, and it can be used to solve (small!) binary optimization problems. What interests us today, is that QAOA is an algorithm that can be run on existing quantum computers! 
 
 !!! info "For the curious"
     The original QAOA paper can be found on the arxiv ([Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. "A quantum approximate optimization algorithm](https://arxiv.org/abs/1411.4028)). The paper is a bit technical, and may not be the best reference for a 12h challenge. So, if you need a more lay-down intro, please check out the OpenQAOA [what-is-the-qaoa](/docs/what-is-the-qaoa.md) reference.
@@ -147,7 +147,7 @@ You can try to color other more complicated graphs, some examples could be:
 <img src="/img/graph-2.png" alt="graph2" width="40%" style="display: float; margin-right: 2.5%; margin-left: 2.5%;"> 
 <img src="/img/graph-3.png" alt="graph2" width="40%" style="display: float; margin: 0 auto;"> 
 
-!!! warning "QAOA is heuristic"
+!!! warning "QAOA is an heuristic"
 
     You may find solutions that are not optimal. This can happen because QAOA is an approximation and quantum computers are noisy. We recommend you to solve the problem classically to see the optimal solutions that we are trying to find with QAOA. You can do that with OpenQAOA: 
 
