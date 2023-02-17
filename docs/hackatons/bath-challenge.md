@@ -58,7 +58,7 @@ where $Q$ is a matrix that encodes the whole problem.
 
 ### **STEP 2. Solve the Graph coloring problem using OpenQAOA** 
 
-Take a look at the OpenQAOA workflows to check how you can solve problems using QAOA. You can find them at [the-simplest-workflow](docs/the-simplest-workflow.md) and [customise-the-QAOA-workflow](docs/workflows/customise-the-QAOA-workflow.md). But as a quick recap, the easiest way to run QAOA is:
+Take a look at the OpenQAOA workflows to check how you can solve problems using QAOA. You can find them at [the-simplest-workflow](/docs/the-simplest-workflow.md) and [customise-the-QAOA-workflow](/docs/workflows/customise-the-QAOA-workflow.md). But as a quick recap, the easiest way to run QAOA is:
 
 ```Python
 from openqaoa import QAOA
@@ -114,7 +114,7 @@ def graph_coloring_qubo(graph, k) -> QUBO:
 ```
 
 !!! hint
-    If you are stuck, and you need some inspiration you can check how some of the other problem classes are structured in OpenQAOA by checking out the [OpenQAOA github page](https://github.com/entropicalabs/openqaoa/tree/dev/openqaoa/problems). In particular, the method `get_qubo_problem()` has the same functionality that you are tackling here. 
+    If you are stuck, and you need some inspiration you can check how some of the other problem classes are structured in OpenQAOA by checking out the [OpenQAOA github page](https://github.com/entropicalabs/openqaoa/tree/main/src/openqaoa-core/problems). In particular, the method `get_qubo_problem()` has the same functionality that you are tackling here. 
 
 
 #### **STEP 2.2. Run QAOA**
@@ -160,7 +160,7 @@ You can try to color other more complicated graphs, some examples could be:
 
 ### **STEP 3. Interpret the result**
 
-So, you ran a QAOA workflow successfully ... what next? Well, you can start studying the `q.results` object. First, read the [making-sense-of-the-result](docs/making-sense-of-the-result.md) page. 
+So, you ran a QAOA workflow successfully ... what next? Well, you can start studying the `q.results` object. First, read the [making-sense-of-the-result](/docs/making-sense-of-the-result.md) page. 
 
 The result will look at so
 ```Python
@@ -196,7 +196,7 @@ Maybe try to plot a scaling of the performance of the algorithm as a function of
 
 In the eventuality that you have had the time to explore QAOA and the graph colouring problem, here are a few ideas to keep you entertained:
 
-- Try to solve the problem using a Quantum Computer! We suggest you use the free IBM ones, see the [ibmq](docs/devices/ibmq.md) page
+- Try to solve the problem using a Quantum Computer! We suggest you use the free IBM ones, see the [ibmq](/docs/devices/ibmq.md) page
 - Can you come up with some interesting parameter initialization strategies?
-- Have a look at [RQAOA](docs/workflows/recursive-qaoa.md): how does it perform with respect to plain QAOA?
+- Have a look at [RQAOA](/docs/workflows/recursive-qaoa.md): how does it perform with respect to plain QAOA?
  

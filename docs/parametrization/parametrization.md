@@ -7,9 +7,9 @@ There are many different ways in which a QAOA circuit can be parametrized, and e
 
 We currently offer 7 different parametrizations for QAOA. They fall broadly into three categories:
 
-* The [Standard](/docs/parametrization/parametrization.md) classes are parametrization that have the $\gamma$ 's and $\beta$ 's as free parameters, as defined in the seminal paper by Farhi et al. [1].
-* The [Fourier](docs/parametrization/fourier-parametrization.md) classes have the discrete cosine and sine transforms of the $\gamma$'s respective $\beta$'s as free parameters, as proposed by Zhou et al. [2].
-* The [Annealing](docs/parametrization/annealing-parametrization.md) class is based on the idea of QAOA being a form of discretized, adiabatic annealing. Here the function values $s(t_i)$ at equally spaced times $t_i$ are the free parameters.
+* The [Standard](/docs/parametrization/standard-parametrization.md) classes are parametrization that have the $\gamma$ 's and $\beta$ 's as free parameters, as defined in the seminal paper by Farhi et al. [1].
+* The [Fourier](/docs/parametrization/fourier-parametrization.md) classes have the discrete cosine and sine transforms of the $\gamma$'s respective $\beta$'s as free parameters, as proposed by Zhou et al. [2].
+* The [Annealing](/docs/parametrization/annealing-parametrization.md) class is based on the idea of QAOA being a form of discretized, adiabatic annealing. Here the function values $s(t_i)$ at equally spaced times $t_i$ are the free parameters.
 
 Except for the `Annealing` parameters, each class also comes in three levels of detail: 
 
@@ -57,7 +57,7 @@ create_qaoa_variational_params(qaoa_circuit_params=qaoa_circuit_params,
                                 )
 ```
 
-Note that when using the fourier type, we need to specify the `q` value! For more details check out the [fourier-parametrization](docs/parametrization/fourier-parametrization.md) page.
+Note that when using the fourier type, we need to specify the `q` value! For more details check out the [fourier-parametrization](/docs/parametrization/fourier-parametrization.md) page.
 
 !!! warning "Using `custom`"
     When using the `custom` initialization strategy, we have to provide the appropriate number variational parameters in the form of a dictionary, `variational_params_dict`. The keys of the this dictionary are specific for the chose parametrization and the values depend on the number of values, p. Examples for how to use `custom` can be found in the separate pages.
