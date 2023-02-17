@@ -97,7 +97,7 @@ qubo_problem = QUBO(terms=  [[0,1], [0,2], [1,2], [0], [1], [2]],
 
 !!! info
 
-    When initializing the QUBO object in OpenQAOA there is no need to include the terms that are weighted 0. 
+    When initializing the QUBO object in OpenQAOA there is no need to include the terms that are weighted 0, and make sure that `len(terms) == len(weights)`.
  
 
 #### **STEP 2.1. Code the QUBO problem**
@@ -133,6 +133,10 @@ You have colored your first graph! To check the solutions you can do:
 q.results.most_probable_states
 ```
 
+You can try to color other more complicated graphs, some examples could be:
+
+IMAGE KKK
+
 !!! warning "QAOA is heuristic"
 
     You may find solutions that are not optimal. This can happen because QAOA is an approximation and quantum computers are noisy. We recommend you to solve the problem classically to see the optimal solutions that we are trying to find with QAOA. You can do that with OpenQAOA doing: 
@@ -144,36 +148,7 @@ q.results.most_probable_states
 !!! danger "Try not to crash your laptop!"
     Remember that to simulate a quantum computer you need $2^{n}$ variables, where $n$ is the number of qubits. In our case this means that given $n$ colors and $N$ vertexes you will need $2^{nN}$ numbers. Typically each number is represented by 128bits. You can try to plot $128 * 2^{nN}$ to see how quickly you will run out RAM! 
 
-## **Solve the Graph coloring problem using OpenQAOA**
-
-Check out the OpenQAOA workflows (for a refresher, check out [the-simplest-workflow](docs/the-simplest-workflow.md) and [customise-the-QAOA-workflow](docs/workflows/customise-the-QAOA-workflow.md))
-
-Then all you need to do, is to create the right QUBO and pass the terms and weights given by the cost function above.
-
-```Python
-graph_coloring_qubo = QUBO(terms=[[..], [..], ...],
-                           weights=[...],
-                           n=number_of_vertexes)
-```
-
-Note that `terms` is a list of lists, and `weight` a list.
-
-!!! tip "Start with a simple problem"
-    Make sure you start with a small graph and remember to make sure that `len(terms) == len(weights)`!
-
-Then, all you need to do for your first QAOA tests is to solve use a QAOA workflow:
-
-```Python
-q = QAOA()
-q.compile(graph_coloring_qubo)
-q.optimize()
-```
-
-After the optimization make sure you explore and familiarize yourself with the `q.results` object! 
-
-
-
-## **Interpret the result**
+### **STEP 3. Interpret the result**
 
 So, you ran a QAOA workflow successfully ... what next? Well, you can start studying the `q.results` object. First, read the [making-sense-of-the-result](docs/making-sense-of-the-result.md) page. 
 
@@ -186,7 +161,7 @@ The result will look at so
 This represents the most probable quantum state identified by the QAOA. In order to figure out how to interpret this result, you need to go back to the cost function. You need to make sure you know how to map each binary variable within the bistring back to the binary variable $x_{v,i}$!
 
 
-## **Study the QAOA parameters**
+### **OPTIONAL. Study the QAOA parameters**
 
 Our goal is to achieve the lowest cost value. How does the lowest cost change as we vary certain QAOA Parameters? 
 
@@ -201,7 +176,7 @@ q.set_circuit_properties(p=3, param_type='fourier', q=2)
 
 Can you find a combination of QAOA Parameters that gives you the best result for any random graph?
 
-## **Study the Graph and the Solution**
+## **OPTIONAL. Study the Graph and the Solution**
 
 Andrew Lukas paper says that given `n` colors and `N` vertexes it takes `nN` qubits to encode the problem. Without saturating your RAM, do you think you can play around with different graph topologies and colouring schemes?
 
