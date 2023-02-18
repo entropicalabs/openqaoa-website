@@ -7,7 +7,7 @@ Our challenge is to solve the [Graph Colouring problem](https://en.wikipedia.org
 As far as we know, it is not possible to solve a NP-complete problem in polynomial time. Therefore, one way to tackle NP problems is to employ heuristics. The **quantum approximate optimization algorithm (QAOA)** is one such heuristic algorithm, and it can be used to solve (small!) binary optimization problems. What interests us today, is that QAOA is an algorithm that can be run on existing quantum computers! 
 
 !!! info "For the curious"
-    The original QAOA paper can be found on the arxiv ([Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. "A quantum approximate optimization algorithm"](https://arxiv.org/abs/1411.4028)). The paper is a bit technical, and may not be the best reference for a 12h challenge. So, if you need a more lay-down intro, please check out the OpenQAOA [what-is-the-qaoa](../what-is-the-qaoa.md) reference.
+    The original QAOA paper can be found on the arxiv ([Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. "A quantum approximate optimization algorithm"](https://arxiv.org/abs/1411.4028)). The paper is a bit technical, and may not be the best reference for a 12h challenge. So, if you need a more lay-down intro, please check out the OpenQAOA [what-is-the-qaoa](/docs/what-is-the-qaoa.md) reference.
 
 
 ## **How to approach the challenge**
@@ -23,7 +23,7 @@ The last section includes some ideas on how to further explore the challenge.
 
 ###  **STEP 1. Find the cost Hamiltonian**
 
-First things first: what are we trying to do? We are given a graph with $N$ vertexes and some connectivity, and a set of $k$ colors. The optimization problem then is to **find a color for each vertex such that no edge connects two vertexes of same color.** Four simple examples are given by the following choices of graphs and coloring: 
+First things first: what are we trying to do? We are given a graph with $N$ vertices and some connectivity, and a set of $k$ colors. The optimization problem then is to **find a color for each vertex such that no edge connects two vertices of same color.** Four simple examples are given by the following choices of graphs and coloring: 
 
 <img src="/img/graph-ex-1.png" alt="graph1" width="40%" style="display: float; margin-right: 2.5%; margin-left: 2.5%;"> 
 <img src="/img/graph-ex-2.png" alt="graph2" width="40%" style="display: float; margin-right: 2.5%; margin-left: 2.5%;"> 
@@ -37,7 +37,7 @@ Now that we have an idea of the problem that we are trying to solve, we need to 
 
 $$ \vec y^*=\underset{\vec y}{\arg \min } f(\vec y),$$
 
-However, we want to solve the problem on a quantum computer, where the qubits only have two positions: $\uparrow$ and $\downarrow$. This requires you to write the cost function in terms of $n$ **binary variables**, $\vec x = (x_1, ..., x_n)$ where $x_i \in \{0,1\}$ and $n>N$ _(note that $n$ is also the number of qubits that you will use)_.
+However, we want to solve the problem on a quantum computer, where qubits can only take one of two values when measured: $\uparrow$ and $\downarrow$. This requires you to write the cost function in terms of $n$ **binary variables**, $\vec x = (x_1, ..., x_n)$ where $x_i \in \{0,1\}$ and $n>N$ _(note that $n$ is also the number of qubits that you will use)_.
 
 A good place to familiarize yourself with these type of cost functions is the great paper [Ising formulations of many NP problems](https://arxiv.org/abs/1302.5843) by Andrew Lucas. In section $6.1$ he introduces graph colouring problems, and it offers the following cost function:
 
@@ -69,7 +69,7 @@ Once we have the expression for the $Q$ matrix, we will be very close to be able
 
 
 #### **STEP 1.3. Understand the Ising model**
-However, to optimize this function and to find one solution $\vec x^*$ in a quantum computer using QAOA we need to use the Ising encoding, which means that the binary encoding must be $\{-1,+1\}$, instead of $\{0, 1\}$. This is more detailed in the [what-is-the-qaoa](../what-is-the-qaoa.md) page.
+However, to optimize this function and to find one solution $\vec x^*$ in a quantum computer using QAOA we need to use the Ising encoding, which means that the binary encoding must be $\{-1,+1\}$, instead of $\{0, 1\}$. This is more detailed in the [what-is-the-qaoa](/docs/what-is-the-qaoa.md) page.
 
 The cost function of a QUBO problem in the Ising encoding reads:
 
@@ -86,11 +86,11 @@ h_i = - \frac{1}{2}Q_{ii} - \frac{1}{4} \sum_{ \substack{j=0 \\ j\neq i}}^nQ_{ij
 So for any given problem, after we find $Q$, we can get $J$ and $h$ with this transformation. We are, now, ready to code!
 
 !!! info "For the curious"
-    QUBO stands for quadratic unconstrained binary optimization. You can check out the [what-is-a-qubo](../problems/what-is-a-qubo.md) to learn more about it and see some examples.
+    QUBO stands for quadratic unconstrained binary optimization. You can check out the [what-is-a-qubo](/docs/problems/what-is-a-qubo.md) to learn more about it and see some examples.
 
 ### **STEP 2. Solve the Graph coloring problem using OpenQAOA** 
 
-Take a look at the OpenQAOA workflows to check how you can solve problems using QAOA. You can find them at [the-simplest-workflow](../the-simplest-workflow.md) and [customise-the-QAOA-workflow](../workflows/customise-the-QAOA-workflow.md). But as a quick recap, the easiest way to run QAOA is:
+Take a look at the OpenQAOA workflows to check how you can solve problems using QAOA. You can find them at [the-simplest-workflow](/docs/the-simplest-workflow.md) and [customise-the-QAOA-workflow](/docs/workflows/customise-the-QAOA-workflow.md). But as a quick recap, the easiest way to run QAOA is:
 
 ```Python
 from openqaoa import QAOA
@@ -107,7 +107,7 @@ from openqaoa.problems import QUBO
 
 qubo_problem = QUBO(terms=[[..], [..], ...],
                     weights=[...],
-                    n=number_of_vertexes)
+                    n=number_of_vertices)
 ```
 where `terms` is a list of lists, and `weights` is a list of integers. As an example, if one has a QUBO problem encoded in a matrix $J$ and a vector $h$ like
 
@@ -134,7 +134,7 @@ then the QUBO object would be initialized as:
 ```Python
 qubo_problem = QUBO(terms=  [[0,1], [0,2], [1,2], [0], [1], [2]],
                     weights= [J_01,  J_02,  J_12, h_0, h_1, h_2],
-                    n=number_of_vertexes)
+                    n=number_of_vertices)
 ```
 
 !!! info
@@ -187,18 +187,18 @@ You can try to color other more complicated graphs, some examples could be:
 
 !!! warning "QAOA is heuristic"
 
-    You may find solutions that are not optimal (or even not real!). This can happen because QAOA is an approximation and quantum computers are noisy. We recommend you to solve the problem classically to see the optimal solutions that we are trying to find with QAOA. You can do that with OpenQAOA: 
+    You may find solutions that are not optimal (or even not feasible!). This can happen because QAOA is an approximation and quantum computers are noisy. We recommend you to solve the problem classically to see the optimal solutions that we are trying to find with QAOA. You can do that with OpenQAOA: 
 
         ground_state_hamiltonian(gc_qubo.hamiltonian)
 
 
 
 !!! danger "Try not to crash your laptop!"
-    Remember that to simulate a quantum computer you need $2^{n}$ variables, where $n$ is the number of qubits. In our case this means that given $k$ colors and $N$ vertexes you will need $2^{kN}$ numbers. Typically each number is represented by 128bits. You can try to plot $128 * 2^{kN}$ to see how quickly you will run out RAM! 
+    Remember that to simulate a quantum computer you need $2^{n}$ variables, where $n$ is the number of qubits. In our case this means that given $k$ colors and $N$ vertices you will need $2^{kN}$ numbers. Typically each number is represented by 128bits. You can try to plot $128 * 2^{kN}$ to see how quickly you will run out RAM! 
 
 ### **STEP 3. Interpret the result**
 
-So, you ran a QAOA workflow successfully ... what next? Well, you can start studying the `q.results` object. First, read the [making-sense-of-the-result](../making-sense-of-the-result.md) page. 
+So, you ran a QAOA workflow successfully ... what next? Well, you can start studying the `q.results` object. First, read the [making-sense-of-the-result](/docs/making-sense-of-the-result.md) page. 
 
 The result will look at so
 ```Python
@@ -215,7 +215,7 @@ This represents the most probable quantum state identified by the QAOA. In order
 
 Our goal is to achieve the lowest cost value. How does the lowest cost change as we vary certain QAOA Parameters? 
 
-What happens when you vary the number of layers $p$? And as you increase the number of vertexes? What can you tell about the size of the graph? And is there anything special when it comes to the initialization parameters? 
+What happens when you vary the number of layers $p$? And as you increase the number of vertices? What can you tell about the size of the graph? And is there anything special when it comes to the initialization parameters? 
 
 You can easily test many of these parameters through OpenQAOA workflow setters:
 
@@ -228,7 +228,7 @@ Can you find a combination of QAOA Parameters that gives you the best result for
 
 ### **OPTIONAL. Study the Graph and the Solution**
 
-Andrew Lukas paper says that given `k` colors and `N` vertexes it takes `nN` qubits to encode the problem. Without saturating your RAM, do you think you can play around with different graph topologies and colouring schemes?
+Andrew Lukas paper says that given `k` colors and `N` vertices it takes `nN` qubits to encode the problem. Without saturating your RAM, do you think you can play around with different graph topologies and colouring schemes?
 
 Maybe try to plot a scaling of the performance of the algorithm as a function of changing graph properties (e.g. edge connectivity).
 
@@ -236,7 +236,7 @@ Maybe try to plot a scaling of the performance of the algorithm as a function of
 
 In the eventuality that you have had the time to explore QAOA and the graph colouring problem, here are a few ideas to keep you entertained:
 
-- Try to solve the problem using a Quantum Computer! We suggest you use the free IBM ones, see the [ibmq](../devices/ibmq.md) page
+- Try to solve the problem using a Quantum Computer! We suggest you use the free IBM ones, see the [ibmq](/docs/devices/ibmq.md) page
 - Can you come up with some interesting parameter initialization strategies?
-- Have a look at [RQAOA](../workflows/recursive-qaoa.md): how does it perform with respect to plain QAOA?
+- Have a look at [RQAOA](/docs/workflows/recursive-qaoa.md): how does it perform with respect to plain QAOA?
  
