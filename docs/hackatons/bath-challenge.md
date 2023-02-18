@@ -7,7 +7,7 @@ Our challenge is to solve the [Graph Colouring problem](https://en.wikipedia.org
 As far as we know, it is not possible to solve a NP-complete problem in polynomial time. Therefore, one way to tackle NP problems is to employ heuristics. The **quantum approximate optimization algorithm (QAOA)** is one such heuristic algorithm, and it can be used to solve (small!) binary optimization problems. What interests us today, is that QAOA is an algorithm that can be run on existing quantum computers! 
 
 !!! info "For the curious"
-    The original QAOA paper can be found on the arxiv ([Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. "A quantum approximate optimization algorithm"](https://arxiv.org/abs/1411.4028)). The paper is a bit technical, and may not be the best reference for a 12h challenge. So, if you need a more lay-down intro, please check out the OpenQAOA [what-is-the-qaoa](/docs/what-is-the-qaoa.md) reference.
+    The original QAOA paper can be found on the arxiv ([Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. "A quantum approximate optimization algorithm"](https://arxiv.org/abs/1411.4028)). The paper is a bit technical, and may not be the best reference for a 12h challenge. So, if you need a more lay-down intro, please check out the OpenQAOA [what-is-the-qaoa](../what-is-the-qaoa.md) reference.
 
 
 ## **How to approach the challenge**
@@ -69,7 +69,7 @@ Once we have the expression for the $Q$ matrix, we will be very close to be able
 
 
 #### **STEP 1.3. Understand the Ising model**
-However, to optimize this function and to find one solution $\vec x^*$ in a quantum computer using QAOA we need to use the Ising encoding, which means that the binary encoding must be $\{-1,+1\}$, instead of $\{0, 1\}$. This is more detailed in the [what-is-the-qaoa](/docs/what-is-the-qaoa.md) page.
+However, to optimize this function and to find one solution $\vec x^*$ in a quantum computer using QAOA we need to use the Ising encoding, which means that the binary encoding must be $\{-1,+1\}$, instead of $\{0, 1\}$. This is more detailed in the [what-is-the-qaoa](../what-is-the-qaoa.md) page.
 
 The cost function of a QUBO problem in the Ising encoding reads:
 
@@ -86,11 +86,11 @@ h_i = - \frac{1}{2}Q_{ii} - \frac{1}{4} \sum_{ \substack{j=0 \\ j\neq i}}^nQ_{ij
 So for any given problem, after we find $Q$, we can get $J$ and $h$ with this transformation. We are, now, ready to code!
 
 !!! info "For the curious"
-    QUBO stands for quadratic unconstrained binary optimization. You can check out the [what-is-a-qubo](/docs/problems/what-is-a-qubo.md) to learn more about it and see some examples.
+    QUBO stands for quadratic unconstrained binary optimization. You can check out the [what-is-a-qubo](../problems/what-is-a-qubo.md) to learn more about it and see some examples.
 
 ### **STEP 2. Solve the Graph coloring problem using OpenQAOA** 
 
-Take a look at the OpenQAOA workflows to check how you can solve problems using QAOA. You can find them at [the-simplest-workflow](/docs/the-simplest-workflow.md) and [customise-the-QAOA-workflow](/docs/workflows/customise-the-QAOA-workflow.md). But as a quick recap, the easiest way to run QAOA is:
+Take a look at the OpenQAOA workflows to check how you can solve problems using QAOA. You can find them at [the-simplest-workflow](../the-simplest-workflow.md) and [customise-the-QAOA-workflow](../workflows/customise-the-QAOA-workflow.md). But as a quick recap, the easiest way to run QAOA is:
 
 ```Python
 from openqaoa import QAOA
@@ -198,7 +198,7 @@ You can try to color other more complicated graphs, some examples could be:
 
 ### **STEP 3. Interpret the result**
 
-So, you ran a QAOA workflow successfully ... what next? Well, you can start studying the `q.results` object. First, read the [making-sense-of-the-result](/docs/making-sense-of-the-result.md) page. 
+So, you ran a QAOA workflow successfully ... what next? Well, you can start studying the `q.results` object. First, read the [making-sense-of-the-result](../making-sense-of-the-result.md) page. 
 
 The result will look at so
 ```Python
@@ -236,7 +236,7 @@ Maybe try to plot a scaling of the performance of the algorithm as a function of
 
 In the eventuality that you have had the time to explore QAOA and the graph colouring problem, here are a few ideas to keep you entertained:
 
-- Try to solve the problem using a Quantum Computer! We suggest you use the free IBM ones, see the [ibmq](/docs/devices/ibmq.md) page
+- Try to solve the problem using a Quantum Computer! We suggest you use the free IBM ones, see the [ibmq](../devices/ibmq.md) page
 - Can you come up with some interesting parameter initialization strategies?
 - Have a look at [RQAOA](/docs/workflows/recursive-qaoa.md): how does it perform with respect to plain QAOA?
  
