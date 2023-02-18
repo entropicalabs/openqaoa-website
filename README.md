@@ -10,4 +10,8 @@ A website for OpenQAOA build with MkDocs
 pip install mkdocs-material
 ```
 
-3. Profit! 
+3. Check locally your changes my typing
+
+```bash
+mkdocs serve
+```

@@ -1,4 +1,4 @@
-# Bath Challenge
+# Baths 2023 Quantum Bootcamp
 
 Welcome to the OpenQAOA challenge!
 
