@@ -28,7 +28,7 @@ import networkx
 from openqaoa.problems import MinimumVertexCover
 g = networkx.circulant_graph(6, [1])
 vc = MinimumVertexCover(g, field=1.0, penalty=10)
-qubo_problem = vc.get_qubo_problem()
+qubo_problem = vc.quno
 ```
 
 Now that we have the qubo problem, we can create a custom workflow as follows
@@ -101,7 +101,7 @@ q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_ham
 This method allows to shape the properties of the ansats circuit. It is the place where you can select the number of layers `p`, the type desired parametrization (and its initialization), and the type of mixer that you want to use. 
 
 !!! tip
-    If you want to read more about parametrisations and initialisations, please refer to the [parametrization](parametrization/parametrization.md) pages.
+    If you want to read more about parametrisations and initialisations, please refer to the [parametrization](/docs/parametrization/parametrization.md) pages.
 
 ## The backend properties
 
