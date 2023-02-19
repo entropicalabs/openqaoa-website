@@ -1,4 +1,4 @@
-name: publish_test
+name: publish_live
 
 on:
     # Automatic publishing on push
