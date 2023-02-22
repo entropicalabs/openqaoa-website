@@ -98,7 +98,14 @@ nav:
       - parametrization/annealing-parametrization.md
   - Optimizers:
       - optimizers/optimizers.md
-      - optimizers/gradient-based-optimizers.md
+      - Gradient-based optimizers:
+          - optimizers/gradient-based-optimizers/gradient-based-optimizers.md
+          - optimizers/gradient-based-optimizers/gradient-computation.md
+          - optimizers/gradient-based-optimizers/vgd-optimizer.md
+          - optimizers/gradient-based-optimizers/rmsprop-optimizer.md
+          - optimizers/gradient-based-optimizers/newton-optimizer.md
+          - optimizers/gradient-based-optimizers/natural-gd-optimizer.md
+          - optimizers/gradient-based-optimizers/spsa-optimizer.md
       - optimizers/gradient-free-optimizers.md
       - optimizers/pennylane-optimizers.md
       - optimizers/shot-adaptive-optimizers.md
