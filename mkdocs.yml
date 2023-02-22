@@ -123,6 +123,8 @@ nav:
         - problems/number-partition.md
         - problems/shortest-path-problem.md
         - problems/traveling-sales-person.md
+  - Challenges:
+    - challenges/intro.md
   - Events:
     - hackatons/bath-challenge.md
 
