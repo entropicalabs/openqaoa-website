@@ -80,11 +80,16 @@ $$n_{\text{min}} \leq N^{(k)}_i \leq n_{\text{max}}, $$
 
 In the following example it can be seen how to run QAOA using a shot-adaptive optimizer using OpenQAOA.
 
-```Python hl_lines="6-19"
+```Python hl_lines="11-24"
 from openqaoa import QAOA 
 
 # create the QAOA object
 q = QAOA()
+
+# we need to use a QPU or a shot-based simulator to use shot-adaptive optimizers
+q.set_device(create_device('local', 'qiskit.shot_simulator'))
+# set the default number of shots
+q.set_backend_properties(n_shots=500)
 
 # set optimizer and properties
 q.set_classical_optimizer(
@@ -109,7 +114,7 @@ Here, we set the method argument to `cans`, the Jacobian approximation method to
 
 If after this code we run the following line:
 ```Python 
-q.results.plot_n_shots()
+q.result.plot_n_shots()
 ```
 We get the graph below, where it can be seen that at each iteration a different number of shots is used for the gradient approximation of all the parameters:
 
