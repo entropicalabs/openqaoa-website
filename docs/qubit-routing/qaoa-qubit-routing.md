@@ -3,7 +3,7 @@
 OpenQAOA supports custom qubit routing solutions specific to QAOA circuits as part of the QAOA workflow. 
 
 ## What is Qubit Routing?
-Qubit Routing is a key step in circuit compilation that maps a Quantum Circuit defined over logical qubits to the physical qubits in a Quantum Computer. Most of currently available Quantum Computers have sparsely connected physical qubits. Therefore, in order to implement an entaglement operation between physical qubits $i, j$ that are not connected on the QPU, we make use of $SWAP$ gates. A SWAP gate is an entangling operation between two qubits $a, b$ that swaps the quantum state of the two qubits. Mathematically, it can be described as follows:
+Qubit Routing is a key step in circuit compilation that maps a Quantum Circuit defined over logical qubits to the physical qubits in a Quantum Computer. Most of currently available Quantum Computers have sparsely connected physical qubits. Therefore, in order to implement an entaglement operation between physical qubits $i, j$ that are not connected on the QPU, we make use of $SWAP$ gates. A SWAP gate is an operation between two qubits $a, b$ that swaps the quantum state of the two qubits. Mathematically, it can be described as follows:
 
 $$
 SWAP (\Psi_a \otimes \Psi_b) = \Psi_b \otimes \Psi_a
@@ -16,9 +16,11 @@ QAOA circuits are a type of variational circuits with alternating layers of para
 
 To circumvent the absence of connected edges between qubits, qubit routing solutions employ $SWAP_{ij}$ gates, that swap the state of qubits $i,j$ physically on the hardware. This allows the desired qubit state to travel along the chain of physically connected qubits as shown in the following figure.
 
-![swap_along_chain_example](/img/swap_travel_example.png)
+<p align="center">
+	<img src="/img/swap_travel_example.png"  width="50%" height="25%">
+</p>
 
-In the example above, we use a SWAP gate between qubits $Q_2,Q_4$, to swap the positions of the two qubits. This now allows us to implement the required entangling gates between qubits $Q_1,Q_4$, and between $Q_3,Q_4$. Similarly, the entangling gates with $Q_5$ can be implemented by first swapping the qubits in the current position of $Q_4$. The final equivalent circuit will resemble to that in the following figure. 
+Such application of SWAPs can facilitate the swapping of positions of the two qubits $Q_2, Q_4$ as shown in the figure below. This now allows us to implement the required entangling gates between qubits $Q_1,Q_4$, and between $Q_3,Q_4$. Similarly, the entangling gates with $Q_5$ can be implemented by first swapping the qubits in the current position of $Q_4$. The final equivalent circuit will resemble to that in the following figure. 
 
 ![qaoa_routing_example_2](/img/routing_2.png) ![routing_example_circuit_2](/img/swap_ckts.png)
 
@@ -34,13 +36,13 @@ Before, we start desigining a solution to implement qubit routing, note that we 
 
 ## Qubit Routing solutions in OpenQAOA
 Implemeting your own custom qubit routing solution in OpenQAOA is really simple! Owing to the simplifications in the input circuit from QAOA (as discussed above), it can be represented as a list of edges. 
-The custom routing solution is then expected to accept the circuit (as a list of edges) and the `openqaoa.DeviceBase` object as input to produce a routed circuit.
+The custom routing solution is then expected to accept the circuit (as a list of edges) and the `openqaoa.Device` object as input to produce a routed circuit.
 
 The custom routing function is also expected to output other relevant information regarding the process. These are described below:
 
 - initial_mapping (`List[int]`): This list reports selected qubits on the QPU that the algorithm will be executed on. For example, it is assumed that for an `initial_mapping = [b,a,d,c,f,e]`, the logical to physical qubit mapping is defined as `{0:b,1:a,2:d,3:c,4:f,5:e}`
 - routed_gates (`List[List[int]]`): The routed gate set is output in the same format as the input gate set. This list contains pairs of qubits where a two-qubit gates is applied. Each of these pair is either an `RZZ` or a `SWAP` gate. Each pair is defined using logical qubits, i.e. qubits numbered from `[0, 1, 2, ... n-1]`
-- swap_mask (`List[bool]`): This output tags each qubit pair (gate) in the list above as either a `SWAP` gate if the entry is `True` or an `RZZ` gate if the entry is `False`.
+- swap_mask (`List[bool]`): This output tags each qubit pair (gate) in the `routed_gates` list above as either a `SWAP` gate if the entry is `True` or an `RZZ` gate if the entry is `False`.
 - final_qubit_mapping (`List[int]`): This list reports the final order of the shuffled qubits after the application of `SWAPs`. The list must be labelled with qubit indices from `0` to `n-1`
 
 In order to define such a routing function, one can imagine the following template:
@@ -116,7 +118,11 @@ q.compile(problem=maxcut, routing_function = my_custom_routing_function)
 q.optimize()
 ```
 
-Additionally, OpenQAOA also lets you visualize the routed circuit by simply calling the visualization methods of the library used for the hardware. Since `qiskit` is used for IBMQ devices, you can visualize your qiskit circuit by calling the `.draw()` method on the compiled circuit.
+Additionally, OpenQAOA also lets you obtain the routed circuit by simply calling the `parametric_circuit` or `qaoa_circuit` on the backend object after compilation. For IBMQ devices, `qiskit` circuit is returned, and therefore, can be visualized by calling the `.draw()` method on the compiled circuit. For instance,
+
+```Python
+q.backend.parametric_circuit.draw()
+```
 
 Moreover, one can tests their routing solutions on IBMQ emulators before targeting actual Quantum Computers by simply creating an emulator based on the real device. In OpenQAOA, as follows:
 ```Python
