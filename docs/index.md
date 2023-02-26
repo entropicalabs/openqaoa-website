@@ -17,6 +17,13 @@
 <a href="https://pypi.org/project/openqaoa" target="_blank">
     <img src="https://img.shields.io/pypi/pyversions/openqaoa.svg?color=%2334D058" alt="Supported Python versions">
 </a>
+<a href="https://github.com/entropicalabs/openqaoa/blob/main/LICENSE" target="_blank">
+    <img src="https://img.shields.io/pypi/l/openqaoa" alt="OQ license">
+</a>
+</a>
+<a href="https://discord.gg/ana76wkKBd" target="_blank">
+    <img src="https://img.shields.io/discord/991258119525122058" alt="Discord server">
+</a>
 </p>
 ---
 

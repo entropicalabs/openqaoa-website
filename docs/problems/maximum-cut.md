@@ -16,10 +16,10 @@ where $w_{ij}$ is the weight corresponding to the edge $(i,j) \in E$, and $\text
 Note that the equivalent formulation in terms of Ising variables is the following
 
 $$
-C(\boldsymbol{\sigma}) = -\sum_{(i, j)\in E} w_{ij} \sigma_i\sigma_j,
+C(\sigma) = -\sum_{(i, j)\in E} w_{ij} \sigma_i\sigma_j,
 $$
 
-where this time $\boldsymbol{\sigma}\in \{-1, 1\}^{|V|}$.
+where this time $\sigma \in \{-1, 1\}^{|V|}$.
 
 ## MaxCut in OpenQAOA
 
@@ -46,7 +46,7 @@ Once the graph is defined, creating a MaxCut problem class requires only a few l
 from openqaoa.problems.problem import MaximumCut
 
 maxcut_prob = MaximumCut(G)
-maxcut_qubo = maxcut_prob.quno
+maxcut_qubo = maxcut_prob.qubo
 ```
 
 We can then access the underlying cost hamiltonian 
