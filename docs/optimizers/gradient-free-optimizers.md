@@ -4,7 +4,7 @@ In OpenQAOA offers the possibility to use different gradient-free optimizers to 
 
 !!! info "List of `scipy.optimize.minimize` methods"
 
-    Here you can find a list of the name of the current available optimizers: `nelder-mead`, `powell`, `cg`, `bfgs`, `newton-cg`, `l-bfgs-b`, `tnc`, `cobyla`, `slsqp`, `trust-constr`, `dogleg`, `trust-ncg`, `trust-exact`, `trust-krylov`.
+    Here you can find a list of the name of the current available optimizers: `nelder-mead`, `powell`, `cg`, `bfgs`, `tnc`, `cobyla`, `slsqp`, `trust-constr`, `dogleg`, `trust-ncg`, `trust-exact`, `trust-krylov`.
 
     Note that this list is subject to changes, as new optimizers could be implemented in future versions of the library.
 
