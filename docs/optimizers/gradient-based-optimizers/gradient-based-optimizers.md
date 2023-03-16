@@ -18,7 +18,9 @@ Here you can find a list and a brief description of the gradient-based optimizer
 | `natural_grad_descent` | Quantum Natural Gradient Descent | A quantum optimization method that leverages the geometry of the parameter space and the quantum Fisher information matrix to improve convergence speed. | [link](./natural-gd-optimizer.md)|
 | `spsa`           | Simultaneous Perturbation Stochastic Approximation | A gradient-free optimization method that uses stochastic approximations of the gradient. | [link](./spsa-optimizer.md)|
 
-Also, we don't know the analytical form of the cost function therefore we need some method to compute the Jacobian $\vec\nabla f(\vec\gamma)$. OpenQAOA offers different methods to compute it: `finite_difference`, `param_shift`, `stoch_param_shift`, and `grad_spsa`. To read about the these please refer to the [Gradient computation](./gradient-computation.md) page.
+In addition, there are two more gradient-based optimizers available: `newton-cg`, `l-bfgs-b`. These are included in the library scipy.optimize.minimize, please refer to their documentation to learn more about them.
+
+Also,the analytical form of the cost function is not known therefore we need some method to compute the Jacobian $\vec\nabla f(\vec\gamma)$. OpenQAOA offers different methods to compute it: `finite_difference`, `param_shift`, `stoch_param_shift`, and `grad_spsa`. To read about the these please refer to the [Gradient computation](./gradient-computation.md) page.
 
 ## OpenQAOA example
 In the code below it is shown how to run QAOA with a gradient-based optimizer like gradient descent and approximating the Jacobian with finite difference method.

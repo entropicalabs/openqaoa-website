@@ -41,8 +41,8 @@ from openqaoa.devices import create_device
 q = QAOA()
 
 # Create a device
-qiskit_sv = create_device(location='qcs', name='aspen-m-3')
-q.set_device(qiskit_sv)
+aspen_device = create_device(location='qcs', name='aspen-m-3')
+q.set_device(aspen_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -91,8 +91,8 @@ from openqaoa.devices import create_device
 q = QAOA()
 
 # Create a device
-qiskit_sv = create_device(location='qcs', name='aspen-m3')
-q.set_device(qiskit_sv)
+aspen_device = create_device(location='qcs', name='aspen-m3')
+q.set_device(aspen_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -117,8 +117,8 @@ from openqaoa.devices import create_device
 q = QAOA()
 
 # Create a device
-qiskit_sv = create_device(location='qcs', name='aspen-m3')
-q.set_device(qiskit_sv)
+aspen_device = create_device(location='qcs', name='aspen-m3')
+q.set_device(aspen_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -144,8 +144,8 @@ from openqaoa.devices import create_device
 q = QAOA()
 
 # Create a device
-qiskit_sv = create_device(location='qcs', name='aspen-m3')
-q.set_device(qiskit_sv)
+aspen_device = create_device(location='qcs', name='aspen-m3')
+q.set_device(aspen_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')

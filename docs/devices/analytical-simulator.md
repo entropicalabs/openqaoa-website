@@ -21,7 +21,7 @@ q.set_device(analytical_device)
 ```
 
 !!! note "Expectation values of RQAOA"
-    Recall that [RQAOA](/workflows/recursive-qaoa.md) requires computing the expectation values of pair and single spins. If using the analytical device, those would be computed analytically using the `exp_val_single_analytical` and `exp_val_pair_analytical` functions from the `openqaoa.utilities`. Otherwise, the expectation values are computed from the count dictionary.
+    Recall that [RQAOA](/workflows/recursive-qaoa.md) requires computing the expectation values of pair and single spins. When using the analytical device, the expectation values will also be computed analytically, using the `exp_val_single_analytical` and `exp_val_pair_analytical` functions from the `openqaoa.utilities`. 
 
 ## References
 ----------

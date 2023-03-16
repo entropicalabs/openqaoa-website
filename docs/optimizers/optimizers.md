@@ -56,8 +56,8 @@ q.optimize()
 ```
 In this example, the optimizer used is COBYLA, which is a gradient-free optimization algorithm with a maximum number of iterations set to 100. The following is a comprehensive list of all optimization algorithms available in OpenQAOA:
 
-- <a style="color:inherit; font-weight:bold" href="/optimizers/gradient-free-optimizers">Gradient-free optimizers</a>: `nelder-mead`, `powell`, `cg`, `bfgs`, `newton-cg`, `l-bfgs-b`, `tnc`, `cobyla`, `slsqp`, `trust-constr`, `dogleg`, `trust-ncg`, `trust-exact`, and `trust-krylov`.
-- <a style="color:inherit; font-weight:bold" href="/optimizers/gradient-based-optimizers">Gradient-based optimizers</a>: `vgd`, `newton`, `rmsprop`, `natural_grad_descent`, and `spsa`.
+- <a style="color:inherit; font-weight:bold" href="/optimizers/gradient-free-optimizers">Gradient-free optimizers</a>: `nelder-mead`, `powell`, `cg`, `bfgs`, `tnc`, `cobyla`, `slsqp`, `trust-constr`, `dogleg`, `trust-ncg`, `trust-exact`, and `trust-krylov`.
+- <a style="color:inherit; font-weight:bold" href="/optimizers/gradient-based-optimizers">Gradient-based optimizers</a>: `vgd`, `newton`, `rmsprop`, `natural_grad_descent`, `spsa`, and `newton-cg`, `l-bfgs-b`,
 
 In addition to these, some optimizers from the PennyLane library have been adapted for use in OpenQAOA. These include:
 
