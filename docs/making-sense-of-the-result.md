@@ -4,6 +4,7 @@ You have just ran the simples QAOA workflow and now it is time to make sense of 
 
 ```Python
 from openqaoa import QAOA  
+
 q = QAOA()
 q.compile(qubo_problem)
 q.optimize()

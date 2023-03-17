@@ -37,6 +37,9 @@ Let us now do a walk through the whole process using the Sherrington-Kirkpatrick
 
 
 ```Python
+import networkx as nx
+from openqaoa import QUBO
+
 # Number of qubits
 n_qubits = 8
 
@@ -65,6 +68,8 @@ We now demonstrate the full RQAOA workflow.
 
 
 ```Python
+from openqaoa import RQAOA, create_device
+
 r =  RQAOA()
 
 # Set up RQAOA properties
