@@ -5,6 +5,7 @@ The simples QAOA workflow makes use of the OpenQAOA default values
 
 ```Python
 from openqaoa import QAOA  
+
 q = QAOA()
 q.compile(qubo_problem)
 q.optimize()
@@ -26,6 +27,7 @@ Again, first things first: we need to create a problem instance. For example, an
 ```Python
 import networkx
 from openqaoa.problems import MinimumVertexCover
+
 g = networkx.circulant_graph(6, [1])
 vc = MinimumVertexCover(g, field=1.0, penalty=10)
 qubo_problem = vc.qubo
