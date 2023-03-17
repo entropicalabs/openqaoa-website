@@ -1,11 +1,19 @@
-/* :root {
-  --bg-color:                   #FCFCEA;
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #1d1e27; /* header background */
+  --md-default-bg-color: #2e303e; /* page background */
+  --md-default-fg-color: #FCFCEA; /* page text color */
+  --md-default-fg-color--light: #7e83a2; /* side menu titles font color */
+  --md-typeset-a-color: #7e83a2; /* links color */
+  --md-accent-fg-color: #969dc7; /* links hover color */
 }
 
-body {
-  background:                  #FCFCEA;
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #3b3d4f; /* header background */
+  --md-default-bg-color: #fcfcea; /* page background */
+  --md-default-fg-color: #1d1e27; /* page text color */
+  --md-default-fg-color--light: #4d5062; /* side menu titles font color */
+  --md-typeset-a-color: #4d5062; /* links color */
+  --md-accent-fg-color: #969dc7; /* links hover color */
+  --md-footer-bg-color: #2e303e; /* footer light band */
+  --md-footer-bg-color--dark: #1d1e27; /* footer darker band */
 }
- */
-
-
-/* #0B2340 per gli sfondi e #FCFCEA per il testo (nella versione dark) */
