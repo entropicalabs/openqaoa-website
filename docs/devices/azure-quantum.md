@@ -42,6 +42,8 @@ You can get started by following [Azure Quantum official docs](https://learn.mic
 The procedure is simple:
 
 ```Python
+from openqaoa import QAOA, create_device
+
 q = QAOA()
 
 device_azure = create_device(location='azure',
@@ -58,6 +60,8 @@ Please, note that you need to specify the correct path for your `resource_id` an
 If you are unsure about what devices are available to you, you can do the following:
 
 ```Python
+from openqaoa import QAOA, create_device
+
 az_device = create_device(location='azure',
                         name='', 
                         resource_id="/subscriptions/****/resourceGroups/****/providers/****/Workspaces/****", 

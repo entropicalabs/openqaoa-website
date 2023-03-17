@@ -19,6 +19,10 @@ Further information can be found in [Rigetti's official documentation](https://d
 In order to instantiate to connect to Rigetti QCS, *you need to be using Rigetti's JupyterLab IDE*. That is, you need to be physically running your code _within_ QCS. As of writing, there is no option for remote access
 
 ```Python
+from openqaoa import QAOA, create_device
+
+q_pyquil = QAOA()
+
 rigetti_device = create_device(location='qcs', name='Aspen-M-3')
 q_pyquil.set_device(rigetti_device)
 ```

@@ -18,6 +18,10 @@ Due to its marked exploratory behavior, the vectorized simulator is the _default
 If you want to explicitly set the vectorized device use the following snippet
 
 ```Python
+from openqaoa import QAOA, create_device
+
+q = QAOA()
+
 vect_device = create_device(location='local', name='vectorized')
 q.set_device(vect_device)
 ```

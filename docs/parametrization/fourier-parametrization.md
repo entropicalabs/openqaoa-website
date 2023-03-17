@@ -114,6 +114,8 @@ The class `QAOAVariationalFourierExtendedParams`, similarly to the `ExtendedPara
 It can be used with the following piece of code:
 
 ```Python
+q = QAOA()
+
 q.set_circuit_properties(p=4, 
                          q=2, 
                          param_type='fourier_extended', 

@@ -36,7 +36,7 @@ This version of RQAOA is included in OpenQAOA. Additionally, OpenQAOA incorporat
 Let us now do a walk through the whole process using the Sherrington-Kirkpatrick model as an example. This model corresponds to a fully-connected system, where we choose the couplings $J_{ij}$ to be of magnitude 1, but with randomly assigned signs. Then we have to translate the problem to a Quadratic Unconstrained Binary Optimization problem. This can be done in a single line by creating an object of the class ```QUBO``` which takes the number of qubits, connectivity of the problem (terms) and the couplings  (weights).
 
 
-```
+```Python
 # Number of qubits
 n_qubits = 8
 

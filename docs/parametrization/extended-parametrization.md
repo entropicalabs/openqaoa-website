@@ -19,6 +19,8 @@ $$
 This time, however, the extended parametrization allows us to specify a different angle for every gate with the following:
 
 ```Python
+q = QAOA()
+
 q.set_circuit_properties(p=1, 
                          param_type='extended', 
                          init_type='custom', 
