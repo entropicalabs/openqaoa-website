@@ -16,6 +16,8 @@ The analytical simulator computes the expectation value of the cost Hamiltonian,
 If you want to explicitly set the analytical simulator device use the following snippet
 
 ```Python
+from openqaoa import QAOA, create_device
+
 analytical_device = create_device(location='local', name='analytical_simulator')
 q.set_device(analytical_device)
 ```

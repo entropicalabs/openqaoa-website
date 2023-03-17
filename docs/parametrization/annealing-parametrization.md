@@ -29,6 +29,8 @@ $$ H_C = 2.5 (Z_0Z_1 + Z_1Z_2 + Z_0Z_2) + 3.5 (Z_0 + Z_1 + Z_2). $$
 We can use the annealing parametrization with ramp initialization by using
 
 ```Python
+q = QAOA()
+
 q.set_circuit_properties(p=2, 
                          param_type='annealing', 
                          init_type='ramp')

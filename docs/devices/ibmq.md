@@ -44,13 +44,18 @@ Once installed, the steps to running a computation in the Quantum Lab is the sam
 An IBMQ Device can be created by the following:
 
 ```Python
-IBMQ.save_account('YOUR_API_TOKEN')
+from openqaoa import QAOA, create_device
+from qiskit import IBMQ
+
+IBMQ.load_account() # load the previously saved credentials
 
 q = QAOA()
 
 qasm_sim_device = create_device(location='ibmq', 
-                                name='ibmq_qasm_simulator', hub='ibm-q', 
-                                group='open', project='main')
+                                name='ibmq_qasm_simulator',
+                                hub='ibm-q', 
+                                group='open', 
+                                project='main')
 
 q.set_device(qasm_sim_device)
 ```
@@ -60,6 +65,8 @@ q.set_device(qasm_sim_device)
 If you are unsure about what devices are available to you, you can do the following:
 
 ```Python
+from openqaoa import create_device
+
 q_device = create_device(location='ibmq', 
                         name='', hub='ibm-q', 
                         group='open', project='main')

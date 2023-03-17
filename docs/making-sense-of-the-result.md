@@ -3,7 +3,7 @@
 You have just ran the simples QAOA workflow and now it is time to make sense of what just happened. 
 
 ```Python
-from openqaoa.workflows.optimizer import QAOA  
+from openqaoa import QAOA  
 q = QAOA()
 q.compile(qubo_problem)
 q.optimize()

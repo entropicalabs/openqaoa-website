@@ -39,7 +39,7 @@ Once the graph is defined, creating a MVC problem class requires only a few line
 from openqaoa.problems.problem import MinimumVertexCover
 
 mvc_prob = MinimumVertexCover(G)
-mvc_qubo = maxcut_prob.quno
+mvc_qubo = maxcut_prob.qubo
 ```
 
 We can then access the underlying cost hamiltonian 

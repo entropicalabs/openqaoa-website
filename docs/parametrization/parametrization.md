@@ -24,13 +24,14 @@ Before starting the algorithm, the parameters need to be initialized! That is, w
 OpenQAOA supports three different initialization strategies:
 
 * **rand** (for random) sets the values of $\beta$ and $\gamma$ uniformly at random in the range $[0, \pi]$. 
-* **ramp** create evenly spaced timelayers at the centers of p intervals, setting $\beta$ and $\gamma$ according
+* **ramp** create evenly spaced-time layers at the centers of p intervals, setting $\beta$ and $\gamma$ according
             to a linear ramp schedule. If `time` is not specified, the annealing time is set to $0.7p$. For example, this specifies ($\beta$, $\gamma$) = (0.35, 0.35) as the optimization starting point in a single-layer QAOA.
 * **custom** allows the user to initialize the angles with custom values.
 
 The above can be combined to create a `Variational Parameter Class` with the Standard Parametrisation and Ramp Initializations
 
 ```Python
+from openqaoa.qaoa_components.variational_parameters.variational_params_factory import create_qaoa_variational_params
 create_qaoa_variational_params(qaoa_circuit_params=qaoa_circuit_params,
                                 params_type='standard',
                                 init_type='ramp')
@@ -38,6 +39,7 @@ create_qaoa_variational_params(qaoa_circuit_params=qaoa_circuit_params,
 ```
 or with the Extended Parametrisation and Random Initializations
 ```Python
+from openqaoa.qaoa_components.variational_parameters.variational_params_factory import create_qaoa_variational_params
 create_qaoa_variational_params(qaoa_circuit_params=qaoa_circuit_params,
                                 params_type='extended',
                                 init_type='rand')
@@ -46,6 +48,7 @@ create_qaoa_variational_params(qaoa_circuit_params=qaoa_circuit_params,
 or with 
 
 ```Python
+from openqaoa.qaoa_components.variational_parameters.variational_params_factory import create_qaoa_variational_params
 create_qaoa_variational_params(qaoa_circuit_params=qaoa_circuit_params,
                                 params_type='fourier',
                                 q=1,

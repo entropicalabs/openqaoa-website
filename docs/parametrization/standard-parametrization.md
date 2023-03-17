@@ -41,6 +41,8 @@ The `StandardWithBiasParams` class allows for changing the parameter of the RX g
 Let us now use this class by setting the circuit properties with
 
 ```Python
+q = QAOA()
+
 q.set_circuit_properties(p=1, 
                         param_type='standard_w_bias',
                         init_type='custom',     

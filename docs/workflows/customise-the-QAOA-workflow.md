@@ -3,8 +3,8 @@
 The simples QAOA workflow makes use of the OpenQAOA default values
 
 
-```Python title="simples_qaoa_workflow.py"
-from openqaoa.workflows.optimizer import QAOA  
+```Python
+from openqaoa import QAOA  
 q = QAOA()
 q.compile(qubo_problem)
 q.optimize()
@@ -28,21 +28,21 @@ import networkx
 from openqaoa.problems import MinimumVertexCover
 g = networkx.circulant_graph(6, [1])
 vc = MinimumVertexCover(g, field=1.0, penalty=10)
-qubo_problem = vc.quno
+qubo_problem = vc.qubo
 ```
 
 Now that we have the qubo problem, we can create a custom workflow as follows
 
 ```Python
-from openqaoa.workflows.optimizer import QAOA  
-from openqaoa.devices import create_device
+from openqaoa import QAOA, create_device
+from qiskit import IBMQ
 
 #Create the QAOA
 q = QAOA()
 
 # Create a device
-aspen_device = create_device(location='qcs', name='aspen-m-3')
-q.set_device(aspen_device)
+ibmq_device = create_device(location='ibmq', name='ibm_perth')
+q.set_device(ibmq_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -61,38 +61,44 @@ q.optimize()
 
 Let's break down the process. First, we create the `QAOA()` object and set a device
 
-```Python hl_lines="8 9"
-from openqaoa.workflows.optimizer import QAOA  
-from openqaoa.devices import create_device
+```Python hl_lines="11 12"
+from openqaoa import QAOA, create_device  
+from qiskit import IBMQ
 
 #Create the QAOA
 q = QAOA()
 
+# Load account from disk
+IBMQ.load_account() 
+
 # Create a device
-aspen_m3_device = create_device(location='qcs', name='aspen-m3')
-q.set_device(aspen_m3_device)
+ibmq_device = create_device(location='ibmq', name='ibm_perth')
+q.set_device(ibmq_device)
 ```
 
 With these two lines of code we first create a device, and then set the it within the QAOA workflow.
 
 !!! Tip 
-    To check all available backends go to the [devices page](/devices/device.md)
+    For the above code to work, you need to have saved your IBMQ credentials on your device (see the use of `IBMQ.save_account()` on the [official IBMQ docs](https://quantum-computing.ibm.com/lab/docs/iql/manage/account/ibmq) for more info!  To check all available backends go to the [devices page](/devices/device.md)
 
 
 ## The circuit Ansatz
 
 Next, we can modify the circuit's ansatz. This can be done through the method `set_circuit_properties()`
 
-```Python hl_lines="12 13"
-from openqaoa.workflows.optimizer import QAOA  
-from openqaoa.devices import create_device
+```Python hl_lines="15 16"
+from openqaoa import QAOA, create_device  
+from qiskit import IBMQ
 
 #Create the QAOA
 q = QAOA()
 
+# Load account from disk
+IBMQ.load_account() 
+
 # Create a device
-aspen_device = create_device(location='qcs', name='aspen-m3')
-q.set_device(aspen_device)
+ibmq_device = create_device(location='ibmq', name='ibm_perth')
+q.set_device(ibmq_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -109,16 +115,19 @@ The backend identifies the device where the computation will be executed. It is 
 
 Let's see an example
 
-```Python hl_lines="15"
-from openqaoa.workflows.optimizer import QAOA  
-from openqaoa.devices import create_device
+```Python hl_lines="18"
+from openqaoa import QAOA, create_device  
+from qiskit import IBMQ
 
 #Create the QAOA
 q = QAOA()
 
+# Load account from disk
+IBMQ.load_account() 
+
 # Create a device
-aspen_device = create_device(location='qcs', name='aspen-m3')
-q.set_device(aspen_device)
+ibmq_device = create_device(location='ibmq', name='ibm_perth')
+q.set_device(ibmq_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -136,16 +145,19 @@ here we are fixing:
 
 As QAOA is a classical-quantum hybrid computation, we can customise the classical part to. This is done through the classical optimizer attribute
 
-```Python hl_lines="18"
-from openqaoa.workflows.optimizer import QAOA  
-from openqaoa.devices import create_device
+```Python hl_lines="21"
+from openqaoa import QAOA, create_device  
+from qiskit import IBMQ
 
 #Create the QAOA
 q = QAOA()
 
+# Load account from disk
+IBMQ.load_account() 
+
 # Create a device
-aspen_device = create_device(location='qcs', name='aspen-m3')
-q.set_device(aspen_device)
+ibmq_device = create_device(location='ibmq', name='ibm_perth')
+q.set_device(ibmq_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')

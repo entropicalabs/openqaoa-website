@@ -51,6 +51,8 @@ You can get started by following [Braket's official docs](https://docs.aws.amazo
 The procedure is simple:
 
 ```Python
+from openqaoa import QAOA, create_device
+
 q = QAOA()
 
 sv1_device = create_device(location='aws', 
@@ -64,11 +66,14 @@ q.set_device(sv1_device)
 If you are unsure about what devices are available to you, you can do the following:
 
 ```Python
-b_device = create_device(location='aws', 
-                        name='', aws_region='us-west-1')
+from openqaoa import create_device
 
-b_device.check_connection()
-b_device.available_qpus
+device = create_device(location='aws', 
+                        name='',
+                        aws_region='us-west-1')
+
+device.check_connection()
+device.available_qpus
 ```
 
 The attribute `check_connection` authenticates your Braket credentials while `available_qpus` returns a list of Braket device arn strings representing the available devices to your Braket account, based on your access keys.

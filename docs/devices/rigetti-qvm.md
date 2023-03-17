@@ -22,6 +22,8 @@ Instructions on how to install the QVM and quilc vary from operative system. Ple
 In order to instantiate a QVM backend, we need to run the following snipped of code
 
 ```Python
+from openqaoa import QAOA, create_device
+
 q_qvm = QAOA()
 
 rigetti_args ={
