@@ -20,7 +20,8 @@ qubo_problem = vc.qubo
 Now that we have the qubo problem, we can create a workflow
 
 ```Python
-from openqaoa.workflows.optimizer import QAOA  
+from openqaoa import QAOA  
+
 q = QAOA()
 q.compile(qubo_problem)
 q.optimize()
@@ -28,8 +29,9 @@ q.optimize()
 
 Let's break down the process. First, we create the `QAOA()` object
 
-```Python hl_lines="2"
-from openqaoa.workflows.optimizer import QAOA  
+```Python hl_lines="3"
+from openqaoa import QAOA  
+
 q = QAOA()
 q.compile(qubo_problem)
 q.optimize()
@@ -40,8 +42,9 @@ The `QAOA()` object is a workflow and contains all the details required to succe
 !!! note "Compilation and QUBOs"
     To build the QAOA ansatz we need the cost function, and the cost function is encoded in the qubo problem! :-)
 
-```Python hl_lines="3"
-from openqaoa.workflows.optimizer import QAOA  
+```Python hl_lines="4"
+from openqaoa import QAOA  
+
 q = QAOA()
 q.compile(qubo_problem)
 q.optimize()
@@ -49,8 +52,9 @@ q.optimize()
 
 Compiling the problem is a crucial step: now the representation of the QAOA workflow includes all the key information to build the circuit. So, all we are left with is the last step: the optimization!
 
-```Python hl_lines="4"
-from openqaoa.workflows.optimizer import QAOA  
+```Python hl_lines="5"
+from openqaoa import QAOA  
+
 q = QAOA()
 q.compile(qubo_problem)
 q.optimize()
