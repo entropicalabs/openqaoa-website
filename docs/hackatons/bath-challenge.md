@@ -176,7 +176,7 @@ q.optimize()
 ```
 When you compile the object, OpenQAOA translates the QUBO to cost Hamiltonian and compose the QAOA circuit. After that, when you optimize, the algorithm tries to find the optimal parameters. This means that you have colored your first graph! Congratulations! To check the solutions you can do:
 ```Python
-q.results.most_probable_states
+q.result.most_probable_states
 ```
 
 <br>
@@ -198,11 +198,11 @@ You can try to color other more complicated graphs, some examples could be:
 
 ### **STEP 3. Interpret the result**
 
-So, you ran a QAOA workflow successfully ... what next? Well, you can start studying the `q.results` object. First, read the [making-sense-of-the-result](../making-sense-of-the-result.md) page. 
+So, you ran a QAOA workflow successfully ... what next? Well, you can start studying the `q.result` object. First, read the [making-sense-of-the-result](../making-sense-of-the-result.md) page. 
 
 The result will look at so
 ```Python
-> results
+> result
 {'solutions_bitstrings': ['010110'], 'bitstring_energy': -4.0}
 ```
 

@@ -184,7 +184,7 @@ The results show the final solution of the problem, the output from the classica
 ```
 
 
-From the intermediate steps, we can extract useful properties such as the cost optimization, the shape of the system, or the correlation matrix at that step. The ``r.results`` object has some methods that help to get the intermediate steps: ``.get_qaoa_results(step)``, ``.get_problem(step)``, ``plot_corr_matrix(step)``, among my others (see documentation [ADD LINK]).
+From the intermediate steps, we can extract useful properties such as the cost optimization, the shape of the system, or the correlation matrix at that step. The ``r.result`` object has some methods that help to get the intermediate steps: ``.get_qaoa_results(step)``, ``.get_problem(step)``, ``plot_corr_matrix(step)``, among my others (see documentation [ADD LINK]).
 
 
 ![kamada_kawai_layout](/img/rqaoa_elimination_steps.png)
