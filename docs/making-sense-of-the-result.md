@@ -30,7 +30,7 @@ In particular, there are three pain attributes of the result object:
 Evaluating
 
 ```Python
-q.results.optimized
+q.result.optimized
 ```
 
 yields
@@ -60,7 +60,7 @@ Let's unpack it:
 Evaluating
 
 ```Python
-q.results.intermediate
+q.result.intermediate
 ```
 
 yields
@@ -91,7 +91,7 @@ Let's unpack it:
 OpenQAOA features some helper function to extract some common plots 
 
 ```Python
-q.results.plot_cost()
+q.result.plot_cost()
 ```
 
 ![PlotCost](img/plot_cost.png)

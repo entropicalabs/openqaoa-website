@@ -43,7 +43,7 @@ from qiskit import IBMQ
 q = QAOA()
 
 # Create a device
-ibmq_device = create_device(location='ibmq', name='ibm_perth')
+ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
 q.set_device(ibmq_device)
 
 # circuit properties
@@ -53,7 +53,7 @@ q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_ham
 q.set_backend_properties(init_hadamard=True, n_shots=8000, cvar_alpha=0.85)
 
 # classical optimizer properties
-q.set_classical_optimizer(method='nelder-mead', maxiter=200)
+q.set_classical_optimizer(method='cobyla', maxiter=50, tol=0.05)
 
 q.compile(qubo_problem)
 q.optimize()
@@ -74,7 +74,7 @@ q = QAOA()
 IBMQ.load_account() 
 
 # Create a device
-ibmq_device = create_device(location='ibmq', name='ibm_perth')
+ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
 q.set_device(ibmq_device)
 ```
 
@@ -99,7 +99,7 @@ q = QAOA()
 IBMQ.load_account() 
 
 # Create a device
-ibmq_device = create_device(location='ibmq', name='ibm_perth')
+ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
 q.set_device(ibmq_device)
 
 # circuit properties
@@ -128,7 +128,7 @@ q = QAOA()
 IBMQ.load_account() 
 
 # Create a device
-ibmq_device = create_device(location='ibmq', name='ibm_perth')
+ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
 q.set_device(ibmq_device)
 
 # circuit properties
@@ -158,7 +158,7 @@ q = QAOA()
 IBMQ.load_account() 
 
 # Create a device
-ibmq_device = create_device(location='ibmq', name='ibm_perth')
+ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
 q.set_device(ibmq_device)
 
 # circuit properties
@@ -168,8 +168,10 @@ q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_ham
 q.set_backend_properties(init_hadamard=True, n_shots=8000, cvar_alpha=0.85)
 
 # classical optimizer properties
-q.set_classical_optimizer(method='nelder-mead', maxiter=200)
+q.set_classical_optimizer(method='cobyla', maxiter=50, tol=0.05)
 ```
+
+Note that since we are running the computation over the cloud we set `maxiter=50` (that is, we cap the number of circuit evaluations to 50) and set a tolerance `tol=0.05`, roughly meaning that we will stop the optimization loop as soon as gains between consecutive cost values are smaller than the tolerance.
 
 Currently OpenQAOA allows both for [gradient based](/docs/optimizers/gradient-based-optimizers.md) and [gradient free](/docs/optimizers/gradient-free-optimizers.md) optimization methods, together with a wide selections of optimizers inherited both by SciPy and [PennyLane](/docs/optimizers/pennylane-optimizers.md).
 
