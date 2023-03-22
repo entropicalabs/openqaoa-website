@@ -1,4 +1,4 @@
-# Contributing to OpenQAOA - Challenges 
+# Contributing to OpenQAOA - Challenges  
 This section of the website contains a set of feature questions that we encourage our community to work on.
 
 Some of them are software-related, others more physics-oriented, while others have to do with benchmarks and documentation.
