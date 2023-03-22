@@ -23,7 +23,7 @@ theme:
       quote: octicons/quote-16
   logo: img/entropicalabs_logo.svg
   favicon: img/entropicalabs_logo.svg
-  language: en 
+  language: en
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -86,7 +86,7 @@ nav:
   - OpenQAOA: index.md
   - Features: features.md
   - What is the QAOA?: what-is-the-qaoa.md
-  - Getting Started: 
+  - Getting Started:
       - install-openqaoa.md
       - the-simplest-workflow.md
       - making-sense-of-the-result.md
@@ -96,12 +96,12 @@ nav:
   - QUBO Problems:
       - problems/what-is-a-qubo.md
       - Built-in QUBO:
-        - problems/knapsack.md
-        - problems/maximum-cut.md
-        - problems/minimum-vertex-cover.md
-        - problems/number-partition.md
-        - problems/shortest-path-problem.md
-        - problems/traveling-sales-person.md
+          - problems/knapsack.md
+          - problems/maximum-cut.md
+          - problems/minimum-vertex-cover.md
+          - problems/number-partition.md
+          - problems/shortest-path-problem.md
+          - problems/traveling-sales-person.md
   - Parametrizations:
       - parametrization/parametrization.md
       - parametrization/standard-parametrization.md
@@ -124,28 +124,28 @@ nav:
   - The Devices:
       - devices/device.md
       - Local Simulators:
-        - devices/qiskit.md
-        - devices/rigetti-qvm.md
-        - devices/entropica-labs-vectorized.md
-        - devices/analytical-simulator.md
+          - devices/qiskit.md
+          - devices/rigetti-qvm.md
+          - devices/entropica-labs-vectorized.md
+          - devices/analytical-simulator.md
       - Quantum Processing Units:
-        - devices/amazon-braket.md
-        - devices/azure-quantum.md
-        - devices/ibmq.md
-        - devices/rigetti-qcs.md
+          - devices/amazon-braket.md
+          - devices/azure-quantum.md
+          - devices/ibmq.md
+          - devices/rigetti-qcs.md
   - Qubit Routing:
       - qubit-routing/qaoa-qubit-routing.md
   - Challenges:
-    - challenges/intro.md
+      - challenges/intro.md
   - Events:
-    - hackatons/bath-challenge.md
+      - hackatons/bath-challenge.md
 
 
 extra:
   social:
-  - icon: fontawesome/brands/github-alt
-    link: https://github.com/entropicalabs/openqaoa
-  - icon: fontawesome/brands/discord
-    link: https://discord.gg/ana76wkKBd
-  - icon: fontawesome/brands/medium
-    link: https://medium.com/@entropicalabs
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/entropicalabs/openqaoa
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/ana76wkKBd
+    - icon: fontawesome/brands/medium
+      link: https://medium.com/@entropicalabs
