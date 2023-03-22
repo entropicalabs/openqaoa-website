@@ -1,6 +1,6 @@
 # PennyLane optimizers
 
-In addition to the gradient-based and gradient-free optimizers discussed in [the gradient-based optimizers](../optimizers/gradient-based-optimizers.md) and [the gradient-free optimizers](../optimizers/gradient-free-optimizers.md) pages, some of the optimizers from the PennyLane library have been adapted for use with OpenQAOA. The following table shows this adapted optimizers:
+In addition to the gradient-based and gradient-free optimizers discussed in [the gradient-based optimizers](../optimizers/gradient-based-optimizers/gradient-based-optimizers.md) and [the gradient-free optimizers](gradient-free-optimizers.md) pages, some of the optimizers from the PennyLane library have been adapted for use with OpenQAOA. The following table shows this adapted optimizers:
 
 | OpenQAOA name | PennyLane name | Method | Description |
 | :------------ | :------------- | :----- | :---------- |

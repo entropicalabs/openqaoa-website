@@ -63,7 +63,7 @@ $$ \frac{\partial f(\vec\gamma)}{\partial\gamma_i}
 
 where $\vec{e}_j$ is the $j$ base vector: $\vec{e}_j = (0,...,0,1,0,...,0)$, where the $1$ is found the $j\text{-th}$ position. 
 
-In the QAOA, it turns out that the cost function can be expressed as above for all the gates when we are using the extended parameters. This means that we can use the parameter-shift rule to compute the Jacobian when we are solving QAOA with extended parameters. However, we can also use standard parameters if we convert the standard parameters to extended before the gradient computation and after it we convert them back. To learn about the various parametrizations, please refer to the [Parametrization and Initialization page](../parametrization/parametrization.md).
+In the QAOA, it turns out that the cost function can be expressed as above for all the gates when we are using the extended parameters. This means that we can use the parameter-shift rule to compute the Jacobian when we are solving QAOA with extended parameters. However, we can also use standard parameters if we convert the standard parameters to extended before the gradient computation and after it we convert them back. To learn about the various parametrizations, please refer to the [Parametrization and Initialization page](../../parametrization/parametrization.md).
 
 ### OpenQAOA example
 In the code below it is shown how to run QAOA with a gradient-based optimizer like gradient descent and approximating the Jacobian with the parameter-shift method.
