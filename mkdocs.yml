@@ -93,6 +93,8 @@ nav:
       - making-sense-of-the-result.md
   - Workflows:
       - workflows/customise-the-QAOA-workflow.md
+      - workflows/run-workflows-on-qpus-QASM-simulator.md
+      - workflows/run-workflows-on-qpus-qpu.md
       - workflows/recursive-qaoa.md
   - QUBO Problems:
       - problems/what-is-a-qubo.md
