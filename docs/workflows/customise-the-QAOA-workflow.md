@@ -1,6 +1,11 @@
 # Customise the QAOA workflow
 
-The simples QAOA workflow makes use of the OpenQAOA default values
+In this page, you will learn how to customize OpenQAOA workflows.
+
+!!! tip
+    As a rule of thumbs, customizing often times makes the quantum circuit more complex. This in turn, may lead to either longer execution times, or even worst performances! Many of the tools we will explore here
+
+The simplest QAOA workflow implicit uses the default values
 
 
 ```Python
@@ -17,6 +22,25 @@ A QAOA workflow is composed by 4 parts. this example, we have used the default v
 * **the classical optimizer** `cobyla`, as implemented by the folks at SciPy
 * **the device employed** `vectorized`, a very fast numpy-based QAOA simulator developed by Entropica Labs
 * **the result of the algorithm**
+
+All these properties can be easily accessed within the `QAOA` object. For example,
+
+```Python
+q.circuit_properties.asdict()
+```
+
+gives
+
+```JSON
+{'param_type': 'standard',
+ 'init_type': 'ramp',
+ 'qubit_register': [],
+ 'p': 1,
+ 'variational_params_dict': {'total_annealing_time': 0.7},
+ 'annealing_time': 0.7,
+ 'linear_ramp_time': 0.7,
+ 'mixer_hamiltonian': 'x'}
+```
 
 ## Customizing a workflow
 
@@ -36,15 +60,9 @@ qubo_problem = vc.qubo
 Now that we have the qubo problem, we can create a custom workflow as follows
 
 ```Python
-from openqaoa import QAOA, create_device
-from qiskit import IBMQ
-
 #Create the QAOA
 q = QAOA()
 
-# Create a device
-ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
-q.set_device(ibmq_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -59,48 +77,15 @@ q.compile(qubo_problem)
 q.optimize()
 ```
 
-## The device
+## The circuit properties
 
-Let's break down the process. First, we create the `QAOA()` object and set a device
+Let's break down the process. First, we create the `QAOA()` object and modify the circuit's ansatz. This can be done through the method `set_circuit_properties()`
 
-```Python hl_lines="11 12"
+```Python hl_lines="7"
 from openqaoa import QAOA, create_device  
-from qiskit import IBMQ
 
 #Create the QAOA
 q = QAOA()
-
-# Load account from disk
-IBMQ.load_account() 
-
-# Create a device
-ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
-q.set_device(ibmq_device)
-```
-
-With these two lines of code we first create a device, and then set the it within the QAOA workflow.
-
-!!! Tip 
-    For the above code to work, you need to have saved your IBMQ credentials on your device (see the use of `IBMQ.save_account()` on the [official IBMQ docs](https://quantum-computing.ibm.com/lab/docs/iql/manage/account/ibmq) for more info!  To check all available backends go to the [devices page](/devices/device.md)
-
-
-## The circuit Ansatz
-
-Next, we can modify the circuit's ansatz. This can be done through the method `set_circuit_properties()`
-
-```Python hl_lines="15 16"
-from openqaoa import QAOA, create_device  
-from qiskit import IBMQ
-
-#Create the QAOA
-q = QAOA()
-
-# Load account from disk
-IBMQ.load_account() 
-
-# Create a device
-ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
-q.set_device(ibmq_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -109,7 +94,7 @@ q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_ham
 This method allows to shape the properties of the ansats circuit. It is the place where you can select the number of layers `p`, the type desired parametrization (and its initialization), and the type of mixer that you want to use. 
 
 !!! tip
-    If you want to read more about parametrisations and initialisations, please refer to the [parametrization](/docs/parametrization/parametrization.md) pages.
+    If you want to read more about parametrisations and initialisations, please refer to the [parametrization](../parametrization/parametrization.md) pages.
 
 ## The backend properties
 
@@ -117,19 +102,11 @@ The backend identifies the device where the computation will be executed. It is 
 
 Let's see an example
 
-```Python hl_lines="18"
+```Python hl_lines="10"
 from openqaoa import QAOA, create_device  
-from qiskit import IBMQ
 
 #Create the QAOA
 q = QAOA()
-
-# Load account from disk
-IBMQ.load_account() 
-
-# Create a device
-ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
-q.set_device(ibmq_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -147,19 +124,11 @@ here we are fixing:
 
 As QAOA is a classical-quantum hybrid computation, we can customise the classical part to. This is done through the classical optimizer attribute
 
-```Python hl_lines="21"
+```Python hl_lines="13"
 from openqaoa import QAOA, create_device  
-from qiskit import IBMQ
 
 #Create the QAOA
 q = QAOA()
-
-# Load account from disk
-IBMQ.load_account() 
-
-# Create a device
-ibmq_device = create_device(location='ibmq', name='ibmq_qasm_simulator')
-q.set_device(ibmq_device)
 
 # circuit properties
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
@@ -168,11 +137,11 @@ q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_ham
 q.set_backend_properties(init_hadamard=True, n_shots=8000, cvar_alpha=0.85)
 
 # classical optimizer properties
-q.set_classical_optimizer(method='cobyla', maxiter=50, tol=0.05)
+q.set_classical_optimizer(method='cobyla', maxiter=200, tol=0.05)
 ```
 
-Note that since we are running the computation over the cloud we set `maxiter=50` (that is, we cap the number of circuit evaluations to 50) and set a tolerance `tol=0.05`, roughly meaning that we will stop the optimization loop as soon as gains between consecutive cost values are smaller than the tolerance.
+Note that since we are running the computation over the cloud we set `maxiter=200` (that is, we cap the number of circuit evaluations to 200) and set a tolerance `tol=0.05`, roughly meaning that we will stop the optimization loop as soon as gains between consecutive cost values are smaller than the tolerance.
 
-Currently OpenQAOA allows both for [gradient based](/docs/optimizers/gradient-based-optimizers.md) and [gradient free](/docs/optimizers/gradient-free-optimizers.md) optimization methods, together with a wide selections of optimizers inherited both by SciPy and [PennyLane](/docs/optimizers/pennylane-optimizers.md).
+Currently OpenQAOA allows both for [gradient based](../optimizers/gradient-based-optimizers/gradient-based-optimizers.md) and [gradient free](../optimizers/gradient-free-optimizers.md) optimization methods, together with a wide selections of optimizers inherited both by SciPy and [PennyLane](../optimizers/pennylane-optimizers.md).
 
-Extensive description of the optimizers available on OpenQAOA can be found on the [optimizer](/docs/optimizers/optimizers.md) page. 
+Extensive description of the optimizers available on OpenQAOA can be found on the [optimizer](../optimizers/optimizers.md) page. 
