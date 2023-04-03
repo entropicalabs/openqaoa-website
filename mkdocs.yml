@@ -84,7 +84,7 @@ markdown_extensions:
 
 
 nav:
-  - OpenQAOA: index.md
+  - Home: index.md
   - Features: features.md
   - What is the QAOA?: what-is-the-qaoa.md
   - Getting Started:
