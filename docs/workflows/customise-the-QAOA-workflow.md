@@ -68,7 +68,7 @@ q = QAOA()
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
 
 # backend properties
-q.set_backend_properties(init_hadamard=True, n_shots=8000, cvar_alpha=0.85)
+q.set_backend_properties(init_hadamard=True)
 
 # classical optimizer properties
 q.set_classical_optimizer(method='cobyla', maxiter=50, tol=0.05)
@@ -112,13 +112,11 @@ q = QAOA()
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
 
 # backend properties
-q.set_backend_properties(init_hadamard=True, n_shots=8000, cvar_alpha=0.85)
+q.set_backend_properties(init_hadamard=True)
 ```
 
-here we are fixing:
-- The number of shots: this is a fundamental value when running computations on a QPU or on a shot-based simulator
-- The initial round of Hamiltonians is set to True
-- Setting the value for the [Conditional Value-at-Risk](https://research.ibm.com/publications/improving-variational-quantum-optimization-using-cvar), a trick employed during the calculation of the expectation value
+here we are applying an initial layer of Hadamard gates to all qubits.
+
 
 ## The classical optimizer
 
@@ -134,7 +132,7 @@ q = QAOA()
 q.set_circuit_properties(p=3, param_type='standard', init_type='ramp', mixer_hamiltonian='xy')
 
 # backend properties
-q.set_backend_properties(init_hadamard=True, n_shots=8000, cvar_alpha=0.85)
+q.set_backend_properties(init_hadamard=True)
 
 # classical optimizer properties
 q.set_classical_optimizer(method='cobyla', maxiter=200, tol=0.05)

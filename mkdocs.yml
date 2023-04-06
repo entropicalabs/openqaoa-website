@@ -54,6 +54,7 @@ theme:
 
 plugins:
   - search
+  - glightbox
 
 extra_css:
   - stylesheets/extra.css
@@ -95,6 +96,7 @@ nav:
       - workflows/customise-the-QAOA-workflow.md
       - workflows/run-workflows-on-qpus-QASM-simulator.md
       - workflows/run-workflows-on-qpus-qpu.md
+      - workflows/custom-mixer-workflow.md
       - workflows/recursive-qaoa.md
   - QUBO Problems:
       - problems/what-is-a-qubo.md
