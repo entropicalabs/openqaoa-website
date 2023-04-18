@@ -14,6 +14,9 @@
 <a href="https://pypi.org/project/openqaoa" target="_blank">
     <img src="https://badge.fury.io/py/openqaoa.svg" alt="Package version">
 </a>
+<a href="https://pepy.tech/project/openqaoa" target="_blank">
+    <img src="https://static.pepy.tech/badge/openqaoa">
+</a>
 <a href="https://pypi.org/project/openqaoa" target="_blank">
     <img src="https://img.shields.io/pypi/pyversions/openqaoa.svg?color=%2334D058" alt="Supported Python versions">
 </a>
