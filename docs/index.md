@@ -2,7 +2,7 @@
 ![OpenQAOA](https://github.com/entropicalabs/openqaoa/blob/main/.github/images/openqaoa_logo_offW.png?raw=true#only-dark)
 
 <p align="center">
-    <em>OpenQAOA is an advanced multi-backend SDK for quantum optimization designed to ease research efforts within the VQA environment while ensuring the reliability and reproducibility of results.</em>
+    <em>OpenQAOA is an advanced multi-backend SDK for quantum optimization designed to ease research efforts within the VQA community and ensure the reliability and reproducibility of results</em>
 </p>
 <p align="center">
 <a href="https://github.com/entropicalabs/openqaoa/actions/workflows/test_main_linux.yml" target="_blank">
@@ -13,6 +13,9 @@
 </a>
 <a href="https://pypi.org/project/openqaoa" target="_blank">
     <img src="https://badge.fury.io/py/openqaoa.svg" alt="Package version">
+</a>
+<a href="https://pepy.tech/project/openqaoa" target="_blank">
+    <img src="https://static.pepy.tech/badge/openqaoa">
 </a>
 <a href="https://pypi.org/project/openqaoa" target="_blank">
     <img src="https://img.shields.io/pypi/pyversions/openqaoa.svg?color=%2334D058" alt="Supported Python versions">
