@@ -27,9 +27,9 @@ OpenQAOA utilizes the Qiskit library to authenticate with IBMQ. As such, the use
     Since Qiskit requires the API Tokens to be used for programmatic access. Be cautious about where you expose your code. If leaked, they may compromise your IBMQ account.
 
 ```Python
-from qiskit import IBMQ
+from qiskit_ibm_provider import IBMProvider
 
-IBMQ.save_account('YOUR_API_TOKEN')
+IBMProvider.save_account('YOUR_API_TOKEN')
 ```
 
 OpenQAOA then loads and authenticates the saved API Token via Qiskit.
@@ -45,9 +45,6 @@ An IBMQ Device can be created by the following:
 
 ```Python
 from openqaoa import QAOA, create_device
-from qiskit import IBMQ
-
-IBMQ.load_account() # load the previously saved credentials
 
 q = QAOA()
 
