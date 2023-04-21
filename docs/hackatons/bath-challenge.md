@@ -238,5 +238,5 @@ In the eventuality that you have had the time to explore QAOA and the graph colo
 
 - Try to solve the problem using a Quantum Computer! We suggest you use the free IBM ones, see the [ibmq](../devices/ibmq.md) page
 - Can you come up with some interesting parameter initialization strategies?
-- Have a look at [RQAOA](/docs/workflows/recursive-qaoa.md): how does it perform with respect to plain QAOA?
+- Have a look at [RQAOA](/workflows/recursive-qaoa): how does it perform with respect to plain QAOA?
  

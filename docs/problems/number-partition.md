@@ -5,7 +5,7 @@ In the Number Partitioning problem, the goal is to find, given a set of $k$ posi
 For example, given the set of numbers $S=\{1, 2, 3, 6, 10\}$, one can find that there is a perfect number partition since we can take $R=\{2, 3, 6\}$ and $S\setminus R =\{1, 10\}$, so that $|R|=|S\setminus R |=11$.
 
 !!! note "A Kind of Knapsack Problem"
-    The Number Partitioning problem can be seen as a special case of the [Knapsack problem](/docs/problems/knapsack.md), where there are $n$ items with same value, and the weight capacity is $W=\frac12 \sum_{i}^k n_k$.
+    The Number Partitioning problem can be seen as a special case of the [Knapsack problem](/problems/knapsack), where there are $n$ items with same value, and the weight capacity is $W=\frac12 \sum_{i}^k n_k$.
 
 ## The Cost Function
 
