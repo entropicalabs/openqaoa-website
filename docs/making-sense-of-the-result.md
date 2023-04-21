@@ -17,8 +17,6 @@ A QAOA workflow is composed by 4 parts. this example, we have used the default v
 * **the device employed** `vectorized`, a very fast numpy-based QAOA simulator developed by Entropica Labs
 * **the result of the algorithm**
 
-More information about these parameters can be found [TODO](TODO)
-
 ## The result object
 
 Result is a class attribute of the object `q`, and its chief role is that of keeping a record of the steps behind the workflow.
