@@ -7,52 +7,61 @@ A calibration factor from the diagonal noise channel is obtained by measuring qu
     The technique has been developed theoretically by E. v. d. Berg et al. [1] and by A. W. R. Smith, et al. [2] and implemented within Qiskit as one of their “resilience levels” under the name “Twirled Readout Error eXtinction (TREX)”. Experimentally has been applied by Layden et al. [3] to ensure that the  symmetry requirement $Q(s'| s) = Q(s |s')$ is met. Note that this requirement is specific to the Monte Carlo algorithm and therefore irrelevant to QAOA. 
 
 
-### The steps to perform SPAM Twirling are:
-1. Obtain calibration data (ideally over the whole device) under BFA (subroutine)
-1.1. Initialize the circuit in the |000…0> state.
-1.2. Measure under BFA (subroutine)
-1.3. Save the counts and the registers (this is how the measurement string outcomes map to the physical qubits on the device) and all other relevant information to a json. 
-2. Run the quantum experiment under BFA 
-2.1. Calculate calibration factors
-2.2. Prepare the desired quantum circuit
-2.3. Measure under BFA (subroutine)
-2.4. Correct the expectation values by term
-2.5. Combine all corrected terms into the final expectation value
+### The algorithm
+I. Obtain calibration data (ideally over the whole device) under BFA (subroutine)
 
-##### Subroutine: Bit Flip Averaging (BFA) technique
+1. Initialize the circuit in the |000…0> state.
+2. Measure under BFA (subroutine)
+3. Save the counts and the registers (this is how the measurement string outcomes map to the physical qubits on the device) and all other relevant information to a json. 
 
-1. Divide the total number of shots into n batches and for each batch choose a set of qubits to be flipped. 
-As a side note, if we know the structure of the noise, we should choose the schedule such that it mimics the syndromes of the noise matrix. In particular, for uncorrelated noise on 3 qubits, one must bitflip [[], [0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]] which is a variation of combinations, n_batches = 2**3 = 8. Performing those on the |0000..0> state allows for inhering the noise probabilities, i.e. obtaining M and then inverting it to correct the noisy measurement outcome coming from a real experiment. 
-Since we usually don’t have a very accurate model of the noise and to keep it general, we choose the schedule completely at random. This is also what the authors in the relevant papers suggest.
+II. Run the quantum experiment under BFA 
+
+1. Calculate calibration factors 
+2. Prepare the desired quantum circuit 
+3. Measure under BFA (subroutine)
+4. Correct the expectation values by term 
+5. Combine all corrected terms into the final expectation value
+
+#### Subroutine: Bit Flip Averaging (BFA) technique
+
+1. Divide the total number of shots into n batches and for each batch choose a set of qubits to be flipped. Note that since we usually don’t have a very accurate model of the noise and to keep it general, we choose the schedule completely at random.
 2. The bit flip before the measurement can be done by applying an X gate, absorbing the X gate into the last layer of RX rotations or propagating it to the front (and then absorbing it into the initial |+> state). 
 3. The bit flip after the measurement is performed by applying a classical not to the outcome bitstring, which is implemented as changing the keys in the count dictionary. 
-As a side note, recall that Qiskit stores the measurement outcomes in reversed order, so one must be careful of how it keeps track of the negated qubit indices. Also, as a result of routing, the physical qubits might be swapped. However, both cases are taken care of before returning the get_counts method, so technically we should not care about these. 
-4. Lastly, combine the negated counts from all batches into a single count dictionary which is then used for calculating the calibration factors or estimating the expectation values.
+4. Combine the negated counts from all batches into a single count dictionary which is then used for calculating the calibration factors or estimating the expectation values.
 
-
+Let's look at a simple example of a 2-qubit system for which the QAOA circuit is:
 ![circuit_original](/img/spam_twirling_circuit_0.png)
-![circuit_XX](/img/spam_twirling_circuit_1.png)
+
+Under BFA, at every batch what is executed on the quantum hardware will be the original QAOA circuit plus X gates on random qubits. for this very simple example, the X gate can be applied to the first qubit:
 ![circuit_XI](/img/spam_twirling_circuit_2.png)
+to the second one:
 ![circuit_IX](/img/spam_twirling_circuit_3.png)
+or to both:
+![circuit_XX](/img/spam_twirling_circuit_1.png)
 
 ### How to do this within OpenQAOA?
 
-In the workflows, this can be implemented simply by:
+In the workflows, this can be implemented by simply doing:
 ```Python
-q.set_error_mitigation_properties(error_mitigation_technique='spam_twirling', n_batches=4, calibration_data_location='filename')
+q.set_error_mitigation_properties(error_mitigation_technique='spam_twirling', 
+                                  n_batches=4,
+                                  calibration_data_location='filename',
+                                  )
 ```
 
-Internally, this wrap the backend to allow for dividing the computation in batches where a different set of qubits will be negated.
+Internally, this wraps the backend to allow for dividing the computation in batches where a different set of qubits will be negated.
 ```Python
-if(self.error_mitigation_properties.error_mitigation_technique == "spam_twirling"):
-        self.backend = SPAMTwirlingWrapper(
-            backend=self.backend,
+if self.error_mitigation_properties.error_mitigation_technique == 'spam_twirling':
+    self.backend = SPAMTwirlingWrapper(backend=self.backend,
             n_batches=self.error_mitigation_properties.n_batches,
-            calibration_data_location=self.error_mitigation_properties.calibration_data_location,
-            )
+            calibration_data_location=self.error_mitigation_properties.calibration_data_location)
+
 ```
 
-The BaseWrapper class can be ...
+### What to expect?
+Let's see the technique in practice by solving MaxCut on a u3R graph for n=6 qubits. In this example, we use the Rigetti 7 qubit device (as a noisy QVM) with 1000 shots divided into 10 batches, but one can very easily change the number of batches or shots to improve the results.
+![results_rigetti](/img/spam_twirling_results_rigetti.png)
+The plot above shows a slice of the landscape at $\gamma=0.25$ and for various $\beta$. It is clear that by performing SPAM Twirling we obtain (the orange line) energies much closer to the theoretically simulated ones (dark blue line). 
 
 ## References
 ----------
