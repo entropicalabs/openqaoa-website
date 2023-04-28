@@ -44,10 +44,11 @@ or to both:
 In the workflows, this can be implemented by simply doing:
 ```Python
 q = QAOA()
-q.set_error_mitigation_properties(error_mitigation_technique='spam_twirling', 
-                                  n_batches=4,
-                                  calibration_data_location='path_to_calibration_data',
-                                  )
+q.set_error_mitigation_properties(
+    error_mitigation_technique="spam_twirling",
+    n_batches=4,
+    calibration_data_location="filename",
+)
 ```
 
 Internally, OpenQAOA modifies the backend object in order to divide the computation in batches and applies the conditional X gate on a set of qubits choosen uniformly at random

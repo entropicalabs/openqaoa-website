@@ -139,7 +139,7 @@ nav:
   - Qubit Routing:
       - qubit-routing/qaoa-qubit-routing.md
   - Error Mitigation:
-    - error-mitigation/spam-twirling.md
+      - error-mitigation/spam-twirling.md
   - Challenges:
       - challenges/intro.md
   - Events:
