@@ -49,13 +49,12 @@ q.set_error_mitigation_properties(error_mitigation_technique='spam_twirling',
                                   )
 ```
 
-Internally, this wraps the backend to allow for dividing the computation in batches where a different set of qubits will be negated.
+Internally, OpenQAOA modifies the backend object in order to divide the computation in batches, where each batch fetures a different set of negated qubits.
 ```Python
-if self.error_mitigation_properties.error_mitigation_technique == 'spam_twirling':
-    self.backend = SPAMTwirlingWrapper(backend=self.backend,
-            n_batches=self.error_mitigation_properties.n_batches,
-            calibration_data_location=self.error_mitigation_properties.calibration_data_location)
-
+if error_mitigation_properties.error_mitigation_technique == 'spam_twirling':
+    backend = SPAMTwirlingWrapper(backend=self.backend,
+                                  n_batches=self.error_mitigation_properties.n_batches,
+                                  calibration_data_location=error_mitigation_properties.calibration_data_location)
 ```
 
 ### What to expect?
