@@ -1,6 +1,6 @@
 # SPAM Twirling 
 
-State Preparation and Measurement (SPAM) Twirling is a simple error mitigation technique used to remove any preferred direction due to readout noise.  It works by diagonalizing the noise associated with measurement by randomly flipping qubits via X gates right before the measurement and flipping the corresponding measured bit classically. 
+State Preparation and Measurement (SPAM) Twirling is a simple error mitigation technique used to remove any preferred direction due to readout noise.  It works by diagonalizing the noise associated with measurements by randomly flipping qubits via X gates right before the measurement and flipping the corresponding measured bit classically. 
 A calibration factor from the diagonal noise channel is obtained by measuring quantum circuits initialized in the zero states. As a result, the expectation values of the circuit in the presence of readout noise is much closer to the noise-free one.
 
 !!! info "For the curious"
@@ -8,11 +8,11 @@ A calibration factor from the diagonal noise channel is obtained by measuring qu
 
 
 ### The algorithm
-I. Obtain calibration data (ideally over the whole device) under BFA (subroutine)
+I. Obtain calibration data (ideally for the whole device) under the Bit Flipping Averaging (BFA) subroutine
 
 1. Initialize the circuit in the |000…0> state.
 2. Measure under BFA (subroutine)
-3. Save the counts and the registers (this is how the measurement string outcomes map to the physical qubits on the device) and all other relevant information to a json. 
+3. Save the counts and the registers (this is how the measurement string outcomes map to the physical qubits on the device) and all other relevant information to a json (see [the code](https://github.com/entropicalabs/openqaoa/blob/dev/tests/qpu_calibration_data/README_calibration_files.md) for the exact format). 
 
 II. Run the quantum experiment under BFA 
 
@@ -24,17 +24,17 @@ II. Run the quantum experiment under BFA
 
 #### Subroutine: Bit Flip Averaging (BFA) technique
 
-1. Divide the total number of shots into n batches and for each batch choose a set of qubits to be flipped. Note that since we usually don’t have a very accurate model of the noise and to keep it general, we choose the schedule completely at random.
+1. Divide the total number of shots into $n$ batches and for each batch choose a set of qubits to be flipped. Note that since we usually don’t have a very accurate model of the noise and to keep it general, we choose the qubits within each batch uniformly at random.
 2. The bit flip before the measurement can be done by applying an X gate, absorbing the X gate into the last layer of RX rotations or propagating it to the front (and then absorbing it into the initial |+> state). 
-3. The bit flip after the measurement is performed by applying a classical not to the outcome bitstring, which is implemented as changing the keys in the count dictionary. 
+3. The bit flip after the measurement is performed by applying a classical `not` to the outcome bitstring, which is implemented as changing the keys in the count dictionary. 
 4. Combine the negated counts from all batches into a single count dictionary which is then used for calculating the calibration factors or estimating the expectation values.
 
 Let's look at a simple example of a 2-qubit system for which the QAOA circuit is:
 ![circuit_original](/img/spam_twirling_circuit_0.png)
 
-Under BFA, at every batch what is executed on the quantum hardware will be the original QAOA circuit plus X gates on random qubits. for this very simple example, the X gate can be applied to the first qubit:
+Under BFA, every batch implements the desired QAOA circuit with single X gates prepended/appended randomly on a subset of the qubits. Considering,as an example, a simple two qubit circuit, there are 3 posibilities for the X gates. They can be applied to the first qubit
 ![circuit_XI](/img/spam_twirling_circuit_2.png)
-to the second one:
+to the second one
 ![circuit_IX](/img/spam_twirling_circuit_3.png)
 or to both:
 ![circuit_XX](/img/spam_twirling_circuit_1.png)
@@ -43,13 +43,14 @@ or to both:
 
 In the workflows, this can be implemented by simply doing:
 ```Python
+q = QAOA()
 q.set_error_mitigation_properties(error_mitigation_technique='spam_twirling', 
                                   n_batches=4,
-                                  calibration_data_location='filename',
+                                  calibration_data_location='path_to_calibration_data',
                                   )
 ```
 
-Internally, OpenQAOA modifies the backend object in order to divide the computation in batches, where each batch fetures a different set of negated qubits.
+Internally, OpenQAOA modifies the backend object in order to divide the computation in batches and applies the conditional X gate on a set of qubits choosen uniformly at random
 ```Python
 if error_mitigation_properties.error_mitigation_technique == 'spam_twirling':
     backend = SPAMTwirlingWrapper(backend=self.backend,
@@ -58,7 +59,8 @@ if error_mitigation_properties.error_mitigation_technique == 'spam_twirling':
 ```
 
 ### What to expect?
-Let's see the technique in practice by solving MaxCut on a u3R graph for n=6 qubits. In this example, we use the Rigetti 7 qubit device (as a noisy QVM) with 1000 shots divided into 10 batches, but one can very easily change the number of batches or shots to improve the results.
+Let's see the technique in practice by solving MaxCut on a u3R graph for n=6 qubits. In this example, we simulate a 7 qubit device using the (noisy) Quantum Virtual MAchine, an emulator developed by Rigetti. We have a total of 1000 shots, we divided them into into 10 batches of equal number of shots (note that the number of batches and shots may be tweaked to improve the result!).
+
 ![results_rigetti](/img/spam_twirling_results_rigetti.png)
 The plot above shows a slice of the landscape at $\gamma=0.25$ and for various $\beta$. It is clear that by performing SPAM Twirling we obtain (the orange line) energies much closer to the theoretically simulated ones (dark blue line). 
 
