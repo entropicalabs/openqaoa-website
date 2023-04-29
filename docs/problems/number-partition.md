@@ -11,9 +11,9 @@ For example, given the set of numbers $S=\{1, 2, 3, 6, 10\}$, one can find that 
 
 The function to minimize can be defined as
 
-$$C(\boldsymbol{\sigma}) = \left(\sum_{i=1}^k n_i\sigma_i\right)^2 = \sum_{i, j=1}^kn_in_j\sigma_i\sigma_j,$$
+$$C(\sigma) = \left(\sum_{i=1}^k n_i\sigma_i\right)^2 = \sum_{i, j=1}^kn_in_j\sigma_i\sigma_j,$$
 
-where $\boldsymbol{\sigma}\in \{-1, 1\}^k$. That is, a variable $\sigma_i$ is attached to each number $n_i$, and the variable's value determines on which side of the partition the number is assigned to. The smallest value $C(\cdot)$ can take is 0, which happens when $\boldsymbol{\sigma}$ is a perfect partition.
+where $\sigma \in \{-1, 1\}^k$. That is, a variable $\sigma_i$ is attached to each number $n_i$, and the variable's value determines on which side of the partition the number is assigned to. The smallest value $C(\cdot)$ can take is 0, which happens when $\sigma$ is a perfect partition.
 
 Since this formulation is already in terms of Ising variables, it can be used directly in QAOA.
 
