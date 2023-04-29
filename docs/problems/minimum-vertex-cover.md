@@ -5,6 +5,7 @@ The Minimum Vertex Cover (MVC) problem is a common constrained optimization prob
 ## The Cost Function
 
 The corresponding function to minimize can be derived as:
+
 $$
 C(\textbf{x}) = \sum_{i \in V}x_i + P\sum_{(i, j) \in E}\left(1-x_i\right)\left(1-x_j\right),
 $$
