@@ -1,5 +1,9 @@
 # SPAM Twirling 
 
+!!! info "Note"
+    This feature is present only in openqaoa 0.1.4 and above!
+
+
 State Preparation and Measurement (SPAM) Twirling is a simple error mitigation technique used to remove any preferred direction due to readout noise.  It works by diagonalizing the noise associated with measurements by randomly flipping qubits via X gates right before the measurement and flipping the corresponding measured bit classically. 
 A calibration factor from the diagonal noise channel is obtained by measuring quantum circuits initialized in the zero states. As a result, the expectation values of the circuit in the presence of readout noise is much closer to the noise-free one.
 
