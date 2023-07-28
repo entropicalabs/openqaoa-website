@@ -140,6 +140,8 @@ nav:
       - qubit-routing/qaoa-qubit-routing.md
   - Error Mitigation:
       - error-mitigation/spam-twirling.md
+  - Contributing:
+      - contributing/add_new_backend.md
   - Challenges:
       - challenges/intro.md
   - Events:
