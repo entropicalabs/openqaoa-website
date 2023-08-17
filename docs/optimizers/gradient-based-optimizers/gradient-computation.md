@@ -44,7 +44,7 @@ q.optimize()
 
 
 ## Parameter-shift
-The parameter-shift rule is a technique that allows for the exact computation of gradients for quantum circuits with certain gate sets. It works by exploiting the fact that the derivative of a unitary gate $U(\theta)$ with respect to its parameter $\theta$ can be expressed in terms of the gate itself, read XX. 
+The parameter-shift rule is a technique that allows for the exact computation of gradients for quantum circuits with certain gate sets. It works by exploiting the fact that the derivative of a unitary gate $U(\theta)$ with respect to its parameter $\theta$ can be expressed in terms of the gate itself, read [Schuld et al. (2018)](https://doi.org/10.1103/PhysRevA.99.032331). 
 
 As a quick explanation, if we have a cost function like:
 
@@ -120,7 +120,7 @@ The parameters are perturbed by a random vector that takes values of +1 or -1 wi
 
 $$ \vec\nabla f(\vec\gamma) \approx \frac{f(\vec\gamma + c \vec\Delta) - f(\vec\gamma - c \vec\Delta)}{2c} \odot  \vec\Delta $$
 
-where $c$ is a constant that determines the step size, and $\vec\Delta$ is the perturbation vector: $\vec\Delta = (\delta_1, \delta_2, ..., \delta_n)$ where $ \delta_i \in \{-1, 1\}$ are randomly generated.
+where $c$ is a constant that determines the step size, and $\vec\Delta$ is the perturbation vector: $\vec\Delta = (\delta_1, \delta_2, ..., \delta_n)$ where $\delta_i \in \{-1, 1\}$ are randomly generated.
 
 The primary benefit of Gradient SPSA is that it requires only two evaluations of the cost function to estimate the Jacobian, unlike the finite difference method, which requires two evaluations for each parameter.
 
