@@ -141,7 +141,7 @@ nav:
   - Error Mitigation:
       - error-mitigation/spam-twirling.md
   - OpenQAOA jobs:
-      - openqaoa-jobs/braket-jobs.md
+      - openqaoa-jobs/braket-container.md
   - Contributing:
       - contributing/add_new_backend.md
   - Challenges:
