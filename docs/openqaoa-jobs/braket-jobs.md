@@ -1,6 +1,6 @@
-# Bryong your own OpenQAOA container to Amazon Braket Hybrid Jobs
+# Bring your own OpenQAOA container to Amazon Braket Hybrid Jobs
 
-If you are wondering what is an Amazon Braket Hybrid Jobs, check out Braket's very answer
+If you are wondering what is an Amazon Braket Hybrid Jobs, check out [Braket's very own answer](https://docs.aws.amazon.com/braket/latest/developerguide/braket-what-is-hybrid-job.html)
 
 > With Hybrid Jobs, you can run algorithms that use both classical and quantum compute resources. These hybrid quantum-classical algorithms can help you optimize the performance of the quantum devices currently available. These algorithms are designed to maximize the benefits and reduce the drawbacks of both types of computational systems and are generally used to find the ground state or global minimum of a particular system.
 
