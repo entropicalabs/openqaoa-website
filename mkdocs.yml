@@ -124,7 +124,7 @@ nav:
       - optimizers/gradient-free-optimizers.md
       - optimizers/pennylane-optimizers.md
       - optimizers/shot-adaptive-optimizers.md
-  - The Devices:
+  - Devices:
       - devices/device.md
       - Local Simulators:
           - devices/qiskit.md
@@ -138,6 +138,12 @@ nav:
           - devices/rigetti-qcs.md
   - Qubit Routing:
       - qubit-routing/qaoa-qubit-routing.md
+  - Error Mitigation:
+      - error-mitigation/spam-twirling.md
+  - OpenQAOA jobs:
+      - openqaoa-jobs/braket-container.md
+  - Contributing:
+      - contributing/add_new_backend.md
   - Challenges:
       - challenges/intro.md
   - Events:
