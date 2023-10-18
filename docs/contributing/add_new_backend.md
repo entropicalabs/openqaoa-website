@@ -11,18 +11,25 @@ In similar spirit, one can add new backends that add a new hardware provider to 
 
 This folder will contain all the necessary code to support the new `XYZ` plugin. 
 Within this folder will be the following files containing instructions to convert the plugin into an installable package:
-- LICENSE: Since OpenQAOA is licensed using MIT License, the individual plugins will follow the same license as well.
-- MANIFEST.in: This file will include the requirements file to install package dependencies for `openqaoa-xyz`
-- pyproject.toml: This file should contain the following instructions
+
+- `LICENSE`: Since OpenQAOA is licensed using MIT License, the individual plugins will follow the same license as well.
+
+- `MANIFEST.in`: This file will include the requirements file to install package dependencies for `openqaoa-xyz`
+
+- `pyproject.toml`: This file should contain the following instructions
+
 	```Python
 	[build-system]
 	requires = ["setuptools>=61.0"]
 	build-backend = "setuptools.build_meta"
 	```
-- README.md: A readme file to describe the plugin
-- requirements.txt: A textfile describing all the necessary python dependencies for the plugin
-- setup.py: Setup instructions to install the package as a python module
-- tests/ : A tests folder containing all backend specific unit-tests for the new plugin
+- `README.md`: A readme file to describe the plugin
+
+- `requirements.txt`: A textfile describing all the necessary python dependencies for the plugin
+
+- `setup.py`: Setup instructions to install the package as a python module
+
+- `tests/` : A tests folder containing all backend specific unit-tests for the new plugin
 
 All the code supporting this new plugin will go inside a `src/openqaoa-xyz/openqaoa_xyz`. The naming conventions of all files and folders are crucial for the proper functioning of the plugin.
 

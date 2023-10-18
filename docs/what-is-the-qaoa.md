@@ -2,7 +2,7 @@
 
 Quantum computing has the potential to revolutionize the way we solve complex problems, and the Quantum Approximate Optimization Algorithm (QAOA) is one such algorithm that has been gaining attention in recent years. QAOA is a hybrid quantum-classical algorithm that combines quantum circuits and classical optimization to find approximate solutions to combinatorial optimization problems.
 
-Combinatorial optimization is the process of finding the best solution from a finite set of possible solutions, and it plays a crucial role in fields such as machine learning, finance, and logistics. QAOA provides a new and innovative approach to solving these problems, using quantum computers to explore the solution space more effectively.
+Combinatorial optimization is the process of finding the best solution from a finite set of possible states, and it plays a crucial role in fields such as machine learning, finance, and logistics. QAOA provides a new and innovative approach to solving these problems, using quantum computers to explore the solution space more effectively.
 
 
 ## Description of the algorithm
@@ -64,7 +64,7 @@ $$ f(x) =  \sum_{i=1}^n h_{i} x_i + \sum_{i, j} J_{i j} x_i x_j $$
 is minimized. 
 Where $x$ is a vector of $n$ components ($x_i \in \pm 1$), and $J_{ij}$ and $h_i$ are constants. Each different problem will have different $J_{ij}$ and $h_i$ values.
 
-The function can be enconded in a cost Hamiltonian the following way:
+The function can be encoded in a cost Hamiltonian the following way:
 
 $$ \mathcal{H}_C = \sum_{i=1}^n h_i \sigma_i^z + \sum_{i,j} J_{i j} \sigma_i^z \sigma_j^z  $$
 
