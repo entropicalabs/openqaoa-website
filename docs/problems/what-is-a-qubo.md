@@ -1,4 +1,4 @@
-# What is a QUBO
+# What is a QUBO?
 
 QAOA can solve binary optimization problems known as QUBOs. QUBO stands for _Quadratic unconstrained binary optimization_, and a QUBO problem represent, loosely speaking, a binary problem with at most quadratic terms. In general any optimization problem can be cast as a binary problem, but not all of them will be quadratic in the resulting binary variables. For a very nice paper showcasing the QUBO formulation of most common optimization problems, please check out Andrew Lucas's paper [Ising formulations of many NP problems](https://arxiv.org/abs/1302.5843)
 
@@ -29,9 +29,11 @@ $$
 where $x_i \in\{0, 1\}$ are the binary variables and $Q_{ij}$ represents the quadratic coefficients. We note that the cost function can in principle also include a constant term, but this will not change which configuration minimizes $C(\cdot)$.
 
 In the context of QAOA, we will be interested in the equivalent formulation known as Ising model, where the cost function is
+
 $$
-C(\boldsymbol{\sigma})=\sum_{i=1}^n h_i \sigma_i + \sum_{i,j=1}^n J_{ij} \sigma_i\sigma_j,
+C(\sigma)=\sum_{i=1}^n h_i \sigma_i + \sum_{i,j=1}^n J_{ij} \sigma_i\sigma_j,
 $$
+
 where $\sigma_i \in\{-1, 1\}$ are Ising variables and $h_i$ and $J_{ij}$ represent the coefficients for the linear and quadratic coefficients.
 
 !!! note "From QUBO to Ising Model and Back"
