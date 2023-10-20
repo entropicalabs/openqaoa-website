@@ -74,3 +74,177 @@ States that minimize $C_P(\textbf{x})$ then constitute valid paths that start at
 
 ## The Shortest Path Problem in OpenQAOA
 
+The Shortest Path problem being a graph problem, you can leverage the popular `networkx` to easily create a variety of graphs. For example, an Erdös-Rényi graph can be instantiated with
+
+```Python
+import networkx as nx
+
+G = nx.generators.fast_gnp_random_graph(n=6, p=0.6, seed=42)
+nx.set_edge_attributes(G, values = 1, name = 'weight')
+nx.set_node_attributes(G, values = 1, name = 'weight')
+```
+
+!!! note
+    The Shortest Path problem requires the edges and nodes of the graph to have associated weights.
+
+OpenQAOA has a nice wrapper to plot networkx graphs
+
+```Python
+from openqaoa.utilities import plot_graph
+plot_graph(G)
+```
+
+![seed_42_graph](/img/seed_42_graph.png)
+
+Once the graph is defined, creating a Shortest Path problem class requires only a few lines of code, specifying which nodes are associated with the source and destination:
+
+```Python
+from openqaoa.problems import ShortestPath
+
+sp_prob = ShortestPath(G, source=0, dest=5)
+sp_qubo = sp_prob.qubo
+```
+
+We can then access the underlying cost hamiltonian 
+
+```Python
+sp_qubo.hamiltonian.expression
+```
+
+$$
+-1.0Z_{0}Z_{7} - 1.0Z_{0}Z_{8} - 1.0Z_{0}Z_{9} - 1.0Z_{1}Z_{10} - 1.0Z_{1}Z_{11} - 1.0Z_{1}Z_{4} - 1.0Z_{1}Z_{7} - 1.0Z_{2}Z_{12} - 1.0Z_{2}Z_{5} - 1.0Z_{2}Z_{8} - 1.0Z_{3}Z_{10} - 1.0Z_{3}Z_{13} - 1.0Z_{3}Z_{6} - 1.5Z_{5} - 1.5Z_{6} - 1.5Z_{8} - 2.0Z_{10} - 2.0Z_{12} - 2.0Z_{13} - 2.0Z_{4} - 2.0Z_{7} - 2.0Z_{9} - 2.5Z_{11} + 0.5Z_{0} + 0.5Z_{10}Z_{11} + 0.5Z_{10}Z_{13} + 0.5Z_{11}Z_{12} + 0.5Z_{11}Z_{13} + 0.5Z_{12}Z_{13} + 0.5Z_{2} + 0.5Z_{3} + 0.5Z_{4}Z_{10} + 0.5Z_{4}Z_{11} + 0.5Z_{4}Z_{5} + 0.5Z_{4}Z_{6} + 0.5Z_{4}Z_{7} + 0.5Z_{5}Z_{12} + 0.5Z_{5}Z_{6} + 0.5Z_{5}Z_{8} + 0.5Z_{6}Z_{10} + 0.5Z_{6}Z_{13} + 0.5Z_{7}Z_{10} + 0.5Z_{7}Z_{11} + 0.5Z_{7}Z_{8} + 0.5Z_{7}Z_{9} + 0.5Z_{8}Z_{12} + 0.5Z_{8}Z_{9} + 0.5Z_{9}Z_{11} + 0.5Z_{9}Z_{12} + 0.5Z_{9}Z_{13} + 1.5Z_{1} + 17.0
+$$
+
+You may also check all details of the problem instance in the form of a dictionary:
+
+```Python
+> sp_qubo.asdict()
+
+{'constant': 17.0,
+ 'metadata': {},
+ 'n': 14,
+ 'problem_instance': {'G': {'directed': False,
+                            'graph': {},
+                            'links': [{'source': 0, 'target': 2, 'weight': 1},
+                                      {'source': 0, 'target': 3, 'weight': 1},
+                                      {'source': 0, 'target': 4, 'weight': 1},
+                                      {'source': 1, 'target': 2, 'weight': 1},
+                                      {'source': 1, 'target': 3, 'weight': 1},
+                                      {'source': 1, 'target': 5, 'weight': 1},
+                                      {'source': 2, 'target': 4, 'weight': 1},
+                                      {'source': 2, 'target': 5, 'weight': 1},
+                                      {'source': 3, 'target': 5, 'weight': 1},
+                                      {'source': 4, 'target': 5, 'weight': 1}],
+                            'multigraph': False,
+                            'nodes': [{'id': 0, 'weight': 1},
+                                      {'id': 1, 'weight': 1},
+                                      {'id': 2, 'weight': 1},
+                                      {'id': 3, 'weight': 1},
+                                      {'id': 4, 'weight': 1},
+                                      {'id': 5, 'weight': 1}]},
+                      'dest': 5,
+                      'problem_type': 'shortest_path',
+                      'source': 0},
+ 'terms': [[4, 5],
+           [4, 6],
+           [5, 6],
+           [9, 11],
+           [9, 12],
+           [9, 13],
+           [11, 12],
+           [11, 13],
+           [12, 13],
+           [0, 7],
+           [8, 7],
+           [9, 7],
+           [0, 8],
+           [8, 9],
+           [0, 9],
+           [1, 4],
+           [4, 7],
+           [10, 4],
+           [11, 4],
+           [1, 7],
+           [10, 7],
+           [11, 7],
+           [1, 10],
+           [10, 11],
+           [1, 11],
+           [2, 5],
+           [8, 5],
+           [12, 5],
+           [8, 2],
+           [8, 12],
+           [2, 12],
+           [3, 6],
+           [10, 6],
+           [13, 6],
+           [10, 3],
+           [10, 13],
+           [3, 13],
+           [0],
+           [1],
+           [2],
+           [3],
+           [4],
+           [5],
+           [6],
+           [7],
+           [8],
+           [9],
+           [10],
+           [11],
+           [12],
+           [13]],
+ 'weights': [0.5,
+             0.5,
+             0.5,
+             0.5,
+             0.5,
+             0.5,
+             0.5,
+             0.5,
+             0.5,
+             -1.0,
+             0.5,
+             0.5,
+             -1.0,
+             0.5,
+             -1.0,
+             -1.0,
+             0.5,
+             0.5,
+             0.5,
+             -1.0,
+             0.5,
+             0.5,
+             -1.0,
+             0.5,
+             -1.0,
+             -1.0,
+             0.5,
+             0.5,
+             -1.0,
+             0.5,
+             -1.0,
+             -1.0,
+             0.5,
+             0.5,
+             -1.0,
+             0.5,
+             -1.0,
+             0.5,
+             1.5,
+             0.5,
+             0.5,
+             -2.0,
+             -1.5,
+             -1.5,
+             -2.0,
+             -1.5,
+             -2.0,
+             -2.0,
+             -2.5,
+             -2.0,
+             -2.0]}
+```
