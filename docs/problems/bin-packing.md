@@ -1,6 +1,10 @@
 # The Bin Packing Problem
 
-The Bin Packing Problem (BPP) involves the efficient packing of a collection of items into the minimum number of bins, where each item has an associated weight and the bins have a maximum weight capacity. This problem finds applications in various real-world scenarios, including truck loading with weight restrictions, container scheduling, FPGA chip design among others. The BPP is classified as an NP-hard problem due to its computational complexity. The problem can be formulated as follows, minimize the total number of bins used given by the objective function,
+The Bin Packing Problem (BPP) involves the efficient packing of a collection of items into the minimum number of bins, where each item has an associated weight and the bins have a maximum weight capacity. This problem finds applications in various real-world scenarios, including truck loading with weight restrictions, container scheduling, FPGA chip design among others. The BPP is classified as an NP-hard problem due to its computational complexity. 
+
+## The cost function
+
+The problem can be formulated as follows, minimize the total number of bins used given by the following cost function:
 
 $$\begin{equation}
 \min \sum_{j=0}^{m-1} y_j\tag{1},
@@ -30,168 +34,120 @@ y_j \in {0,1} \quad \forall j=0,..,m-1\tag{6}
 
 In the above equations, $n$ represents the number of items (nodes), $m$ represents the number of bins, $w_{i}$ is the weight of the $i$-th item, $B$ denotes the maximum weight capacity of each bin, and $x_{ij}$ and $y_j$ are binary variables representing the presence of item $i$ in bin $j$ and the utilization of bin $j$, respectively. The objective function in Eq.(1) aims to minimize the number of bins used, while Eq.(2) enforces the constraint on bin weight capacity. Eq.(3) ensures that each item is assigned to only one bin, and Eqs.(4) and (5) define the binary nature of variables $x_{ij}$ and $y_j$.
 
-## Solving the problem using QAOA
-To encode the problem and solve it, we can use the [openqaoa library](https://openqaoa.entropicalabs.com/), a SDK with functionalities to convert combinatorial optimization problems into QAOA sequences.
+## Bin Packing in OpenQAOA
 
+The bin packing problem can be defined by the number of items, the number of bins, the range of weight of the items and the weight capacity of the bins. We can create the Bin Packing problem easily:
 
-```python
-from openqaoa.problems import BinPacking
-from openqaoa.problems import FromDocplex2IsingModel
-from openqaoa import QAOA, QUBO
+```Python
 import numpy as np
-import matplotlib.pyplot as plt
+from openqaoa.problems import BinPacking
 
-font_size = 16
-plt.rcParams['font.size'] = font_size
-
-%matplotlib inline
-```
-
-
-```python
-def qaoa_result(qubo, p=5, maxiter=100):
-    """
-    qubo (openqaoa.QUBO): Ising Hamiltonian of the problem
-    p (int): Number of layers of the QAOA circuit
-    maxiter (int): Maximum number of iterations
-    """
-    max_weight = np.max(qubo.weights)
-    qubo_weights = [w/max_weight for w in qubo.weights]
-    qubo_normal = QUBO(qubo.n, qubo.terms, qubo_weights) # Normalizing the QUBO weights, (it can help sometimes to improve the results)
-
-    qaoa = QAOA()
-    qaoa.set_circuit_properties(p=p, init_type="ramp", linear_ramp_time=0.1) # initialization betas and gammas with a ramp technique
-    qaoa.set_classical_optimizer(maxiter=maxiter) 
-    qaoa.compile(qubo_normal)
-    qaoa.optimize()
-    return qaoa
-```
-
-## Setting the problem
-
-
-```python
-np.random.seed(1234)
-#setting the problem
 n_items = 3 # number of items
 n_bins = 2 # maximum number of bins the solution will be explored on 
 min_weight = 1 # minimum weight of the items
 max_weight = 3 # maximum weight of the items
 weight_capacity = 5 # weight capacity of the bins
-weights = np.random.randint(min_weight, max_weight, n_items) # random instance of the problem
+weights = np.random.default_rng(seed=1234).integers(low=min_weight, high=max_weight, size=n_items) # random instance of the problem
+
+bpp = BinPacking(weights, weight_capacity, n_bins=n_bins, simplifications=False)
+bpp_qubo = bpp.qubo
 ```
 
-## Classical solution and visualizaiton using CPLEX
-This solution is based on the python based library of `CPLEX`, [docplex](https://pypi.org/project/docplex/).
+We can then access the underlying cost hamiltonian
 
-
-```python
-bpp = BinPacking(weights, weight_capacity, n_bins=n_bins, simplifications=False) #setting the problem using a openqaoa class
-sol_cplex = bpp.classical_solution(string=True) # getting the optimal solution using DocPLEX 
-fig, ax = plt.subplots()
-bpp.plot_solution(sol_cplex, ax)# Plotting the optimal solution
+```Python
+bpp.qubo.hamiltonian.expression
 ```
 
+$$
+-15.0Z_{0}Z_{10} - 15.0Z_{0}Z_{2} - 15.0Z_{0}Z_{4} - 15.0Z_{0}Z_{6} - 15.0Z_{0}Z_{9} - 15.0Z_{1}Z_{12} - 15.0Z_{1}Z_{13} - 15.0Z_{1}Z_{3} - 15.0Z_{1}Z_{5} - 15.0Z_{1}Z_{7} - 18.0Z_{10} - 18.0Z_{12} - 18.0Z_{13} - 18.0Z_{2} - 18.0Z_{3} - 18.0Z_{4} - 18.0Z_{5} - 18.0Z_{6} - 18.0Z_{7} - 18.0Z_{9} - 7.5Z_{0}Z_{8} - 7.5Z_{1}Z_{11} - 9.0Z_{11} - 9.0Z_{8} + 1.5Z_{2}Z_{3} + 1.5Z_{4}Z_{5} + 1.5Z_{6}Z_{7} + 128.5 + 3.0Z_{11}Z_{12} + 3.0Z_{11}Z_{13} + 3.0Z_{2}Z_{8} + 3.0Z_{3}Z_{11} + 3.0Z_{4}Z_{8} + 3.0Z_{5}Z_{11} + 3.0Z_{6}Z_{8} + 3.0Z_{7}Z_{11} + 3.0Z_{8}Z_{10} + 3.0Z_{8}Z_{9} + 44.5Z_{0} + 44.5Z_{1} + 6.0Z_{12}Z_{13} + 6.0Z_{2}Z_{10} + 6.0Z_{2}Z_{4} + 6.0Z_{2}Z_{6} + 6.0Z_{2}Z_{9} + 6.0Z_{3}Z_{12} + 6.0Z_{3}Z_{13} + 6.0Z_{3}Z_{5} + 6.0Z_{3}Z_{7} + 6.0Z_{4}Z_{10} + 6.0Z_{4}Z_{6} + 6.0Z_{4}Z_{9} + 6.0Z_{5}Z_{12} + 6.0Z_{5}Z_{13} + 6.0Z_{5}Z_{7} + 6.0Z_{6}Z_{10} + 6.0Z_{6}Z_{9} + 6.0Z_{7}Z_{12} + 6.0Z_{7}Z_{13} + 6.0Z_{9}Z_{10}
+$$
 
-    
-![png](output_6_0.png)
-    
+You  may also chack all details of the problem isntance in the form of a dictionary
 
+```Python
+> bpp_qubo.asdict()
 
-## 1. Solving a random problem using slack variables encoding
-
-
-```python
-penalty = [10, 10] # [Equality, Inequality] constraints
-bpp_slack = BinPacking(weights, weight_capacity, n_bins=n_bins, penalty=penalty, simplifications=False, method="slack")
-qubo = bpp_slack.qubo # Ising Hamiltonian of the BPP using the slack variables encoding 
-results_slack = qaoa_result(qubo, p=5, maxiter=100)
+{'constant': 128.5,
+ 'metadata': {},
+ 'n': 8,
+ 'problem_instance': {'method': 'slack',
+                      'n_bins': 2,
+                      'n_items': 3,
+                      'penalty': [],
+                      'problem_type': 'bin_packing',
+                      'simplifications': False,
+                      'solution': {'x_0_0': -1,
+                                   'x_0_1': -1,
+                                   'x_1_0': -1,
+                                   'x_1_1': -1,
+                                   'x_2_0': -1,
+                                   'x_2_1': -1,
+                                   'y_0': -1,
+                                   'y_1': -1},
+                      'weight_capacity': 5,
+                      'weights': [2, 2, 2]},
+ 'terms': [[2, 3],
+           [4, 5],
+           [6, 7],
+           [0, 2],
+           [0, 4],
+           [0, 6],
+           [0, 8],
+           [0, 9],
+           [0, 10],
+           [2, 4],
+           [2, 6],
+           [8, 2],
+           [9, 2],
+           [2, 10],
+           [4, 6],
+           [8, 4],
+           [9, 4],
+           [10, 4],
+           [8, 6],
+           [9, 6],
+           [10, 6],
+           [8, 9],
+           [8, 10],
+           [9, 10],
+           [1, 3],
+           [1, 5],
+           [1, 7],
+           [1, 11],
+           [1, 12],
+           [1, 13],
+           [3, 5],
+           [3, 7],
+           [3, 11],
+           [3, 12],
+           [3, 13],
+           [5, 7],
+           [11, 5],
+           [12, 5],
+           [5, 13],
+           [11, 7],
+           [12, 7],
+           [13, 7],
+           [11, 12],
+           [11, 13],
+           [12, 13],
+           [0],
+           [1],
+           [2],
+           [3],
+           [4],
+           [5],
+           [6],
+           [7],
+           [8],
+           [9],
+           [10],
+           [11],
+           [12],
+           [13]],
+ 'weights': [1.5, 1.5, 1.5, -15.0, -15.0, -15.0, -7.5, -15.0, -15.0, 6.0, 6.0, 3.0, 6.0, 6.0, 6.0, 3.0, 6.0, 6.0, 
+             3.0, 6.0, 6.0, 3.0, 3.0, 6.0, -15.0, -15.0, -15.0, -7.5, -15.0, -15.0, 6.0, 6.0, 3.0, 6.0, 6.0, 6.0, 
+             3.0, 6.0, 6.0, 3.0, 6.0, 6.0, 3.0, 3.0, 6.0, 44.5, 44.5, -18.0, -18.0, -18.0, -18.0, -18.0, -18.0, 
+             -9.0, -18.0, -18.0, -9.0, -18.0, -18.0]}
 ```
-
-### 1.2 Quantum Solution - QAOA
-
-
-```python
-nstates = 10
-results = results_slack.result.lowest_cost_bitstrings(nstates)
-idx_opt = 0
-p = 0
-for n in range(nstates): # There are multiple optimal solutions, 
-    # Let's check which states share the same enegry with the ground state
-    if results["bitstrings_energies"][n] == results["bitstrings_energies"][idx_opt]:
-        p += results["probabilities"][n]
-print(f"The probability of finding the optimal solution using the slack approach is: {round(100*p,1)}%")
-```
-
-    The probability of finding the optimal solution using the slack approach is: 0.2%
-
-
-
-```python
-fig, ax = plt.subplots(1,3, figsize=(30,5))
-bpp_slack.plot_solution(results["solutions_bitstrings"][0], ax=ax[0])
-results_slack.result.plot_cost(ax=ax[1])
-results_slack.result.plot_probabilities(n_states_to_keep=nstates, ax=ax[2])
-t = ax[0].set_title("Optimal solution")
-```
-
-    states kept: 10
-
-
-
-    
-![png](output_11_1.png)
-    
-
-
-## 2. Solving the random instance using unbalanced penalization
-
-For the penalty terms, we can use the tuned parameters presented in the original [unbalanced penalization paper](https://arxiv.org/abs/2211.13914)
-
-
-```python
-penalty = [10, 2, 1] # [Equality, Inequality] constraints got from the unbalanced penalization paper
-bpp_unbalanced = BinPacking(weights, weight_capacity, n_bins=n_bins, penalty=penalty, simplifications=False, method="unbalanced")
-qubo = bpp_unbalanced.qubo # Ising Hamiltonian of the BPP using the slack variables encoding 
-results_unbalanced = qaoa_result(qubo, p=5, maxiter=100)
-```
-
-### 2.2 Quantum Solution - QAOA
-
-
-```python
-nstates = 20
-results = results_unbalanced.result.lowest_cost_bitstrings(nstates)
-indx_opt = results["solutions_bitstrings"].index(sol_cplex)
-p = 0
-for n in range(nstates): # There are multiple optimal solutions, 
-    # Let's check which states share the same enegry with the ground state
-    if results["bitstrings_energies"][n] == results["bitstrings_energies"][0]:
-        p += results["probabilities"][n]
-print(f"The probability of finding the optimal solution using unbalanced penalization is: {round(100*p,1)}%")
-```
-
-    The probability of finding the optimal solution using unbalanced penalization is: 12.0%
-
-
-
-```python
-fig, ax = plt.subplots(1,3, figsize=(30,5))
-bpp_unbalanced.plot_solution(results["solutions_bitstrings"][0], ax=ax[0])
-results_unbalanced.result.plot_cost(ax=ax[1])
-results_unbalanced.result.plot_probabilities(n_states_to_keep=nstates, ax=ax[2])
-title=ax[0].set_title("Optimal solution")
-```
-
-    states kept: 20
-
-
-
-    
-![png](output_17_1.png)
-    
-
-
-# Conclusion 
-
-In this notebook, we tested the BPP using `openqaoa` for a three items problem with QAOA $p=5$. The results are presented for the unbalanced penalization and slack encodings. The unbalanced penalization reduces the number of qubit needed to represent the problems and therefore improves considerably the probability of obtaining the optimal solution compared to the slack variables approach. 
