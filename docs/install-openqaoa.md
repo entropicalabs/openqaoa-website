@@ -13,7 +13,7 @@ pip install openqaoa
 !!! note
     This command installs the whole openqaoa package including all available plugins
 
-OpenQAOA is now divided into plugins to prevent installing unnecessary modules. Each plugin is available through pip and allows you to access the different providers and backends. Currently, OpenQAOA counts 5 different plugins:
+OpenQAOA is now divided into plugins to let users selectively install modules correspondinng to their needs. Each plugin is available through pip and allows you to access the different providers and backends. Currently, OpenQAOA counts 5 different plugins:
 
 - openqaoa-core: Implements the core functionalities of OpenQAOA and allows you to use standalone simulators.
 - openqaoa-qiskit: Gives access to standalone simulators, qiskit simulators and hardware.
