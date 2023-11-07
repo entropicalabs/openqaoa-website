@@ -1,8 +1,8 @@
 # Devices
 
-OpenQAOA gives access to a large set of local simulators, and Quantum Computers hosted on public (and private) clouds.
+Through its selection of plugins, OpenQAOA gives access to a large set of local simulators, and Quantum Computers hosted on public (and private) clouds.
 
-Before going through the details of each provider, please note that  **financial costs** may be associated to the execution of quantum (and classical) computations on public (and private) cloud. Be careful and always make sure you know what you are doing before trying to send a computation to a third party! 
+Before going through the details of each provider, please note that **financial costs** may be associated to the execution of quantum (and classical) computations on public (and private) cloud. Be careful and always make sure you know what you are doing before trying to send a computation to a third party! 
 
 Conversely, all the local simulators run on your own machine and there is no extra cost associated.
 

@@ -43,7 +43,7 @@ plot_graph(G)
 Once the graph is defined, creating a MaxCut problem class requires only a few lines of code:
 
 ```Python
-from openqaoa.problems.problem import MaximumCut
+from openqaoa.problems import MaximumCut
 
 maxcut_prob = MaximumCut(G)
 maxcut_qubo = maxcut_prob.qubo
@@ -59,6 +59,7 @@ $$
 1.0Z_{0}Z_{2} + 1.0Z_{0}Z_{3} + 1.0Z_{0}Z_{4} + 1.0Z_{1}Z_{2} + 1.0Z_{1}Z_{3} + 1.0Z_{1}Z_{5} + 1.0Z_{2}Z_{4} + 1.0Z_{2}Z_{5} + 1.0Z_{3}Z_{5} + 1.0Z_{4}Z_{5}
 $$
 
+You may also check all details of the problem instance in the form of a dictionary:
 
 ```Python
 > maxcut_qubo.asdict()

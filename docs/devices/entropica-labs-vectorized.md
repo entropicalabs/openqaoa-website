@@ -41,7 +41,7 @@ Firstly, the cost hamiltonian used in QAOAs are diagonal, since they can only co
 
 Secondly, the simulator converts the actions of single and two-pauli rotation gates into permutations of wavefunction coefficients.
 
-If you're interested in the exact procedure used to achieve this, you can check out the vectorized backend docstring [here](https://el-openqaoa.readthedocs.io/en/main/backends.html#openqaoa.backends.simulators.qaoa_vectorized.QAOAvectorizedBackendSimulator).
+If you're interested in the exact procedure used to achieve this, you can check out the vectorized backend docstring [here](https://el-openqaoa.readthedocs.io/en/stable/openqaoa_core/backends.html#openqaoa.backends.qaoa_vectorized.QAOAvectorizedBackendSimulator).
 
 Lastly, since the operations are performed directly on the wavefunction, the memory usage of the simulator scales with $2^{n}$, where n is the number of qubits in the circuit. As compared to $2^{2n}$ if the matrices were not compressed.
 

@@ -38,7 +38,7 @@ rigetti_device = create_device(location='qcs', name=f'{n_qubits}q-qvm', **rigett
 q_qvm.set_device(rigetti_device)
 ```
 
-First, this device requires extra arguments. The source code can be viewed [here](https://github.com/entropicalabs/openqaoa/blob/dev/openqaoa/devices.py#L278)
+First, this device requires extra arguments. The source code can be viewed [here](https://github.com/entropicalabs/openqaoa/blob/main/src/openqaoa-pyquil/openqaoa_pyquil/backends/devices.py)
 
 ```Python
 rigetti_args ={

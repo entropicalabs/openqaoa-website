@@ -10,6 +10,23 @@ Once the virtual environment is activated, then simply pip install openqaoa with
 pip install openqaoa
 ```
 
+!!! note
+    This command installs the whole openqaoa package including all available plugins
+
+OpenQAOA is now divided into plugins to let users selectively install modules correspondinng to their needs. Each plugin is available through pip and allows you to access the different providers and backends. Currently, OpenQAOA counts 5 different plugins:
+
+- openqaoa-core: Implements the core functionalities of OpenQAOA and allows you to use standalone simulators.
+- openqaoa-qiskit: Gives access to standalone simulators, qiskit simulators and hardware.
+- openqaoa-braket: Gives access to standalone simulators, braket simulators and hardware, and braket jobs.
+- openqaoa-azure: Gives access to standalone simulators, qiskit simulators and hardware, azure simulators and hardware.
+- openqaoa-pyquil: Gives access to standalone simulators, pyquil simulators and hardware.
+
+Each plugin can be installed using the following command (replacing "core" with the plugin of interest)
+
+```bash
+pip install openqaoa-core
+```
+
 ## Install dev and experimental features
 
 Alternatively, you can install it manually directly from the GitHub. This may be relevant if you plan to contribute to the development of OpenQAOA or if you want to try out the latest features parked on the `dev` branch on our github repository.

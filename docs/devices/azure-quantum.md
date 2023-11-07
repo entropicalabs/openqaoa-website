@@ -74,3 +74,19 @@ az_device.available_qpus
 The attribute `check_connection` authenticates your Azure credentials while `available_qpus` returns a list of Azure devices available to your Azure account and specified Workspace.
 
 Once you've selected the desired device, recreate the device object with the selected device's name as `name` in the `create_device` function.
+
+
+## Using Azure job submission or sessions
+
+Now that the device has been created and passed to the QAOA object, `optimize` will perform the job submission to the Azure backend automatically (remember that you need to specify what problem you want to solve with QAOA). OpenQAOA is also compatible with Azure [sessions](https://learn.microsoft.com/en-us/azure/quantum/hybrid-computing-interactive) which allows you to group submitted jobs such that they are prioritized in the queue of the target hardware. Instead of submitting jobs one at a time using the usual
+
+```python
+q.optimize()
+```
+
+, you may create an Azure session using the attributes of `q.device` as follows:
+
+```python
+with q.device.backend_device.open_session(name="QAOA") as session:
+    q.optimize()
+```

@@ -10,7 +10,7 @@ We believe some of these challenges may be very interesting for any young quantu
  - **Error Mitigation with Mitiq**: Can we make OpenQAOA compatible with [Mitiq](https://unitary.fund/mitiq.html)?
  - **NVIDIA Backend**: Can we add some of the [NVIDIA](https://docs.nvidia.com/cuda/cuquantum/) simulators to the OpenQAOA stack?
  - **TensorFlow Quantum Simulator**: Add [TensorFlow Quantum](https://www.tensorflow.org/quantum) as a valid simulator to OpenQAOA
- - **Make OpenQAOA compatible with Qiskit Runtime**: [Qiskit Runtime](https://qiskit.org/documentation/partners/qiskit_ibm_runtime/) is an amazing tool to streamline and improve the execution of variational quantum algorithms. Can we make OpenQAOA compatible with it?
+ - **Make OpenQAOA compatible with Qiskit Runtime**: [Qiskit Runtime](https://qiskit.org/ecosystem/ibm-runtime/) is an amazing tool to streamline and improve the execution of variational quantum algorithms. Can we make OpenQAOA compatible with it?
  - **Make OpenQAOA available through qBraid**: [qBraid](https://qbraid.com/) is a fully hosted ecosystem for computing and it would be very nice to have OpenQAOA available to simplify the execution of QAOA computations and enhance QAOA research!
  
 

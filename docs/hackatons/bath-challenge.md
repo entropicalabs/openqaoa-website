@@ -152,7 +152,7 @@ def graph_coloring_qubo(graph, k) -> QUBO:
 ```
 
 !!! hint
-    If you are stuck, and you need some inspiration you can check how some of the other problem classes are structured in OpenQAOA by checking out the [OpenQAOA github page](https://github.com/entropicalabs/openqaoa/tree/main/src/openqaoa-core/problems). In particular, the method `get_qubo_problem()` has the same functionality that you are tackling here. 
+    If you are stuck, and you need some inspiration you can check how some of the other problem classes are structured in OpenQAOA by checking out the [OpenQAOA github page](https://github.com/entropicalabs/openqaoa/tree/main/src/openqaoa-core/openqaoa/problems). In particular, the method `get_qubo_problem()` has the same functionality that you are tackling here. 
 
 
 #### **STEP 2.2. Run QAOA**
