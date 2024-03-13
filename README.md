@@ -10,7 +10,7 @@ A website for OpenQAOA build with MkDocs
 pip install mkdocs-material
 ```
 
-3. Check locally your changes my typing
+3. Check locally your changes by typing
 
 ```bash
 mkdocs serve
