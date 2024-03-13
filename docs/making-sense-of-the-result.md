@@ -21,7 +21,7 @@ A QAOA workflow is composed by 4 parts. this example, we have used the default v
 
 Result is a class attribute of the object `q`, and its chief role is that of keeping a record of the steps behind the workflow.
 
-In particular, there are three pain attributes of the result object:
+In particular, there are three main attributes of the result object:
 
 ### The optimized result
 

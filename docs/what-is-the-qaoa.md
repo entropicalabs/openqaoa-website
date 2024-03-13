@@ -87,7 +87,7 @@ This means that we now know how to construct the QAOA circuit for any QUBO probl
 The classical loop procedure in quantum computing involves the following steps:
 
 1. Encoding the optimization problem into a parametric quantum circuit
-2. InitializingInitializing the circuit parameters
+2. Initializing the circuit parameters
 3. Evaluating the cost function, which represents the energy of the system described by the quantum circuit, by measuring the expectation value of the cost Hamiltonian $\langle \psi|\mathcal{H}_C|\psi\rangle$.
 4. Updating the circuit parameters using a classical optimization algorithm, such as gradient descent or COBYLA, to minimize the cost function and find the optimal solution to the optimization problem.
 
